@@ -1,0 +1,23 @@
+@import url("./core/css/antdConfig.css");
+@import url("./core/css/colors.css");
+@import url('./features/auth/auth.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+  .base-btn{
+    @apply !rounded-full !h-10 !px-5 text-whiteGray capitalize
+  ;}
+
+  .menu-item{
+    @apply flex gap-1 py-[6px] pl-3 pr-6 text-[15px]
+  ;}
+
+}
+
+*{
+  box-sizing: border-box;
+  font-family: "Lucida Sans", sans-serif;
+}

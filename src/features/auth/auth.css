@@ -1,0 +1,39 @@
+@tailwind components;
+
+@layer components{
+
+  /* verification form */
+  .otp-form{
+    @apply flex justify-between
+  ;}
+
+  .otp-form input{
+    @apply !w-12  h-12 rounded text-black text-center outline-none border
+  ;}
+
+  /* account banner */
+
+  .banner{
+    @apply relative bg-primaryGreen min-h-[240px]  overflow-hidden 
+  ;}
+
+  .ball{
+    @apply absolute rounded-full
+  ;}
+
+  .tan-blk{
+  @apply ball h-20 w-20 bg-[#FA897B] right-[210px] -bottom-[39px]
+  ;}
+
+  .purple-blk{
+   @apply ball h-10 w-10 bg-[#531DABE5] right-[139px] bottom-[22px]
+  ;}
+
+  .orange-blk{
+    @apply ball h-32 w-32 bg-[#FFA84A] -right-[16px] -bottom-[40px]
+  ;}
+
+  .blue-blk{
+    @apply ball h-28 w-28 h-52 w-52 bg-[#40A9FF] -right-[50px] -top-[70px]
+  ;}
+}

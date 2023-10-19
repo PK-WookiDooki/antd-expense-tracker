@@ -1,0 +1,54 @@
+.ant-input-password{
+  padding-block : 0 !important;
+}
+
+.ant-input, .ant-picker, .ant-select{
+  width: 100% !important;
+  height: 40px !important;
+  font-family: "Lucida Sans", sans-serif !important;
+  font-size: 16px !important;
+}
+
+.ant-picker,  .ant-select{
+  cursor: pointer;
+}
+
+.account-modal .ant-modal-content{
+  overflow: hidden !important;
+  padding: 0 !important;
+  border-radius: 4px !important;
+}
+
+/* ant segmented */
+.ant-segmented{
+  border: 1px solid var(--primaryGreen) !important;
+  background-color: transparent !important;
+}
+
+.ant-segmented .ant-segmented-thumb{
+  background-color: var(--primaryGreen) !important;
+}
+
+.ant-segmented .ant-segmented-item{
+  color: var(--primaryGreen) !important;
+}
+
+.ant-segmented .ant-segmented-item-selected{
+  background-color: var(--primaryGreen);
+  color: var(--whiteGray) !important;
+}
+
+/* dropdown */
+.ant-dropdown-menu-item{
+  padding: 0 !important;
+}
+
+
+/* textarea for note */
+.note-input .ant-row, .note-input .ant-form-item-control, .note-input .ant-form-item-control-input, .note-input .ant-form-item-control-input-content, .note-input .ant-input {
+  height: 100% !important;
+}
+
+.note-input .ant-row{
+  flex-wrap: nowrap !important;
+}
