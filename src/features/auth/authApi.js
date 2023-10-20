@@ -23,7 +23,7 @@ export const authApi = baseApi.injectEndpoints({
 
         verifyOtp: builder.mutation({
             query: (otpData) => ({
-                url: `${endPoint}/otp-verify`,
+                url: `${endPoint}/verify-otp`,
                 method: "POST",
                 body: otpData,
             }),
@@ -32,7 +32,7 @@ export const authApi = baseApi.injectEndpoints({
 
         resendOtp: builder.mutation({
             query: (email) => ({
-                url: `${endPoint}/otp-resend`,
+                url: `${endPoint}/resend-otp`,
                 method: "POST",
                 body: { email },
             }),

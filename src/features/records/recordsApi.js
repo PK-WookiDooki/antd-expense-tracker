@@ -6,7 +6,7 @@ export const recordsApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllRecords: builder.query({
             query: ({ startDate, endDate, keyword, token }) => ({
-                url: `${endPoint}?startDate=${startDate}&endDate=${endDate}&filter=${keyword}`,
+                url: `${endPoint}?startDate=${startDate}&endDate=${endDate}&filter=ALL`,
                 method: "GET",
                 headers: { authorization: `Bearer ${token}` },
             }),
@@ -19,7 +19,7 @@ export const recordsApi = baseApi.injectEndpoints({
                 method: "GET",
                 headers: { authorization: `Bearer ${token}` },
             }),
-            providesTags: ["records", "user"],
+            providesTags: ["records"],
         }),
 
         addNewRecord: builder.mutation({
@@ -29,12 +29,12 @@ export const recordsApi = baseApi.injectEndpoints({
                 headers: { authorization: `Bearer ${token}` },
                 body: record,
             }),
-            invalidatesTags: ["records", "user"],
+            invalidatesTags: ["records"],
         }),
 
         updateRecord: builder.mutation({
-            query: ({ record, token }) => ({
-                url: `${endPoint}`,
+            query: ({ record, token, recordId }) => ({
+                url: `${endPoint}/${recordId}`,
                 method: "PUT",
                 headers: { authorization: `Bearer ${token}` },
                 body: record,
@@ -44,10 +44,9 @@ export const recordsApi = baseApi.injectEndpoints({
 
         deleteRecord: builder.mutation({
             query: ({ recordId, token }) => ({
-                url: `${endPoint}`,
+                url: `${endPoint}/${recordId}`,
                 method: "DELETE",
                 headers: { authorization: `Bearer ${token}` },
-                body: { recordId },
             }),
             invalidatesTags: ["records"],
         }),

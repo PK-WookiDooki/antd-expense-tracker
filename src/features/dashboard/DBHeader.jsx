@@ -1,9 +1,13 @@
 import { DatePicker, Form } from "antd";
 import dayjs from "dayjs";
 import { formatCurrency } from "../../core/functions/formatData";
+import { useGetUserDataQuery } from "../auth/userApi";
+import { useSelector } from "react-redux";
 
 const DBHeader = ({ startDate, endDate, setStartDate, setEndDate }) => {
-    const balance = 500000;
+    const { token } = useSelector((state) => state.authSlice);
+    const { data: userData } = useGetUserDataQuery(token);
+    const balance = parseInt(userData?.balance);
     const formattedAmount = formatCurrency(balance);
 
     return (
@@ -21,9 +25,7 @@ const DBHeader = ({ startDate, endDate, setStartDate, setEndDate }) => {
                     <p className="text-xl mb-2">Account Balance</p>
                     <h2 className="text-4xl md:text-3xl font-medium lg:mb-8 md:mb-6 mb-4 ">
                         {" "}
-                        {balance >= 0
-                            ? `+${formattedAmount}`
-                            : `-${formattedAmount}`}{" "}
+                        {formattedAmount}
                     </h2>
                     <p className="text-xs md:text-sm lg:text-base ">
                         {" "}

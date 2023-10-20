@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { DBHeader, DBRecords } from "../features";
+import { DBCharts, DBHeader, DBRecords } from "../features";
 import dayjs from "dayjs";
-import { FloatingBtn } from "../components";
+import { FloatingBtn, Loader } from "../components";
 import { useGetAllRecordsQuery } from "../features/records/recordsApi";
 import { useSelector } from "react-redux";
 
@@ -16,11 +16,16 @@ const DashboardPage = () => {
         endDate: endDate.format("YYYY-MM-DD"),
     }).toString();
 
-    const { data: recordsList } = useGetAllRecordsQuery({
-        token,
-        startDate: startDate.format("YYYY-MM-DD"),
-        endDate: endDate.format("YYYY-MM-DD"),
-    });
+    const { data: recordsList, isLoading: isRecordsLoading } =
+        useGetAllRecordsQuery({
+            token,
+            startDate: startDate.format("YYYY-MM-DD"),
+            endDate: endDate.format("YYYY-MM-DD"),
+        });
+
+    if (isRecordsLoading) {
+        return <Loader />;
+    }
 
     return (
         <section className="flex flex-col gap-6">
@@ -30,6 +35,7 @@ const DashboardPage = () => {
                 setStartDate={setStartDate}
                 setEndDate={setEndDate}
             />
+            <DBCharts recordsList={recordsList} />
             <DBRecords recordsList={recordsList} dateString={dateString} />
             <FloatingBtn />
         </section>

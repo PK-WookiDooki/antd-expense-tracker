@@ -1,16 +1,40 @@
 import { Form, Input } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FixWButton } from "../../components";
+import { useDispatch, useSelector } from "react-redux";
+import { useChangeEmailMutation } from "./userApi";
+import { setMessage } from "../../app/global/globalSlice";
 
 const ChangeEmailForm = () => {
     const nav = useNavigate();
     const currentRoute = useLocation().pathname;
 
-    const onFormSubmit = (values) => {
-        console.log(values);
-        nav("/account/verify", {
-            state: { email: values.email, previousRoute: currentRoute },
-        });
+    const { token } = useSelector((state) => state.authSlice);
+    const [changeEmail] = useChangeEmailMutation();
+    const dispatch = useDispatch();
+
+    const onFormSubmit = async (values) => {
+        try {
+            const { data, error: apiError } = await changeEmail({
+                userData: { ...values },
+                token,
+            });
+
+            if (data?.success) {
+                nav("/account/verify", {
+                    state: { email: values.email, previousRoute: currentRoute },
+                });
+            } else {
+                dispatch(
+                    setMessage({
+                        msgType: "error",
+                        msgContent: apiError?.data?.message || apiError?.error,
+                    })
+                );
+            }
+        } catch (error) {
+            throw new Error(error);
+        }
     };
     return (
         <section className=" h-full w-full flex items-center justify-center bg-whiteGray rounded-2xl ">
@@ -30,7 +54,7 @@ const ChangeEmailForm = () => {
                     </p>
                 </div>
                 <Form.Item
-                    name="email"
+                    name="newEmail"
                     label="Email"
                     rules={[
                         {

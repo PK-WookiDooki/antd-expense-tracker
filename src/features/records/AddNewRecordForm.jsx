@@ -20,7 +20,7 @@ import { useGetAllCategoriesQuery } from "../categories/categoriesApi";
 const AddNewRecordForm = () => {
     const { token } = useSelector((state) => state.authSlice);
     const { isAddRecordModalOpen } = useSelector((state) => state.recordsSlice);
-    const { categoriesList } = useSelector((state) => state.categoriesSlice);
+    //const { categoriesList } = useSelector((state) => state.categoriesSlice);
 
     const { data: userCategories } = useGetAllCategoriesQuery(token);
 
@@ -30,16 +30,21 @@ const AddNewRecordForm = () => {
     const dispatch = useDispatch();
     const [error, setError] = useState(null);
 
-    const catOptions = categoriesList
-        ?.filter((category) => category?.type === type)
+    const catOptions = userCategories
+        ?.filter(
+            (category) => category?.type === type || category?.type === null
+        )
         .map((category) => {
             return {
                 label: (
                     <p className="flex items-center gap-1 capitalize">
-                        <i className="material-symbols-outlined">
-                            {category.icon}
+                        <i
+                            className="material-symbols-outlined w-8 h-8 rounded-md text-white flex items-center justify-center"
+                            style={{ backgroundColor: category?.iconBgColor }}
+                        >
+                            {category.iconName}
                         </i>{" "}
-                        {category.categoryName}{" "}
+                        {category.name}{" "}
                     </p>
                 ),
                 value: category.id,
@@ -55,9 +60,8 @@ const AddNewRecordForm = () => {
             );
             delete values.createdDate;
             const record = { ...values, createdDate: formattedDate };
-
-            console.log(record);
-            return;
+            //            console.log(record);
+            //            return;
             const { data, error: apiError } = await addNewRecord({
                 record,
                 token,
@@ -122,7 +126,7 @@ const AddNewRecordForm = () => {
                         ""
                     )}
 
-                    <Form.Item name={"type"} initialValue={"EXPENSE"}>
+                    <Form.Item name={"type"} initialValue={type}>
                         <Segmented
                             options={[
                                 {
@@ -194,7 +198,7 @@ const AddNewRecordForm = () => {
                         <Form.Item
                             label="Note"
                             name={"description"}
-                            className="w-full note-input h-40 md:h-auto  "
+                            className="w-full note-input"
                         >
                             <Input.TextArea className=" !resize-none" />
                         </Form.Item>

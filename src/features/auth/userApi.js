@@ -14,11 +14,11 @@ export const authApi = baseApi.injectEndpoints({
         }),
 
         changeUsername: builder.mutation({
-            query: ({ name, token }) => ({
-                url: `${endPoint}/change-name`,
-                method: "POST",
+            query: ({ username, token }) => ({
+                url: `${endPoint}/change-username`,
+                method: "PUT",
                 headers: { authorization: `Bearer ${token}` },
-                body: { name },
+                body: { username },
             }),
             invalidatesTags: ["user"],
         }),
@@ -26,7 +26,7 @@ export const authApi = baseApi.injectEndpoints({
         changeEmail: builder.mutation({
             query: ({ userData, token }) => ({
                 url: `${endPoint}/change-email`,
-                method: "POST",
+                method: "PUT",
                 headers: { authorization: `Bearer ${token}` },
                 body: userData,
             }),
@@ -36,7 +36,7 @@ export const authApi = baseApi.injectEndpoints({
         changePassword: builder.mutation({
             query: ({ passwords, token }) => ({
                 url: `${endPoint}/change-password`,
-                method: "POST",
+                method: "PUT",
                 headers: { authorization: `Bearer ${token}` },
                 body: passwords,
             }),

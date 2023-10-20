@@ -3,7 +3,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { DeleteRecordModal, EditRecordModal } from "../..";
 
 const RecordCardBody = ({ record, isRemove, date }) => {
-    const { type, recordId, userCategory, amount, description } = record;
+    const { type, userCategory, amount, description } = record;
 
     const formattedAmount = amount.toLocaleString("en-US", {
         style: "currency",
@@ -27,13 +27,21 @@ const RecordCardBody = ({ record, isRemove, date }) => {
             className={`flex items-center justify-between py-1 px-5 bg-white rounded-md `}
         >
             <div className="flex items-center gap-3">
-                <span className=" aspect-square h-12 bg-primary rounded-md flex items-center justify-center bg-primaryBlue text-white ">
-                    Icon
+                <span
+                    className=" aspect-square h-12 bg-primary rounded-md flex items-center justify-center bg-primaryBlue text-white "
+                    style={{
+                        backgroundColor: userCategory?.iconBgColor,
+                    }}
+                >
+                    <i className="material-symbols-outlined">
+                        {" "}
+                        {userCategory?.iconName}{" "}
+                    </i>
                 </span>
                 <div className="flex flex-col gap-1 text-dark">
                     <h2 className="md:text-xl font-medium capitalize">
                         {" "}
-                        {userCategory}{" "}
+                        {userCategory?.name}{" "}
                     </h2>
                     <p className="md:text-sm text-xs line-clamp-1  ">
                         {" "}

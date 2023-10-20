@@ -15,7 +15,8 @@ const BudgetHeader = ({
                     Budget
                 </h2>
                 <p className="md:text-xl text-sm font-normal md:font-medium">
-                    {formatCurrency(30000)} from {formatCurrency(70000)}
+                    {formatCurrency(totalExpensePerMonth)} from{" "}
+                    {formatCurrency(userBudget)}
                 </p>
             </div>
 
@@ -24,11 +25,14 @@ const BudgetHeader = ({
                     <p className="lg:text-xl text-sm mb-2">Remaining</p>
                     <p className="lg:text-[40px] md:text-3xl text-xl">
                         {" "}
-                        {formatCurrency(70000)}{" "}
+                        {formatCurrency(remainingBudget)}{" "}
                     </p>
                 </div>
                 <span className=" md:block hidden self-stretch w-[1px] bg-whiteGray"></span>
-                <EditBudgetModal userBudget={userBudget} />
+                <EditBudgetModal
+                    userBudget={userBudget}
+                    extraStyle={" hidden md:block "}
+                />
             </div>
         </section>
     );

@@ -50,10 +50,15 @@ const EditCategoryModal = ({ category }) => {
 
     const onFormSubmit = async (values) => {
         try {
-            //console.log(values);
+            //console.log({
+            //    categoryId: category?.id,
+            //    category: values,
+            //    token,
+            //});
             //return;
 
             const { data, error: apiError } = await updateCategory({
+                categoryId: category?.id,
                 category: values,
                 token,
             });
@@ -98,7 +103,7 @@ const EditCategoryModal = ({ category }) => {
                 <Form form={form} onFinish={onFormSubmit} layout="vertical">
                     <h2 className="text-xl font-medium mb-10">
                         {" "}
-                        Add New Category{" "}
+                        Update Category{" "}
                     </h2>
 
                     {error !== null ? (
@@ -133,7 +138,7 @@ const EditCategoryModal = ({ category }) => {
 
                     <Form.Item
                         label="Category Name"
-                        name={"categoryName"}
+                        name={"userCategoryName"}
                         rules={[
                             {
                                 required: true,
@@ -154,7 +159,7 @@ const EditCategoryModal = ({ category }) => {
                             },
                         ]}
                     >
-                        <div className="grid grid-cols-6 md:grid-cols-8 gap-2 p-2 rounded-md border border-secondary mt-1 place-items-center">
+                        <div className="grid grid-cols-6 md:grid-cols-8 gap-2 p-2 rounded-md border border-secondary place-items-center min-h-[40px] ">
                             {iconOptions?.map((item, index) => {
                                 return (
                                     <div key={index}>

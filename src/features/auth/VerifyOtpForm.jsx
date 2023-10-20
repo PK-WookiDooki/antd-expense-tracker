@@ -12,7 +12,7 @@ const VerifyOtpForm = () => {
     const [otp, setOtp] = useState("");
     const [isResent, setIsResent] = useState(false);
     const [timer, setTimer] = useState(59);
-    const [error, setError] = useState("");
+    const [error, setError] = useState(null);
     const nav = useNavigate();
     const dispatch = useDispatch();
 
@@ -58,6 +58,12 @@ const VerifyOtpForm = () => {
         }
     };
     useEffect(() => {
+        if (error !== null) {
+            setTimeout(() => {
+                setError(null);
+            }, 5000);
+        }
+
         if (isResent === true) {
             setTimeout(() => {
                 setIsResent(false);
@@ -69,12 +75,12 @@ const VerifyOtpForm = () => {
             timer > 0 &&
             setInterval(() => setTimer(timer - 1), 1000);
         return () => clearInterval(counter);
-    }, [timer, isResent]);
+    }, [timer, isResent, error]);
 
     const onResendOtp = async () => {
         setIsResent(true);
         try {
-            const { data, error } = await resendOtp(email);
+            const { data, error: apiError } = await resendOtp(email);
             if (data?.success) {
                 dispatch(
                     setMessage({
@@ -83,12 +89,13 @@ const VerifyOtpForm = () => {
                     })
                 );
             } else {
-                dispatch(
-                    setMessage({
-                        msgType: "error",
-                        msgContent: error?.data?.message,
-                    })
-                );
+                //dispatch(
+                //    setMessage({
+                //        msgType: "error",
+                //        msgContent: error?.data?.message,
+                //    })
+                //);
+                setError(apiError?.data?.message || apiError?.error);
             }
         } catch (error) {
             throw new Error(error);
@@ -114,7 +121,7 @@ const VerifyOtpForm = () => {
                     />
                 </div>
 
-                {/*{error?.trim().length > 0 ? (
+                {error?.trim().length > 0 ? (
                     <Alert
                         message={error}
                         type="error"
@@ -123,7 +130,7 @@ const VerifyOtpForm = () => {
                     />
                 ) : (
                     ""
-                )}*/}
+                )}
 
                 <OTPInput
                     value={otp}

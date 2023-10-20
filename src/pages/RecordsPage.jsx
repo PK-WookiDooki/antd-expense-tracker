@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { FloatingBtn } from "../components";
+import { FloatingBtn, Loader } from "../components";
 import { RecordPageHeader, RecordsList } from "../features";
 import dayjs from "dayjs";
 import { useState } from "react";
@@ -19,21 +19,26 @@ const RecordsPage = () => {
     const [startDate, setStartDate] = useState(startedDate);
     const [endDate, setEndDate] = useState(endedDate);
 
-    const { data: recordsList } = useGetAllRecordsQuery({
-        token,
-        startDate: startDate.format("YYYY-MM-DD"),
-        endDate: endDate.format("YYYY-MM-DD"),
-    });
+    const { data: records, isLoading: isRecordsLoading } =
+        useGetAllRecordsQuery({
+            token,
+            startDate: startDate.format("YYYY-MM-DD"),
+            endDate: endDate.format("YYYY-MM-DD"),
+        });
+
+    if (isRecordsLoading) {
+        return <Loader />;
+    }
 
     return (
-        <section className=" lg:p-10 p-5 bg-white rounded-2xl flex flex-col gap-10 ">
+        <section className=" lg:p-10 p-5 bg-white rounded-2xl flex flex-col gap-10 h-full ">
             <RecordPageHeader
                 startDate={startDate}
                 endDate={endDate}
                 setStartDate={setStartDate}
                 setEndDate={setEndDate}
             />
-            <RecordsList recordsList={recordsList} />
+            <RecordsList recordsList={records} />
             <FloatingBtn />
         </section>
     );

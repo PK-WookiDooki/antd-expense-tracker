@@ -1,32 +1,55 @@
-import { Button, Form, Input, Modal } from "antd";
+import { Form, Input, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { RxCross1 } from "react-icons/rx";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { setMessage } from "../../app/global/globalSlice";
 import ModalHeader from "../../components/modals/ModalHeader";
 import { SubmitBtn } from "../../components";
+import { useChangePasswordMutation } from "./userApi";
 
 const ChangePasswordModal = () => {
+    const { token } = useSelector((state) => state.authSlice);
     const [openModal, setOpenModal] = useState(false);
+    const [error, setError] = useState(null);
 
     const [form] = Form.useForm();
     const nav = useNavigate();
 
     const dispatch = useDispatch();
+    const [changePassword] = useChangePasswordMutation();
 
-    const onFormSubmit = (values) => {
-        delete values.password_confirmation;
-        console.log(values);
-        nav("/signIn", {
-            replace: true,
-        });
-        dispatch(
-            setMessage({
-                msgType: "success",
-                msgContent: "Password changed successfully!",
-            })
-        );
+    useEffect(() => {
+        if (error !== null) {
+            setTimeout(() => {
+                setError(null);
+            }, 5000);
+        }
+    }, [error]);
+
+    const onFormSubmit = async (values) => {
+        try {
+            delete values.password_confirmation;
+            const { data, error: apiError } = await changePassword({
+                passwords: { ...values },
+                token,
+            });
+            if (data?.success) {
+                nav("/signIn", {
+                    replace: true,
+                });
+                dispatch(
+                    setMessage({
+                        msgType: "success",
+                        msgContent: "Password changed successfully!",
+                    })
+                );
+                closeModal();
+            } else {
+                setError(apiError?.data?.message || apiError?.error);
+            }
+        } catch (error) {
+            throw new Error(error);
+        }
     };
 
     const closeModal = () => {
@@ -40,7 +63,7 @@ const ChangePasswordModal = () => {
                 <h2 className="text-xl font-semibold">Password</h2>
                 <button
                     onClick={() => setOpenModal(true)}
-                    className="py-1 px-4 rounded-full border border-dark text-dark hover:text-whiteGray hover:bg-dark duration-200"
+                    className="py-1 px-4 rounded-full border border-primaryGreen text-primaryGreen hover:text-whiteGray hover:bg-primaryGreen outline-none duration-200"
                 >
                     {" "}
                     Change Password{" "}
@@ -62,7 +85,7 @@ const ChangePasswordModal = () => {
                     className="p-6 pb-0"
                 >
                     <Form.Item
-                        name="current_password"
+                        name="oldPassword"
                         label="Current Password"
                         rules={[
                             {
@@ -74,7 +97,7 @@ const ChangePasswordModal = () => {
                         <Input.Password />
                     </Form.Item>
                     <Form.Item
-                        name="password"
+                        name="newPassword"
                         label="Password"
                         rules={[
                             {
@@ -99,6 +122,7 @@ const ChangePasswordModal = () => {
                     <Form.Item
                         name="password_confirmation"
                         label="Confirm Password"
+                        dependencies={["newPassword"]}
                         rules={[
                             {
                                 required: true,
@@ -108,7 +132,7 @@ const ChangePasswordModal = () => {
                                 validator(_, value) {
                                     if (
                                         !value ||
-                                        getFieldValue("password") === value
+                                        getFieldValue("newPassword") === value
                                     ) {
                                         return Promise.resolve();
                                     }

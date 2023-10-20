@@ -41,14 +41,12 @@ const AddNewCategoryForm = ({ iconsList }) => {
 
     const onFormSubmit = async (values) => {
         try {
-            const iconId = Number(values?.iconId);
-            delete values.iconId;
             const { data, error: apiError } = await addNewCategory({
-                category: { ...values, iconId },
+                category: { ...values },
                 token,
             });
 
-            console.log(data, error);
+            //console.log(data, error);
             if (data?.success) {
                 closeModal();
                 dispatch(
@@ -131,7 +129,7 @@ const AddNewCategoryForm = ({ iconsList }) => {
                     </Form.Item>
 
                     <Form.Item
-                        name={"iconId"}
+                        name={"iconName"}
                         label="Icon"
                         rules={[
                             {
@@ -140,7 +138,7 @@ const AddNewCategoryForm = ({ iconsList }) => {
                             },
                         ]}
                     >
-                        <div className="grid grid-cols-5 md:grid-cols-8 gap-2 p-2 rounded-md border border-gray mt-1">
+                        <div className="grid grid-cols-5 md:grid-cols-8 gap-2 p-2 rounded-md border border-gray min-h-[40px]">
                             {iconOptions?.map((item, index) => {
                                 return (
                                     <div key={index}>
@@ -149,11 +147,11 @@ const AddNewCategoryForm = ({ iconsList }) => {
                                             className={`w-12 h-12 rounded-md border cursor-pointer flex items-center justify-center `}
                                             style={{
                                                 color:
-                                                    icon == item.id
+                                                    icon == item.name
                                                         ? "#FFF"
                                                         : item.iconBgColor,
                                                 backgroundColor:
-                                                    icon == item.id
+                                                    icon == item.name
                                                         ? item.iconBgColor
                                                         : "#FFF",
                                                 borderColor: item.iconBgColor,
@@ -166,12 +164,12 @@ const AddNewCategoryForm = ({ iconsList }) => {
                                         <input
                                             id={item.name}
                                             type="radio"
-                                            name="iconId"
-                                            value={item.id}
+                                            name="iconName"
+                                            value={item.name}
                                             onChange={(e) =>
                                                 setIcon(e.target.value)
                                             }
-                                            checked={icon == item.id}
+                                            checked={icon == item.name}
                                             className="hidden"
                                         />
                                     </div>

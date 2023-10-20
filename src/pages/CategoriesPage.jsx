@@ -1,4 +1,4 @@
-import { FloatingBtn } from "../components";
+import { FloatingBtn, Loader } from "../components";
 import { CategoriesList } from "../features";
 import AddNewCategoryForm from "../features/categories/AddNewCategoryForm";
 import { useGetAllIconsQuery } from "../features/categories/categoriesApi";
@@ -11,11 +11,7 @@ const CategoriesPage = () => {
         useGetAllIconsQuery(token);
 
     if (isIconsLoading) {
-        return (
-            <section className="lg:p-10 p-5 bg-whiteGray rounded-2xl flex flex-col gap-8 h-full">
-                Categories Loading!
-            </section>
-        );
+        return <Loader />;
     }
 
     return (

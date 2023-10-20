@@ -10,7 +10,7 @@ const DeleteCategoryModal = ({ category }) => {
     return (
         <ConfirmationModal
             title={"category"}
-            event={() => deleteCategory({ category: category?.id, token })}
+            event={() => deleteCategory({ categoryId: category?.id, token })}
             component={<CategoryCard category={category} isRemove={true} />}
         />
     );

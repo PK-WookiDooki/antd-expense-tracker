@@ -10,7 +10,7 @@ const DeleteRecordModal = ({ record }) => {
     return (
         <ConfirmationModal
             title={"record"}
-            event={() => deleteRecord({ recordId: record?.id, token })}
+            event={() => deleteRecord({ recordId: record?.recordId, token })}
             component={<RecordCardBody record={record} isRemove={true} />}
             isDropdown={true}
         />

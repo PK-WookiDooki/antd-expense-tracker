@@ -24,8 +24,8 @@ export const categoriesApi = baseApi.injectEndpoints({
         }),
 
         updateCategory: builder.mutation({
-            query: ({ category, token }) => ({
-                url: `${endPoint}`,
+            query: ({ categoryId, category, token }) => ({
+                url: `${endPoint}/${categoryId}`,
                 method: "PUT",
                 headers: { Authorization: `Bearer ${token}` },
                 body: category,
@@ -35,10 +35,9 @@ export const categoriesApi = baseApi.injectEndpoints({
 
         deleteCategory: builder.mutation({
             query: ({ categoryId, token }) => ({
-                url: `${endPoint}`,
+                url: `${endPoint}/${categoryId}`,
                 method: "DELETE",
                 headers: { Authorization: `Bearer ${token}` },
-                body: { categoryId },
             }),
             invalidatesTags: ["categories"],
         }),

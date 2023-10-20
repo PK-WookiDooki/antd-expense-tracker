@@ -2,14 +2,16 @@ import { Alert, Button, Form, InputNumber, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { ModalHeader, SubmitBtn } from "../../components";
 import { useSetBudgetMutation } from "../auth/userApi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setMessage } from "../../app/global/globalSlice";
 
-const EditBudgetModal = ({ userBudget }) => {
+const EditBudgetModal = ({ userBudget, extraStyle }) => {
     const [openModal, setOpenModal] = useState(false);
     const [error, setError] = useState(null);
     const [form] = Form.useForm();
     const dispatch = useDispatch();
+
+    const { token } = useSelector((state) => state.authSlice);
     const [setBudget] = useSetBudgetMutation();
 
     useEffect(() => {
@@ -17,6 +19,10 @@ const EditBudgetModal = ({ userBudget }) => {
             setTimeout(() => {
                 setError(null);
             }, 5000);
+        }
+
+        if (userBudget) {
+            form.setFieldValue("budget", userBudget);
         }
     }, [error, openModal]);
 
@@ -49,14 +55,12 @@ const EditBudgetModal = ({ userBudget }) => {
     };
 
     return (
-        <section className="hidden md:block">
+        <section className={extraStyle}>
             <Button
                 onClick={() => setOpenModal(true)}
                 type="primary"
                 htmlType="button"
-                size="large"
-                shape="round"
-                className=" !bg-whiteGray !text-dark"
+                className=" !bg-whiteGray rounded-2xl !px-8 !text-dark md:!h-[50px] font-medium "
             >
                 Edit Budget
             </Button>
@@ -87,7 +91,7 @@ const EditBudgetModal = ({ userBudget }) => {
                     )}
                     <Form.Item
                         label={"Budget Amount"}
-                        name={"budgetAmount"}
+                        name={"budget"}
                         rules={[
                             {
                                 required: true,

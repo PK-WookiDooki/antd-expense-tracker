@@ -9,13 +9,19 @@ import {
     Select,
 } from "antd";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
 import { FixWButton } from "../../components";
+import { useGetAllCategoriesQuery } from "../categories/categoriesApi";
+import { useUpdateRecordMutation } from "./recordsApi";
+import { setMessage } from "../../app/global/globalSlice";
 
 const EditRecordForm = ({ record, date }) => {
-    const { categoriesList } = useSelector((state) => state.categoriesSlice);
+    //const { categoriesList } = useSelector((state) => state.categoriesSlice);
     const [form] = Form.useForm();
+
+    const { token } = useSelector((state) => state.authSlice);
+    const { data: userCategories } = useGetAllCategoriesQuery(token);
 
     const [openModal, setOpenModal] = useState(false);
     const [error, setError] = useState(null);
@@ -32,37 +38,65 @@ const EditRecordForm = ({ record, date }) => {
             form.setFieldValue("type", record?.type);
             form.setFieldValue("amount", record?.amount);
             form.setFieldValue("createdDate", dayjs(date));
-            form.setFieldValue("userCategoryId", record?.userCategory);
+            form.setFieldValue("userCategoryId", record?.userCategory.id);
             form.setFieldValue("description", record?.description);
         }
     }, [error, record]);
 
-    const catOptions = categoriesList
+    const catOptions = userCategories
         ?.filter((category) => category?.type === type)
         .map((category) => {
             return {
                 label: (
                     <p className="flex items-center gap-1 capitalize">
                         <i className="material-symbols-outlined">
-                            {category.icon}
+                            {category.iconName}
                         </i>{" "}
-                        {category.categoryName}{" "}
+                        {category.name}{" "}
                     </p>
                 ),
                 value: category.id,
             };
         });
 
-    const onFormSubmit = (values) => {
-        const formattedDate = dayjs(values?.createdDate).format("YYYY-MM-DD");
-        delete values.createdDate;
+    const dispatch = useDispatch();
 
-        const transaction = {
-            ...values,
-            createdDate: formattedDate,
-        };
-        console.log(transaction);
-        closeModal();
+    const [updateRecord] = useUpdateRecordMutation();
+
+    const onFormSubmit = async (values) => {
+        try {
+            const formattedDate = dayjs(values?.createdDate).format(
+                "YYYY-MM-DD"
+            );
+            delete values.createdDate;
+
+            const updatedRecord = {
+                ...values,
+                createdDate: formattedDate,
+            };
+
+            const { data, error: apiError } = await updateRecord({
+                recordId: record?.recordId,
+                record: updatedRecord,
+                token,
+            });
+
+            console.log(data);
+
+            if (data?.success) {
+                closeModal();
+                dispatch(
+                    setMessage({
+                        msgType: "success",
+                        mgsContent: data?.message,
+                    })
+                );
+            } else {
+                setError(apiError?.data?.message || apiError?.error);
+            }
+        } catch (error) {
+            throw new Error(error);
+        }
     };
 
     const closeModal = () => {
@@ -172,7 +206,7 @@ const EditRecordForm = ({ record, date }) => {
                                     },
                                 ]}
                             >
-                                <Select options={categoriesList} />
+                                <Select options={catOptions} />
                             </Form.Item>
                         </div>
 

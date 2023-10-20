@@ -22,10 +22,12 @@ export { default as CategoriesList } from "./categories/CategoriesList";
 //dashboard
 export { default as DBHeader } from "./dashboard/DBHeader";
 export { default as DBRecords } from "./dashboard/DBRecords";
+export { default as DBCharts } from "./dashboard/DBPieCharts";
 
 //budget
 export { default as BudgetHeader } from "./budget/BudgetHeader";
 export { default as BudgetExpenses } from "./budget/ExpenseRecords";
+export { default as EditBudgetModal } from "./budget/EditBudgetModal";
 
 //card
 export { default as RecordCard } from "./records/components/RecordCard";

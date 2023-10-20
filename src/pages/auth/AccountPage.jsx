@@ -29,7 +29,7 @@ const Home = () => {
                         <p> {userData?.email} </p>
                         <Link
                             to={"changeEmail"}
-                            className="py-1 px-4 rounded-full border border-dark text-dark hover:text-whiteGray hover:bg-dark duration-200"
+                            className="py-1 px-4 rounded-full border border-primaryGreen text-primaryGreen hover:text-whiteGray hover:bg-primaryGreen outline-none duration-200"
                         >
                             {" "}
                             Change Email{" "}

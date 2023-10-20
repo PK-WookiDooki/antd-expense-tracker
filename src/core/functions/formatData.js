@@ -36,3 +36,28 @@ export const formatCurrency = (amount) => {
 
     return formattedAmount;
 };
+
+export const formatChartData = (recordsList, type) => {
+    const filteredData = recordsList
+        ?.filter((record) => record.type === type)
+        .reduce((result, item) => {
+            const existingItem = result.find(
+                (category) =>
+                    category.name.toLowerCase() ===
+                    item.userCategory.name.toLowerCase()
+            );
+            if (existingItem) {
+                existingItem.value += item.amount;
+            } else {
+                result.push({
+                    type:
+                        item.userCategory.name.chartAt(0).toUpperCase() +
+                        item.category.name.slice(1),
+                    value: item.amount,
+                    color: item.category.iconBgColor,
+                });
+            }
+        });
+
+    return filteredData;
+};

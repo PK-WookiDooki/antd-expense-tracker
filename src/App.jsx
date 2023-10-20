@@ -14,11 +14,7 @@ import {
     Verification,
 } from "./pages";
 import MainLayout from "./layout/MainLayout";
-import {
-    CreateNewPasswordForm,
-    ChangeEmailPage,
-    AuthVerifyOtpPage,
-} from "./features";
+import { ChangeEmailPage, AuthVerifyOtpPage } from "./features";
 import { IsAuth, IsNotAuth, OTPGuard } from "./components";
 import { useDispatch, useSelector } from "react-redux";
 import { ConfigProvider, message } from "antd";

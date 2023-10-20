@@ -1,0 +1,39 @@
+
+/* Target the legend container */
+.g2-legend {
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
+
+/* Style the legend items (labels and markers) */
+.g2-legend-item {
+  margin: 5px;
+  font-size: 18px;
+  /* Add any other styles you want */
+}
+
+/* Style the legend item markers */
+.g2-legend-item-marker {
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  border-radius: 50%;
+  /* Add any other styles you want */
+}
+
+.g2-html-annotation{
+  font-family: "Roboto Slab" !important;
+}
+
+
+/* carousel */
+.slick-slide > div:has(.income-chart){
+  display: flex;
+  justify-content: flex-end;
+}
+
+  .slick-slide{
+    padding: 0  8px !important;
+  }

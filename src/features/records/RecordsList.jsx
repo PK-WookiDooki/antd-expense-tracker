@@ -3,6 +3,7 @@ import { Select } from "antd";
 import { formatData } from "../../core/functions/formatData";
 import { RecordCard } from "..";
 import { useEffect, useState } from "react";
+import useFormatRecords from "./hooks/useFormatRecords";
 
 const options = [
     {
@@ -19,40 +20,41 @@ const options = [
     },
 ];
 
-const RecordsList = () => {
-    const { recordsList } = useSelector((state) => state.recordsSlice);
-    const formattedRecords = formatData(recordsList);
-
-    const [records, setRecords] = useState(formattedRecords);
+const RecordsList = ({ recordsList }) => {
+    //const { recordsList } = useSelector((state) => state.recordsSlice);
+    const [records, setRecords] = useState([]);
     const [isASC, setIsASC] = useState(false);
     const [selectedOpt, setSelectedOpt] = useState("all");
 
     useEffect(() => {
-        if (selectedOpt === "all") {
-            if (isASC) {
-                setRecords(
-                    formattedRecords
-                        .slice()
-                        .sort((a, b) => new Date(a.date) - new Date(b.date))
-                );
+        if (recordsList?.length > 0) {
+            setRecords(formatData(recordsList));
+            if (selectedOpt === "all") {
+                if (isASC) {
+                    setRecords(
+                        records
+                            .slice()
+                            .sort((a, b) => new Date(a.date) - new Date(b.date))
+                    );
+                } else {
+                    setRecords(formatData(recordsList));
+                }
             } else {
-                setRecords(formattedRecords);
-            }
-        } else {
-            const filteredRecords = recordsList?.filter(
-                (record) => record.type === selectedOpt
-            );
-            if (isASC) {
-                setRecords(
-                    formatData(filteredRecords)
-                        .slice()
-                        .sort((a, b) => new Date(a.date) - new Date(b.date))
+                const filteredRecords = recordsList?.filter(
+                    (record) => record.type === selectedOpt
                 );
-            } else {
-                setRecords(formatData(filteredRecords));
+                if (isASC) {
+                    setRecords(
+                        formatData(filteredRecords)
+                            .slice()
+                            .sort((a, b) => new Date(a.date) - new Date(b.date))
+                    );
+                } else {
+                    setRecords(formatData(filteredRecords));
+                }
             }
         }
-    }, [selectedOpt, isASC]);
+    }, [selectedOpt, isASC, recordsList]);
 
     return (
         <section>
