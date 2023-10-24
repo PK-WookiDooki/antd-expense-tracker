@@ -121,7 +121,7 @@ const PieChart = ({ chartData, dataColor, chartTitle, extraStyle }) => {
         <div
             className={`w-full md:max-w-[480px]  bg-pieBg p-5 rounded-xl shadow-sm ${extraStyle} `}
         >
-            <h2 className="text-black text-center text-2xl font-semibold">
+            <h2 className="text-black text-center md:text-2xl text-lg font-medium">
                 {" "}
                 {chartTitle}{" "}
             </h2>
