@@ -2,15 +2,12 @@ import { Dropdown } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutAccount } from "@/features/auth/authSlice";
-import { setMessage } from "@/app/global/globalSlice";
+import {setMessage} from "@/app/global/globalSlice";
 import { useGetUserDataQuery } from "@/features/auth/userApi";
-import { useState } from "react";
 
 const AccountMenu = () => {
     const dispatch = useDispatch();
     const nav = useNavigate();
-
-    const [isDDOpen, setIsDDOpen] = useState(false);
 
     const handleLogout = () => {
         dispatch(logoutAccount());
@@ -54,7 +51,6 @@ const AccountMenu = () => {
     return (
         <Dropdown menu={{ items }} trigger={["click"]} placement="bottomRight">
             <button
-                onClick={() => setIsDDOpen(!isDDOpen)}
                 className="lg:flex items-center gap-1 hidden"
             >
                 {" "}
@@ -62,11 +58,9 @@ const AccountMenu = () => {
                     person
                 </span>
                 {userData?.username || "Nexcoder"}
-                {isDDOpen ? (
-                    <i className="material-symbols-outlined">expand_less </i>
-                ) : (
-                    <i className="material-symbols-outlined">expand_more </i>
-                )}{" "}
+
+                <i className="material-symbols-outlined">expand_more </i>
+
             </button>
         </Dropdown>
     );

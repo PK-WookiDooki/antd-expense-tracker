@@ -10,7 +10,7 @@ const RecordPageHeader = ({ startDate, endDate, setStartDate, setEndDate }) => {
                     defaultValue={startDate}
                     onChange={(dateString) => setStartDate(dateString)}
                     id="startDate"
-                    format={"DD MMMM YYYY"}
+                    format={"DD-MM-YYYY"}
                     className="!h-10 !text-base"
                     allowClear={false}
                     disabledDate={(date) => !date || date.isAfter(endDate)}
@@ -22,7 +22,7 @@ const RecordPageHeader = ({ startDate, endDate, setStartDate, setEndDate }) => {
                     defaultValue={endDate}
                     onChange={(dateString) => setEndDate(dateString)}
                     id="endDate"
-                    format={"DD MMMM YYYY"}
+                    format={"DD-MM-YYYY"}
                     className="!h-10 !text-base"
                     allowClear={false}
                     disabledDate={(date) => !date || date.isBefore(startDate)}

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import AccountMenu from "./AccountMenu";
 import { AddNewRecordModal } from "@/features";
 import { toggleSidebar } from "@/app/global/globalSlice";
-import { useGetUserDataQuery } from "@/features/auth/userApi";
 
 const Header = () => {
     const { isSidebarOpen } = useSelector((state) => state.globalSlice);
@@ -21,7 +20,7 @@ const Header = () => {
                     {isSidebarOpen ? <RxCross1 /> : <RxHamburgerMenu />}{" "}
                 </button>
                 <h1 className="text-2xl font-medium">
-                    <Link to={"/"}> Nextracker </Link>
+                    <Link  onClick={() => dispatch(toggleSidebar(false))} to={"/"} className={"font-dms"}> Nextracker </Link>
                 </h1>
             </div>
             <div className="flex items-center gap-2 lg:gap-6">
@@ -29,6 +28,7 @@ const Header = () => {
                 <div className="flex items-center gap-4">
                     <Link
                         to={"/account"}
+                        onClick={() => dispatch(toggleSidebar(false))}
                         className=" lg:pointer-events-none lg:hidden "
                     >
                         <span className="material-symbols-outlined text-2xl h-10 w-10 rounded-full flex items-center justify-center bg-dark text-whiteGray ">

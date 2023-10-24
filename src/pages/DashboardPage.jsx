@@ -31,7 +31,7 @@ const DashboardPage = () => {
     }
 
     return (
-        <section className="flex flex-col gap-6 max-w-[100vw] ">
+        <section className="flex flex-col gap-6">
             <DBHeader
                 startDate={startDate}
                 endDate={endDate}

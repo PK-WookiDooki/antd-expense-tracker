@@ -46,7 +46,7 @@ const DBHeader = ({ startDate, endDate, setStartDate, setEndDate }) => {
                         <DatePicker
                             id="startDate"
                             defaultValue={dayjs().startOf("months")}
-                            format={"DD MMMM YYYY"}
+                            format={"DD-MM-YYYY"}
                             onChange={(value) => setStartDate(value)}
                             disabledDate={(date) =>
                                 !date || date.isAfter(endDate)
@@ -61,7 +61,7 @@ const DBHeader = ({ startDate, endDate, setStartDate, setEndDate }) => {
                         <DatePicker
                             id="endDate"
                             defaultValue={dayjs().endOf("months")}
-                            format={"DD MMMM YYYY"}
+                            format={"DD-MM-YYYY"}
                             onChange={(value) => setEndDate(value)}
                             disabledDate={(date) =>
                                 !date || date.isBefore(startDate)

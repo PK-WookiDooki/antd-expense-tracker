@@ -52,3 +52,9 @@
 .note-input .ant-row{
   flex-wrap: nowrap !important;
 }
+
+@media screen and (max-width: 768px) {
+  .note-input .ant-form-item-control-input{
+    height: 120px !important;
+  }
+}

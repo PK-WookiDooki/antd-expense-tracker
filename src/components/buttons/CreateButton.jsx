@@ -7,11 +7,11 @@ const CreateButton = ({ label, icon, event, type }) => {
             type="primary"
             htmlType="button"
             shape="round"
-            className={`  ${
+            className={`${
                 type === "record"
                     ? " !bg-primaryGreen hover:!bg-primaryGreen/80 hidden md:flex "
                     : " !bg-primaryBlue hover:!bg-primaryBlue/80 "
-            } flex items-center text-base `}
+            } flex items-center text-base`}
         >
             {" "}
             <i className="material-symbols-outlined"> {icon} </i> {label}{" "}

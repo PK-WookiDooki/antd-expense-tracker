@@ -10,7 +10,7 @@ const DBPieCharts = ({ recordsList }) => {
     const incomeCatColors = incomeData?.map((item) => item.color);
 
     return (
-        <section className="lg:p-8 lg:py-10 md:p-3 md:py-5 p-2 py-4 rounded-2xl bg-whiteGray relative w-[100vw] md:w-auto  ">
+        <section className="lg:p-8 lg:py-10 md:p-3 md:py-5 p-2 py-4 rounded-2xl bg-whiteGray relative">
             <h2 className="md:text-2xl text-lg font-medium text-lightGray mb-5 px-2">
                 Pie Charts Categories
             </h2>

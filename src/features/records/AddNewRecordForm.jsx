@@ -213,7 +213,7 @@ const AddNewRecordForm = () => {
                             <Input.TextArea className=" !resize-none" />
                         </Form.Item>
                     </div>
-                    <div className="mt-9 flex gap-10 items-center justify-center">
+                    <div className="md:mt-9 flex gap-10 items-center justify-center">
                         <FixWButton
                             isButton={true}
                             event={closeModal}
