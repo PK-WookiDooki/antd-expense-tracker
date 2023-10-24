@@ -30,13 +30,15 @@ const BudgetPage = () => {
 
     return (
         <section className="h-full flex flex-col gap-6 ">
-            <EditBudgetModal extraStyle={" md:hidden block "} />
+            <EditBudgetModal userBudget={userData?.budget} extraStyle={" md:hidden block "} />
             <BudgetHeader
-                remainingBudget={parseInt(remainingBudget)}
+                remainingBudget={remainingBudget}
                 totalExpensePerMonth={totalExpensePerMonth}
                 userBudget={userData?.budget}
             />
             <BudgetExpenses
+                userBudget={userData?.budget}
+                expensesList={expensesList}
                 selectedMonth={selectedMonth}
                 setSelectedMonth={setSelectedMonth}
             />

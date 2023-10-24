@@ -36,4 +36,9 @@
   .blue-blk{
     @apply ball h-28 w-28 h-52 w-52 bg-[#40A9FF] -right-[50px] -top-[70px]
   ;}
+
+/*  account page btns*/
+  .edit-btn{
+    @apply py-1 px-4 rounded-full border border-dark text-dark hover:border-primaryGreen hover:text-whiteGray hover:bg-primaryGreen outline-none duration-200;
+  }
 }

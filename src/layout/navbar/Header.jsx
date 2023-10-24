@@ -2,9 +2,9 @@ import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AccountMenu from "./AccountMenu";
-import { AddNewRecordModal } from "../../features";
-import { toggleSidebar } from "../../app/global/globalSlice";
-import { useGetUserDataQuery } from "../../features/auth/userApi";
+import { AddNewRecordModal } from "@/features";
+import { toggleSidebar } from "@/app/global/globalSlice";
+import { useGetUserDataQuery } from "@/features/auth/userApi";
 
 const Header = () => {
     const { isSidebarOpen } = useSelector((state) => state.globalSlice);

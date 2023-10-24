@@ -6,7 +6,7 @@ const MainLayout = () => {
     const { isSidebarOpen } = useSelector((state) => state.globalSlice);
 
     return (
-        <section className="flex flex-row min-h-screen">
+        <section className="flex flex-row min-h-screen !font-sans">
             <Sidebar />
             <main className=" bg-lightGreen flex flex-1 flex-col min-h-screen ">
                 <Header />

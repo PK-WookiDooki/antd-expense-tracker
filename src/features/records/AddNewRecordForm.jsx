@@ -10,17 +10,17 @@ import {
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsAddRecordModalOpen } from "./recordsSlice";
-import { CreateBtn, FixWButton } from "../../components";
+import { CreateBtn, FixWButton } from "@/components";
 import dayjs from "dayjs";
-import { useState } from "react";
-import { setMessage } from "../../app/global/globalSlice";
+import { useEffect, useState } from "react";
+import { setMessage } from "@/app/global/globalSlice";
 import { useAddNewRecordMutation } from "./recordsApi";
 import { useGetAllCategoriesQuery } from "../categories/categoriesApi";
 
 const AddNewRecordForm = () => {
     const { token } = useSelector((state) => state.authSlice);
     const { isAddRecordModalOpen } = useSelector((state) => state.recordsSlice);
-    //const { categoriesList } = useSelector((state) => state.categoriesSlice);
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const { data: userCategories } = useGetAllCategoriesQuery(token);
 
@@ -30,9 +30,12 @@ const AddNewRecordForm = () => {
     const dispatch = useDispatch();
     const [error, setError] = useState(null);
 
+    // const [catOptions, setCatOptions] = useState([]);
+
     const catOptions = userCategories
         ?.filter(
-            (category) => category?.type === type || category?.type === null
+            (category) =>
+                category?.type === type || category?.type === null
         )
         .map((category) => {
             return {
@@ -40,7 +43,9 @@ const AddNewRecordForm = () => {
                     <p className="flex items-center gap-1 capitalize">
                         <i
                             className="material-symbols-outlined w-8 h-8 rounded-md text-white flex items-center justify-center"
-                            style={{ backgroundColor: category?.iconBgColor }}
+                            style={{
+                                backgroundColor: category?.iconBgColor,
+                            }}
                         >
                             {category.iconName}
                         </i>{" "}
@@ -51,17 +56,20 @@ const AddNewRecordForm = () => {
             };
         });
 
+    useEffect(() => {
+        form.resetFields(["userCategoryId"]);
+    }, [type]);
+
     const [addNewRecord] = useAddNewRecordMutation();
 
     const onFormSubmit = async (values) => {
         try {
+            setIsSubmitting(true)
             const formattedDate = dayjs(values?.createdDate).format(
                 "YYYY-MM-DD"
             );
             delete values.createdDate;
             const record = { ...values, createdDate: formattedDate };
-            //            console.log(record);
-            //            return;
             const { data, error: apiError } = await addNewRecord({
                 record,
                 token,
@@ -76,6 +84,7 @@ const AddNewRecordForm = () => {
                 );
                 closeModal();
             } else {
+                setIsSubmitting(false)
                 setError(apiError?.data?.message || apiError?.error);
             }
         } catch (error) {
@@ -86,8 +95,9 @@ const AddNewRecordForm = () => {
     const closeModal = () => {
         form.resetFields();
         setError(null);
-        dispatch(setIsAddRecordModalOpen(false));
-    };
+        setIsSubmitting(false)
+        setType("EXPENSE")
+        dispatch(setIsAddRecordModalOpen(false));}
 
     return (
         <section>
@@ -126,7 +136,7 @@ const AddNewRecordForm = () => {
                         ""
                     )}
 
-                    <Form.Item name={"type"} initialValue={type}>
+                    <Form.Item name={"type"} initialValue={"EXPENSE"}>
                         <Segmented
                             options={[
                                 {
@@ -216,6 +226,7 @@ const AddNewRecordForm = () => {
                             htmlType={"submit"}
                             buttonType={"primary"}
                             isButton={true}
+                            isLoading={isSubmitting}
                         />
                     </div>
                 </Form>

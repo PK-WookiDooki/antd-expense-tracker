@@ -16,7 +16,7 @@ export const authSlice = createSlice({
             state.token = payload.token;
         },
 
-        logoutAccount: (state, { payload }) => {
+        logoutAccount: (state, _) => {
             state.token = null;
             state.userData = null;
             Cookies.remove("token");

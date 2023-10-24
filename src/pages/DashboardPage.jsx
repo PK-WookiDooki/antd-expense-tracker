@@ -23,12 +23,15 @@ const DashboardPage = () => {
             endDate: endDate.format("YYYY-MM-DD"),
         });
 
+
+    // console.log(recordsList)
+
     if (isRecordsLoading) {
-        return <Loader />;
+       return <Loader />;
     }
 
     return (
-        <section className="flex flex-col gap-6">
+        <section className="flex flex-col gap-6 max-w-[100vw] ">
             <DBHeader
                 startDate={startDate}
                 endDate={endDate}

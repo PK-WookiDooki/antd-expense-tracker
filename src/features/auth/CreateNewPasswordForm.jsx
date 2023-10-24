@@ -1,24 +1,32 @@
 import { Form, Input } from "antd";
-import { FormTitle, SubmitBtn } from "../../components";
+import { FormTitle, SubmitBtn } from "@/components";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useResetPasswordMutation } from "./authApi";
 import { useDispatch } from "react-redux";
-import { setMessage } from "../../app/global/globalSlice";
+import { setMessage } from "@/app/global/globalSlice";
+import { useState } from "react";
 
 const CreateNewPasswordForm = () => {
     const nav = useNavigate();
     const email = useLocation().state;
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const [resetPassword] = useResetPasswordMutation();
     const dispatch = useDispatch();
 
     const onFormSubmit = async (values) => {
         try {
+            setIsSubmitting(true);
             const { data, error } = await resetPassword({
                 email,
                 password: values.password,
             });
+
+            console.log({ email, password: values.password });
+
             if (data?.success) {
+                setIsSubmitting(false);
                 nav("/signIn", {
                     replace: true,
                 });
@@ -29,6 +37,7 @@ const CreateNewPasswordForm = () => {
                     })
                 );
             } else {
+                setIsSubmitting(false);
                 dispatch(
                     setMessage({
                         msgType: "error",
@@ -39,12 +48,6 @@ const CreateNewPasswordForm = () => {
         } catch (error) {
             throw new Error(error);
         }
-        //const data = { email, password: values.password };
-        //console.log(data);
-        //nav("/signIn", {
-        //    replace: true,
-        //    state: { message: "Password changed successfully!" },
-        //});
     };
     return (
         <section className="w-full flex flex-col items-center justify-center">
@@ -109,7 +112,7 @@ const CreateNewPasswordForm = () => {
                     <Input.Password />
                 </Form.Item>
 
-                <SubmitBtn label={"Confirm"} />
+                <SubmitBtn label={"Confirm"} isLoading={isSubmitting} />
             </Form>
         </section>
     );

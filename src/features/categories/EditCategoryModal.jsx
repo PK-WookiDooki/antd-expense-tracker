@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { FixWButton } from "../../components";
+import { FixWButton } from "@/components";
 import { Alert, Button, Form, Input, Modal, Segmented } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
     useGetAllIconsQuery,
     useUpdateCategoryMutation,
 } from "./categoriesApi";
-import { setMessage } from "../../app/global/globalSlice";
+import { setMessage } from "@/app/global/globalSlice";
+import WarningModal from "./components/WarningModal";
 
 const EditCategoryModal = ({ category }) => {
     const { token } = useSelector((state) => state.authSlice);
@@ -14,6 +15,7 @@ const EditCategoryModal = ({ category }) => {
     const [error, setError] = useState(null);
     const [icon, setIcon] = useState(category?.iconName);
     const [type, setType] = useState(category?.type);
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const { data: iconsList } = useGetAllIconsQuery(token);
 
@@ -50,13 +52,7 @@ const EditCategoryModal = ({ category }) => {
 
     const onFormSubmit = async (values) => {
         try {
-            //console.log({
-            //    categoryId: category?.id,
-            //    category: values,
-            //    token,
-            //});
-            //return;
-
+            setIsSubmitting(true)
             const { data, error: apiError } = await updateCategory({
                 categoryId: category?.id,
                 category: values,
@@ -71,6 +67,7 @@ const EditCategoryModal = ({ category }) => {
                     })
                 );
             } else {
+                setIsSubmitting(false)
                 setError(apiError?.data?.message || apiError?.error);
             }
         } catch (error) {
@@ -80,9 +77,12 @@ const EditCategoryModal = ({ category }) => {
 
     const closeModal = () => {
         setOpenModal(false);
+        setIsSubmitting(false)
     };
 
-    return (
+    return category?.type === null ? (
+        <WarningModal actionType={"edit"} />
+    ) : (
         <section>
             <Button
                 onClick={() => setOpenModal(true)}
@@ -212,6 +212,7 @@ const EditCategoryModal = ({ category }) => {
                             htmlType={"submit"}
                             buttonType={"primary"}
                             isButton={true}
+                            isLoading={isSubmitting}
                         />
                     </div>
                 </Form>

@@ -1,33 +1,40 @@
 import { Form, Input } from "antd";
-import { FormTitle, SubmitBtn } from "../../components";
+import { FormTitle, SubmitBtn } from "@/components";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useForgotPasswordMutation } from "./authApi";
+import { useResendOtpMutation } from "./authApi";
 import { useDispatch } from "react-redux";
-import { setMessage } from "../../app/global/globalSlice";
+import { setMessage } from "@/app/global/globalSlice";
+import { useState } from "react";
 
 const EmailVerificationForm = () => {
     const nav = useNavigate();
     const currentRoute = useLocation().pathname;
 
-    const [forgotPassword] = useForgotPasswordMutation();
+    const [resentOtp] = useResendOtpMutation();
     const dispatch = useDispatch();
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const onFormSubmit = async (values) => {
         try {
-            const { data, error } = await forgotPassword(values.email);
-            console.log(values);
-            nav("/verify", {
-                replace: true,
-                state: { email: values.email, previousRoute: currentRoute },
-            });
-            return;
-
+            setIsSubmitting(true);
+            const { data, error } = await resentOtp({ email: values.email });
             if (data?.success) {
+                setIsSubmitting(false);
+
                 nav("/verify", {
                     replace: true,
                     state: { email: values.email, previousRoute: currentRoute },
                 });
+                dispatch(
+                    setMessage({
+                        msgType: "success",
+                        msgContent: data?.message,
+                    })
+                );
             } else {
+                setIsSubmitting(false);
+
                 dispatch(
                     setMessage({
                         msgType: "error",
@@ -71,7 +78,7 @@ const EmailVerificationForm = () => {
                     <Input placeholder="example@gmail.com" />
                 </Form.Item>
 
-                <SubmitBtn label={"Confirm"} />
+                <SubmitBtn label={"Confirm"} isLoading={isSubmitting} />
             </Form>
         </section>
     );

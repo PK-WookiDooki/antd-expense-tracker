@@ -1,6 +1,6 @@
 import { Button, FloatButton } from "antd";
 import { useDispatch } from "react-redux";
-import { setIsAddRecordModalOpen } from "../../features/records/recordsSlice";
+import { setIsAddRecordModalOpen } from "@/features/records/recordsSlice";
 const FloatingButton = () => {
     const dispatch = useDispatch();
 

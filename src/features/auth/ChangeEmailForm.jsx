@@ -1,13 +1,16 @@
 import { Form, Input } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FixWButton } from "../../components";
+import { FixWButton, SubmitBtn } from "@/components";
 import { useDispatch, useSelector } from "react-redux";
 import { useChangeEmailMutation } from "./userApi";
-import { setMessage } from "../../app/global/globalSlice";
+import { setMessage } from "@/app/global/globalSlice";
+import { useState } from "react";
 
 const ChangeEmailForm = () => {
     const nav = useNavigate();
     const currentRoute = useLocation().pathname;
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const { token } = useSelector((state) => state.authSlice);
     const [changeEmail] = useChangeEmailMutation();
@@ -15,16 +18,28 @@ const ChangeEmailForm = () => {
 
     const onFormSubmit = async (values) => {
         try {
+            setIsSubmitting(true);
             const { data, error: apiError } = await changeEmail({
                 userData: { ...values },
                 token,
             });
 
             if (data?.success) {
+                setIsSubmitting(false);
                 nav("/account/verify", {
-                    state: { email: values.email, previousRoute: currentRoute },
+                    state: {
+                        email: values.newEmail,
+                        previousRoute: currentRoute,
+                    },
                 });
+                dispatch(
+                    setMessage({
+                        msgType: "success",
+                        msgContent: data?.message,
+                    })
+                );
             } else {
+                setIsSubmitting(false);
                 dispatch(
                     setMessage({
                         msgType: "error",
@@ -77,11 +92,11 @@ const ChangeEmailForm = () => {
 
                 <div className="mt-9 flex gap-10 items-center justify-center">
                     <FixWButton isButton={false} label={"cancel"} />
-                    <FixWButton
+                    <SubmitBtn
                         label={"confirm"}
-                        htmlType={"submit"}
-                        buttonType={"primary"}
-                        isButton={true}
+                        extraStyle={"max-w-[180px] w-full"}
+                        isFixedWidth={true}
+                        isLoading={isSubmitting}
                     />
                 </div>
             </Form>

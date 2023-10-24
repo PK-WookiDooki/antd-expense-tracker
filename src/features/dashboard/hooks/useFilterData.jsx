@@ -4,10 +4,8 @@ function useFilterData(recordsList, type) {
     const [filterRecords, setFilterRecords] = useState([]);
 
     useEffect(() => {
-        if (recordsList) {
-            const result = recordsList
-                .filter((record) => record.type === type)
-                .reduce((result, item) => {
+        if (recordsList?.length > 0) {
+            const result = recordsList?.filter((record) => record.type === type)?.reduce((result, item) => {
                     const existingItem = result.find(
                         (category) =>
                             category.type.toLowerCase() ===
@@ -24,7 +22,7 @@ function useFilterData(recordsList, type) {
                             color: item.userCategory.iconBgColor,
                         });
                     }
-                    return result; // Important: You should return the accumulator (result).
+                    return result;
                 }, []);
 
             setFilterRecords(result);

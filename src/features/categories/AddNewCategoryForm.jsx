@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { CreateBtn, FixWButton } from "../../components";
+import { CreateBtn, FixWButton } from "@/components";
 import { Alert, Form, Input, Modal, Segmented } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useAddNewCategoryMutation } from "./categoriesApi";
-import { setMessage } from "../../app/global/globalSlice";
+import { setMessage } from "@/app/global/globalSlice";
 
 const AddNewCategoryForm = ({ iconsList }) => {
     const { token } = useSelector((state) => state.authSlice);
@@ -12,6 +12,7 @@ const AddNewCategoryForm = ({ iconsList }) => {
     const [error, setError] = useState(null);
     const [icon, setIcon] = useState(null);
     const [type, setType] = useState("EXPENSE");
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const dispatch = useDispatch();
 
@@ -41,6 +42,7 @@ const AddNewCategoryForm = ({ iconsList }) => {
 
     const onFormSubmit = async (values) => {
         try {
+            setIsSubmitting(true)
             const { data, error: apiError } = await addNewCategory({
                 category: { ...values },
                 token,
@@ -56,6 +58,7 @@ const AddNewCategoryForm = ({ iconsList }) => {
                     })
                 );
             } else {
+                setIsSubmitting(false)
                 setError(apiError?.data?.message || apiError?.error);
             }
         } catch (error) {
@@ -66,6 +69,7 @@ const AddNewCategoryForm = ({ iconsList }) => {
     const closeModal = () => {
         form.resetFields();
         setIcon(null);
+        setIsSubmitting(false)
         setOpenModal(false);
     };
 
@@ -191,6 +195,7 @@ const AddNewCategoryForm = ({ iconsList }) => {
                             htmlType={"submit"}
                             buttonType={"primary"}
                             isButton={true}
+                            isLoading={isSubmitting}
                         />
                     </div>
                 </Form>

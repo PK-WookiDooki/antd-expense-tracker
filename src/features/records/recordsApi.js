@@ -1,4 +1,4 @@
-import { baseApi } from "../../app/global/baseApi";
+import { baseApi } from "@/app/global/baseApi";
 
 const endPoint = "/transactions";
 

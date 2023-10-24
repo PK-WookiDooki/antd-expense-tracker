@@ -16,7 +16,11 @@ export default {
                 whiteGray: "#FAFAFA",
             },
         },
-        fontFamily: {},
+        fontFamily: {
+            sans: ["Roboto", "sans-serif"],
+            dms: ["DM Serif Display", "serif"],
+            rbs: ["Roboto Slab", "serif"],
+        },
     },
     plugins: [],
 };

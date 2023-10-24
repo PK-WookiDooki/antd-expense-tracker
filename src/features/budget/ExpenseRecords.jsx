@@ -1,42 +1,44 @@
 import { useSelector } from "react-redux";
 import { RecordCard } from "..";
-import { formatData } from "../../core/functions/formatData";
+import { formatData } from "@/core/functions/formatData";
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 
-const ExpenseRecords = ({ selectedMonth, setSelectedMonth }) => {
-    const { recordsList } = useSelector((state) => state.recordsSlice);
-
+const ExpenseRecords = ({
+    selectedMonth,
+    setSelectedMonth,
+    expensesList,
+    userBudget,
+}) => {
     const [isASC, setIsASC] = useState(false);
-    const expensesList = recordsList?.filter(
-        (record) => record.type === "EXPENSE"
-    );
-    const [expenseRecords, setExpenseRecords] = useState(
-        formatData(expensesList)
-    );
+    const [expenseRecords, setExpenseRecords] = useState([]);
 
     useEffect(() => {
-        const records = formatData(expensesList);
-        if (isASC) {
-            setExpenseRecords(
-                records
-                    .slice()
-                    .sort((a, b) => new Date(a.date) - new Date(b.date))
-            );
-        } else {
-            setExpenseRecords(
-                records
-                    .slice()
-                    .sort((a, b) => new Date(b.date) - new Date(a.date))
-            );
+        if (expensesList) {
+            const records = formatData(expensesList);
+            setExpenseRecords(records);
+
+            if (isASC) {
+                setExpenseRecords(
+                    records
+                        .slice()
+                        .sort((a, b) => new Date(a.date) - new Date(b.date))
+                );
+            } else {
+                setExpenseRecords(
+                    records
+                        .slice()
+                        .sort((a, b) => new Date(b.date) - new Date(a.date))
+                );
+            }
         }
-    }, [isASC]);
+    }, [isASC, expensesList]);
 
     return (
         <section className="md:p-10 p-4 rounded-2xl bg-whiteGray flex flex-col gap-9 h-full">
             <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-medium"> Transactions </h2>
+                <h2 className="md:text-2xl text-xl font-medium text-lightGray"> Transactions </h2>
                 <div className="flex items-center gap-2 ">
                     <button
                         onClick={() => setIsASC(!isASC)}
@@ -52,11 +54,12 @@ const ExpenseRecords = ({ selectedMonth, setSelectedMonth }) => {
                         format={"MMMM YYYY"}
                         onChange={(value) => setSelectedMonth(value)}
                         className=" md:!w-60"
+                        allowClear={false}
                     />
                 </div>
             </div>
 
-            {expenseRecords?.length > 0 ? (
+            {expenseRecords?.length > 0 && userBudget > 0 ? (
                 <div className="flex flex-col gap-2">
                     {expenseRecords?.map((record) => (
                         <RecordCard key={record?.id} record={record} />

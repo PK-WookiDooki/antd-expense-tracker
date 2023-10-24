@@ -2,14 +2,15 @@ import { Alert, Form, Input, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
-import { setMessage } from "../../app/global/globalSlice";
-import { SubmitBtn } from "../../components";
+import { setMessage } from "@/app/global/globalSlice";
+import { SubmitBtn } from "@/components";
 import { useChangeUsernameMutation } from "./userApi";
 
 const EditNameModal = ({ username }) => {
     const [openModal, setOpenModal] = useState(false);
     const [form] = Form.useForm();
     const dispatch = useDispatch();
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const [error, setError] = useState(null);
 
@@ -24,6 +25,7 @@ const EditNameModal = ({ username }) => {
 
     const onFormSubmit = async (values) => {
         try {
+            setIsSubmitting(true)
             const { data, error: apiError } = await changeUsername({
                 username: values.username,
                 token,
@@ -37,6 +39,7 @@ const EditNameModal = ({ username }) => {
                 );
                 closeModal();
             } else {
+                setIsSubmitting(false)
                 setError(apiError?.data?.message || apiError?.error);
             }
         } catch (error) {
@@ -47,17 +50,17 @@ const EditNameModal = ({ username }) => {
     const closeModal = () => {
         form.resetFields();
         setOpenModal(false);
+        setIsSubmitting(false)
     };
 
     return (
         <section className="pb-6 border-b border-gray">
             <h2 className="text-xl font-semibold">Name</h2>
             <div className="flex items-center justify-between mt-2">
-                <p> {username} </p>
+                <p> {username || "Nexcoder"} </p>
                 <button
                     onClick={() => setOpenModal(true)}
-                    className="py-1 px-4 rounded-full border border-primaryGreen text-primaryGreen hover:text-whiteGray hover:bg-primaryGreen outline-none duration-200"
-                >
+                    className="edit-btn">
                     {" "}
                     Edit{" "}
                 </button>
@@ -114,6 +117,7 @@ const EditNameModal = ({ username }) => {
                             label={"save"}
                             isFixedWidth={true}
                             extraStyle={" block ml-auto"}
+                            isLoading={isSubmitting}
                         />
                     </div>
                 </Form>{" "}

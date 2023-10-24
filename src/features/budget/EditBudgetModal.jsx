@@ -1,18 +1,23 @@
 import { Alert, Button, Form, InputNumber, Modal } from "antd";
 import { useEffect, useState } from "react";
-import { ModalHeader, SubmitBtn } from "../../components";
+import { ModalHeader, SubmitBtn } from "@/components";
 import { useSetBudgetMutation } from "../auth/userApi";
 import { useDispatch, useSelector } from "react-redux";
-import { setMessage } from "../../app/global/globalSlice";
+import { setMessage } from "@/app/global/globalSlice";
 
 const EditBudgetModal = ({ userBudget, extraStyle }) => {
     const [openModal, setOpenModal] = useState(false);
     const [error, setError] = useState(null);
     const [form] = Form.useForm();
     const dispatch = useDispatch();
-
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const { token } = useSelector((state) => state.authSlice);
     const [setBudget] = useSetBudgetMutation();
+    useEffect(
+        () => {
+            form.setFieldValue("budget", userBudget)
+        }, [openModal]
+    )
 
     useEffect(() => {
         if (error !== null) {
@@ -20,19 +25,17 @@ const EditBudgetModal = ({ userBudget, extraStyle }) => {
                 setError(null);
             }, 5000);
         }
-
-        if (userBudget) {
-            form.setFieldValue("budget", userBudget);
-        }
-    }, [error, openModal]);
+    }, [error]);
 
     const closeModal = () => {
         setOpenModal(false);
         setError(null);
+        setIsSubmitting(false)
     };
 
     const onFormSubmit = async (values) => {
         try {
+            setIsSubmitting(true)
             const { data, error: apiError } = await setBudget({
                 ...values,
                 token,
@@ -47,6 +50,7 @@ const EditBudgetModal = ({ userBudget, extraStyle }) => {
                     })
                 );
             } else {
+                setIsSubmitting(false)
                 setError(apiError?.data?.message || apiError?.error);
             }
         } catch (error) {
@@ -66,7 +70,6 @@ const EditBudgetModal = ({ userBudget, extraStyle }) => {
             </Button>
             <Modal
                 centered
-                width={420}
                 className="account-modal"
                 open={openModal}
                 footer={null}
@@ -99,7 +102,7 @@ const EditBudgetModal = ({ userBudget, extraStyle }) => {
                             },
                             {
                                 type: "number",
-                                min: 1,
+                                min: 0,
                                 message: "Enter valid amount!",
                             },
                         ]}
@@ -111,6 +114,7 @@ const EditBudgetModal = ({ userBudget, extraStyle }) => {
                             label={"save"}
                             isFixedWidth={true}
                             extraStyle={" block ml-auto"}
+                            isLoading={isSubmitting}
                         />
                     </div>
                 </Form>

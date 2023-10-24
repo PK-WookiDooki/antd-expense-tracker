@@ -2,15 +2,17 @@ import { Form, Input, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setMessage } from "../../app/global/globalSlice";
-import ModalHeader from "../../components/modals/ModalHeader";
-import { SubmitBtn } from "../../components";
+import { setMessage } from "@/app/global/globalSlice";
+import ModalHeader from "@/components/modals/ModalHeader";
+import { SubmitBtn } from "@/components";
 import { useChangePasswordMutation } from "./userApi";
 
 const ChangePasswordModal = () => {
     const { token } = useSelector((state) => state.authSlice);
     const [openModal, setOpenModal] = useState(false);
     const [error, setError] = useState(null);
+
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const [form] = Form.useForm();
     const nav = useNavigate();
@@ -28,6 +30,7 @@ const ChangePasswordModal = () => {
 
     const onFormSubmit = async (values) => {
         try {
+            setIsSubmitting(true)
             delete values.password_confirmation;
             const { data, error: apiError } = await changePassword({
                 passwords: { ...values },
@@ -45,6 +48,7 @@ const ChangePasswordModal = () => {
                 );
                 closeModal();
             } else {
+                setIsSubmitting(false)
                 setError(apiError?.data?.message || apiError?.error);
             }
         } catch (error) {
@@ -55,6 +59,7 @@ const ChangePasswordModal = () => {
     const closeModal = () => {
         form.resetFields();
         setOpenModal(false);
+        setIsSubmitting(false)
     };
 
     return (
@@ -63,10 +68,9 @@ const ChangePasswordModal = () => {
                 <h2 className="text-xl font-semibold">Password</h2>
                 <button
                     onClick={() => setOpenModal(true)}
-                    className="py-1 px-4 rounded-full border border-primaryGreen text-primaryGreen hover:text-whiteGray hover:bg-primaryGreen outline-none duration-200"
-                >
+                    className="edit-btn">
                     {" "}
-                    Change Password{" "}
+                    Change{" "}
                 </button>
             </div>
 
@@ -152,6 +156,7 @@ const ChangePasswordModal = () => {
                             label={"save"}
                             isFixedWidth={true}
                             extraStyle={" block ml-auto "}
+                            isLoading={isSubmitting}
                         />
                     </div>
                 </Form>{" "}

@@ -10,7 +10,7 @@ const CategoryCard = ({ category, isRemove }) => {
         >
             <div className=" capitalize flex items-center gap-3 ">
                 <span
-                    className={`min-w-[48px] h-12 rounded-md text-white flex items-center justify-center`}
+                    className={`md:h-12 aspect-square h-10  rounded-md text-white flex items-center justify-center`}
                     style={{ backgroundColor: category.iconBgColor }}
                 >
                     <i className="material-symbols-outlined">

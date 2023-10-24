@@ -52,12 +52,11 @@ export const formatChartData = (recordsList, type) => {
                 result.push({
                     type:
                         item.userCategory.name.chartAt(0).toUpperCase() +
-                        item.category.name.slice(1),
+                        item.userCategory.name.slice(1),
                     value: item.amount,
-                    color: item.category.iconBgColor,
+                    color: item.userCategory.iconBgColor,
                 });
             }
         });
-
     return filteredData;
 };

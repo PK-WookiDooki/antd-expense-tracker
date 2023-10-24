@@ -3,8 +3,8 @@ import CNavLink from "./CNavLink";
 import "./sidebar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "antd";
-import { logoutAccount } from "../../features/auth/authSlice";
-import { setMessage } from "../../app/global/globalSlice";
+import { logoutAccount } from "@/features/auth/authSlice";
+import { setMessage } from "@/app/global/globalSlice";
 
 const Sidebar = () => {
     const { isSidebarOpen } = useSelector((state) => state.globalSlice);
@@ -29,7 +29,10 @@ const Sidebar = () => {
             } duration-300`}
         >
             <h1 className="text-2xl leading-9 font-medium px-4 py-6 hidden lg:block ">
-                <Link to={"/"}> Nextracker </Link>
+                <Link to={"/"} className=" font-dms ">
+                    {" "}
+                    Nextracker{" "}
+                </Link>
             </h1>
 
             <ul className="flex flex-col gap-3">
@@ -48,17 +51,6 @@ const Sidebar = () => {
                     title={"budget"}
                     path={"/budget"}
                     icon={"production_quantity_limits"}
-                />
-                <CNavLink
-                    title={"register"}
-                    path={"/signUp"}
-                    icon={"category"}
-                />
-                <CNavLink title={"login"} path={"/signIn"} icon={"checklist"} />
-                <CNavLink
-                    title={"verification"}
-                    path={"/verify"}
-                    icon={"checklist"}
                 />
             </ul>
             <div className="p-8 mt-auto ">

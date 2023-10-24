@@ -1,38 +1,42 @@
 import { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
-import { FixWButton, FormTitle, SubmitBtn } from "../../components";
+import { FixWButton, FormTitle, SubmitBtn } from "@/components";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Alert } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useResendOtpMutation, useVerifyOtpMutation } from "./authApi";
-import { setMessage } from "../../app/global/globalSlice";
+import { setMessage } from "@/app/global/globalSlice";
+import { useGetUserDataQuery } from "./userApi";
+import { logoutAccount } from "./authSlice";
 
 const AuthVerifyOtpForm = () => {
-    const { email } = useLocation().state;
+    const { token } = useSelector((state) => state.authSlice);
+    const { data: userData } = useGetUserDataQuery(token);
+    const newEmail = useLocation().state.email;
 
     const [otp, setOtp] = useState("");
     const [isResent, setIsResent] = useState(false);
     const [timer, setTimer] = useState(59);
     const [error, setError] = useState(null);
-    const nav = useNavigate();
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
+    const nav = useNavigate();
     const dispatch = useDispatch();
     const [verifyOtp] = useVerifyOtpMutation();
 
     const onOtpVerify = async (e) => {
         e.preventDefault();
         try {
+            setIsSubmitting(true);
             if (otp?.trim().length != 6) {
                 setError("Invalid OTP received!");
                 return;
             }
 
-            const otpData = { otp, email };
-            const { data, error: apiError } = await verifyOtp({
-                otpData,
-            });
-
+            const otpData = { otp, newEmail, email: userData?.email };
+            const { data, error: apiError } = await verifyOtp(otpData);
             if (data?.success) {
+                setIsSubmitting(false);
                 nav("/signIn", { replace: true });
                 dispatch(
                     setMessage({
@@ -40,7 +44,9 @@ const AuthVerifyOtpForm = () => {
                         msgContent: data?.message,
                     })
                 );
+                dispatch(logoutAccount());
             } else {
+                setIsSubmitting(false);
                 setError(apiError?.data?.message || apiError?.error);
             }
         } catch (error) {
@@ -54,9 +60,10 @@ const AuthVerifyOtpForm = () => {
             }, 5000);
         }
 
-        if (isResent === true) {
+        if (isResent === true || timer === 0) {
             setTimeout(() => {
                 setIsResent(false);
+                setTimer(59);
             }, 60000);
         }
 
@@ -72,8 +79,12 @@ const AuthVerifyOtpForm = () => {
     const onResendOtp = async (e) => {
         e.preventDefault();
         try {
+            setOtp("");
             setIsResent(true);
-            const { data, error: apiError } = await resendOtp(email);
+            const { data, error: apiError } = await resendOtp({
+                newEmail,
+                email: userData?.email,
+            });
             if (data?.success) {
                 dispatch(
                     setMessage({
@@ -98,9 +109,13 @@ const AuthVerifyOtpForm = () => {
                 <div className="mb-8 text-center">
                     <FormTitle
                         title={"Verify Email"}
-                        desc={` Please enter the verification code sent to ${(
-                            <span className="font-bold"> {email} </span>
-                        )}.`}
+                        desc={
+                            <>
+                                {" "}
+                                Please enter the verification code sent to{" "}
+                                <span className="font-bold">{newEmail}</span>.
+                            </>
+                        }
                     />
                 </div>
 
@@ -127,8 +142,7 @@ const AuthVerifyOtpForm = () => {
                 <div className="flex flex-col my-8 gap-3 items-center">
                     <p>Do not receive an OTP?</p>
                     <p className={`text-xl ${isResent ? "block" : "hidden"} `}>
-                        {" "}
-                        {timer} s{" "}
+                        {timer} s
                     </p>
                     <button
                         onClick={onResendOtp}
@@ -147,14 +161,13 @@ const AuthVerifyOtpForm = () => {
 
                 <div className="mt-9 flex gap-10 items-center justify-center">
                     <FixWButton isButton={false} label={"back"} />
-                    <FixWButton
+                    <SubmitBtn
                         label={"confirm"}
-                        htmlType={"submit"}
-                        buttonType={"primary"}
-                        isButton={true}
+                        extraStyle={"max-w-[180px] w-full"}
+                        isFixedWidth={true}
+                        isLoading={isSubmitting}
                     />
                 </div>
-                {/*<SubmitBtn label={"Verify"} />*/}
             </form>
         </section>
     );

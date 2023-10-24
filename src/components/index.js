@@ -15,6 +15,7 @@ export { default as ConfirmationModal } from "./modals/DeleteConfirmationBox";
 
 //titles
 export { default as FormTitle } from "./titles/FormTitle";
+export { default as AdvertText } from "./titles/AdvertText";
 
 //loader
 export { default as Loader } from "./loaders/SpinnerLoader";

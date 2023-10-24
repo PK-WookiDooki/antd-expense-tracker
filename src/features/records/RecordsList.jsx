@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Select } from "antd";
-import { formatData } from "../../core/functions/formatData";
+import { formatData } from "@/core/functions/formatData";
 import { RecordCard } from "..";
 import { useEffect, useState } from "react";
 import useFormatRecords from "./hooks/useFormatRecords";
@@ -8,7 +8,7 @@ import useFormatRecords from "./hooks/useFormatRecords";
 const options = [
     {
         label: "All",
-        value: "all",
+        value: "ALL",
     },
     {
         label: "Expense",
@@ -24,40 +24,43 @@ const RecordsList = ({ recordsList }) => {
     //const { recordsList } = useSelector((state) => state.recordsSlice);
     const [records, setRecords] = useState([]);
     const [isASC, setIsASC] = useState(false);
-    const [selectedOpt, setSelectedOpt] = useState("all");
+    const [selectedOpt, setSelectedOpt] = useState("ALL");
 
     useEffect(() => {
-        if (recordsList?.length > 0) {
+        if (recordsList?.length) {
             setRecords(formatData(recordsList));
-            if (selectedOpt === "all") {
-                if (isASC) {
-                    setRecords(
-                        records
-                            .slice()
-                            .sort((a, b) => new Date(a.date) - new Date(b.date))
-                    );
-                } else {
-                    setRecords(formatData(recordsList));
-                }
-            } else {
-                const filteredRecords = recordsList?.filter(
-                    (record) => record.type === selectedOpt
+        }
+    }, [recordsList]);
+
+    useEffect(() => {
+        if (selectedOpt === "ALL") {
+            if (isASC) {
+                setRecords(
+                    records
+                        .slice()
+                        .sort((a, b) => new Date(a.date) - new Date(b.date))
                 );
-                if (isASC) {
-                    setRecords(
-                        formatData(filteredRecords)
-                            .slice()
-                            .sort((a, b) => new Date(a.date) - new Date(b.date))
-                    );
-                } else {
-                    setRecords(formatData(filteredRecords));
-                }
+            } else {
+                setRecords(formatData(recordsList));
+            }
+        } else {
+            const filteredRecords = recordsList?.filter(
+                (record) => record.type === selectedOpt
+            );
+            if (isASC) {
+                setRecords(
+                    formatData(filteredRecords)
+                        .slice()
+                        .sort((a, b) => new Date(a.date) - new Date(b.date))
+                );
+            } else {
+                setRecords(formatData(filteredRecords));
             }
         }
-    }, [selectedOpt, isASC, recordsList]);
+    }, [selectedOpt, isASC]);
 
     return (
-        <section>
+        <section className="h-full flex flex-col">
             <div className="flex items-center justify-between mb-9 text-black">
                 <h2 className="md:text-2xl text-lg font-semibold text-primary text-lightGray">
                     Transactions
@@ -81,11 +84,20 @@ const RecordsList = ({ recordsList }) => {
                     />
                 </div>
             </div>
-            <div className="flex flex-col gap-3">
-                {records?.map((record) => (
-                    <RecordCard record={record} key={record.id} />
-                ))}
-            </div>
+            {records?.length > 0 ? (
+                <div className="flex flex-col gap-3">
+                    {records?.map((record) => (
+                        <RecordCard record={record} key={record.id} />
+                    ))}
+                </div>
+            ) : (
+                <div className=" flex-1   flex items-center justify-center">
+                    {" "}
+                    <h3 className="text-2xl font-medium text-lightGray">
+                        There is no transactions for now!
+                    </h3>{" "}
+                </div>
+            )}
         </section>
     );
 };

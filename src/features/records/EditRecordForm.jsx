@@ -11,13 +11,12 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
-import { FixWButton } from "../../components";
+import { FixWButton } from "@/components";
 import { useGetAllCategoriesQuery } from "../categories/categoriesApi";
 import { useUpdateRecordMutation } from "./recordsApi";
-import { setMessage } from "../../app/global/globalSlice";
+import { setMessage } from "@/app/global/globalSlice";
 
 const EditRecordForm = ({ record, date }) => {
-    //const { categoriesList } = useSelector((state) => state.categoriesSlice);
     const [form] = Form.useForm();
 
     const { token } = useSelector((state) => state.authSlice);
@@ -26,6 +25,7 @@ const EditRecordForm = ({ record, date }) => {
     const [openModal, setOpenModal] = useState(false);
     const [error, setError] = useState(null);
     const [type, setType] = useState(record?.type);
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     useEffect(() => {
         if (error?.trim().length > 0) {
@@ -43,13 +43,19 @@ const EditRecordForm = ({ record, date }) => {
         }
     }, [error, record]);
 
+
     const catOptions = userCategories
-        ?.filter((category) => category?.type === type)
+        ?.filter(
+            (category) => category?.type === type || category?.type === null
+        )
         .map((category) => {
             return {
                 label: (
                     <p className="flex items-center gap-1 capitalize">
-                        <i className="material-symbols-outlined">
+                        <i
+                            className="material-symbols-outlined w-8 h-8 rounded-md text-white flex items-center justify-center"
+                            style={{ backgroundColor: category?.iconBgColor }}
+                        >
                             {category.iconName}
                         </i>{" "}
                         {category.name}{" "}
@@ -65,6 +71,7 @@ const EditRecordForm = ({ record, date }) => {
 
     const onFormSubmit = async (values) => {
         try {
+            setIsSubmitting(true)
             const formattedDate = dayjs(values?.createdDate).format(
                 "YYYY-MM-DD"
             );
@@ -92,6 +99,7 @@ const EditRecordForm = ({ record, date }) => {
                     })
                 );
             } else {
+                setIsSubmitting(false)
                 setError(apiError?.data?.message || apiError?.error);
             }
         } catch (error) {
@@ -101,6 +109,7 @@ const EditRecordForm = ({ record, date }) => {
 
     const closeModal = () => {
         setError(null);
+        setIsSubmitting(false)
         setOpenModal(false);
     };
 
@@ -232,6 +241,7 @@ const EditRecordForm = ({ record, date }) => {
                             htmlType={"submit"}
                             buttonType={"primary"}
                             isButton={true}
+                            isLoading={isSubmitting}
                         />
                     </div>
                 </Form>

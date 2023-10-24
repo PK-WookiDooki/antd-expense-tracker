@@ -30,45 +30,36 @@ const PieChart = ({ chartData, dataColor, chartTitle, extraStyle }) => {
         };">${text}</div>`;
     }
 
-    const data = [
-        { type: "Food", value: 10 },
-        { type: "Bill", value: 15 },
-        { type: "Car", value: 8 },
-        { type: "Transportation", value: 12 },
-        { type: "Salary", value: 20 },
-    ];
+    const data = [{ type: "Total", value: 0 }];
 
-    const customColorPalette = [
-        "#FF5733",
-        "#0077B6",
-        "#FFC300",
-        "#00A6ED",
-        "#1DB954",
-    ];
+    const customColorPalette = ["#595959"];
 
     const config = {
         appendPadding: 10,
-        data: chartData,
+        data: chartData?.length > 0 ? chartData : data,
         angleField: "value",
         colorField: "type",
-        color: dataColor,
+        color: chartData?.length > 0 ? dataColor : customColorPalette,
         radius: 1,
         innerRadius: 0.65,
-        legend: {
-            position: "bottom",
-            itemName: {
-                style: {
-                    fontSize: 16,
-                    fontFamily: "Roboto",
-                },
-            },
-            marker: {
-                symbol: "circle",
-                style: {
-                    r: 8,
-                },
-            },
-        },
+        legend:
+            chartData?.length > 0
+                ? {
+                      position: "bottom",
+                      itemName: {
+                          style: {
+                              fontSize: 16,
+                              fontFamily: "Roboto",
+                          },
+                      },
+                      marker: {
+                          symbol: "circle",
+                          style: {
+                              r: 8,
+                          },
+                      },
+                  }
+                : false,
         meta: {
             value: {
                 formatter: (v) => ` MMK ${v}`,
@@ -82,7 +73,7 @@ const PieChart = ({ chartData, dataColor, chartTitle, extraStyle }) => {
                 fontSize: 14,
             },
             autoRotate: false,
-            content: "{percentage}",
+            content: chartData?.length > 1 ? "{percentage}" : "",
         },
         statistic: {
             title: {
@@ -128,7 +119,7 @@ const PieChart = ({ chartData, dataColor, chartTitle, extraStyle }) => {
     };
     return (
         <div
-            className={`w-full lg:max-w-[480px]  bg-pieBg p-5 rounded-xl shadow-sm ${extraStyle} `}
+            className={`w-full md:max-w-[480px]  bg-pieBg p-5 rounded-xl shadow-sm ${extraStyle} `}
         >
             <h2 className="text-black text-center text-2xl font-semibold">
                 {" "}

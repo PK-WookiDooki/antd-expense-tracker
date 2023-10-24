@@ -1,14 +1,16 @@
 import Modal from "antd/es/modal/Modal";
 import { useEffect, useState } from "react";
-import { FixWButton } from "../../components";
+import { FixWButton } from "@/components";
 import { Alert, Button } from "antd";
 import { useDispatch } from "react-redux";
-import { setMessage } from "../../app/global/globalSlice";
+import { setMessage } from "@/app/global/globalSlice";
 
 const DeleteConfirmationBox = ({ title, component, event, isDropdown }) => {
     const [openModal, setOpenModal] = useState(false);
     const [error, setError] = useState(null);
     const dispatch = useDispatch();
+
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     useEffect(() => {
         if (error !== null) {
@@ -21,10 +23,12 @@ const DeleteConfirmationBox = ({ title, component, event, isDropdown }) => {
     const closeModal = () => {
         setOpenModal(false);
         setError(null);
+        setIsSubmitting(false)
     };
 
     const onDelete = async () => {
         try {
+            setIsSubmitting(true)
             const { data, error: apiError } = await event();
             if (data?.success) {
                 closeModal();
@@ -35,6 +39,7 @@ const DeleteConfirmationBox = ({ title, component, event, isDropdown }) => {
                     })
                 );
             } else {
+                setIsSubmitting(false)
                 setError(apiError?.data?.message || apiError?.error);
             }
         } catch (error) {
@@ -103,6 +108,7 @@ const DeleteConfirmationBox = ({ title, component, event, isDropdown }) => {
                         buttonType={"primary"}
                         isButton={true}
                         event={onDelete}
+                        isLoading={isSubmitting}
                     />
                 </div>
             </Modal>

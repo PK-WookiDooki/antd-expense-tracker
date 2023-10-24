@@ -32,7 +32,7 @@ const App = () => {
             openNotification();
             setTimeout(() => {
                 dispatch(setMessage({ msgType: null, msgContent: null }));
-            }, 3000);
+            }, 5000);
         }
     }, [apiMessage]);
 
@@ -60,18 +60,19 @@ const App = () => {
                         controlHeightSM: 30,
                         controlHeight: 40,
                         controlHeightLG: 50,
+                        //colorBgBase: "#aa0071",
                     },
                     Input: {
                         colorBorder: "#D9D9D9",
                         fontSize: 16,
-                        fontFamily: "Lucida Sans",
+                        fontFamily: "Roboto",
                     },
                     InputNumber: {
                         colorBorder: "#D9D9D9",
                         handleVisible: "auto",
                         controlHeight: 40,
                         fontSize: 16,
-                        fontFamily: "Lucida Sans",
+                        fontFamily: "Roboto",
                     },
                 },
             }}
@@ -82,9 +83,9 @@ const App = () => {
                     <Route
                         path="/"
                         element={
-                            //<IsAuth>
+                            <IsAuth>
                             <MainLayout />
-                            //</IsAuth>
+                            </IsAuth>
                         }
                     >
                         <Route index element={<DashBoard />} />

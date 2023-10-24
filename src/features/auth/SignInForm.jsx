@@ -1,23 +1,28 @@
 import { Form, Input } from "antd";
-import { FormTitle, SubmitBtn } from "../../components";
+import { FormTitle, SubmitBtn } from "@/components";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setMessage } from "../../app/global/globalSlice";
+import { setMessage } from "@/app/global/globalSlice";
 
 import { useLoginAccountMutation } from "./authApi";
 import { setLoggedInStatus } from "./authSlice";
 import Cookies from "js-cookie";
+import { useState } from "react";
 
 const SignInForm = () => {
     const nav = useNavigate();
     const dispatch = useDispatch();
 
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const [loginAccount] = useLoginAccountMutation();
 
     const onFormSubmit = async (values) => {
         try {
+            setIsSubmitting(true);
             const { data, error } = await loginAccount(values);
             if (data?.token) {
+                setIsSubmitting(false);
                 dispatch(setLoggedInStatus({ token: data?.token }));
                 Cookies.set("token", data?.token);
                 nav("/");
@@ -28,6 +33,7 @@ const SignInForm = () => {
                     })
                 );
             } else {
+                setIsSubmitting(false);
                 dispatch(
                     setMessage({
                         msgType: "error",
@@ -51,7 +57,7 @@ const SignInForm = () => {
                         title={"Welcome Back!"}
                         desc={
                             <>
-                                Don't have an account?
+                                Don&apos;t have an account?
                                 <Link
                                     to={"/signUp"}
                                     className="text-primaryBlue ml-2 "
@@ -96,7 +102,7 @@ const SignInForm = () => {
                     Forgot Password?{" "}
                 </Link>
 
-                <SubmitBtn label={"sign in"} />
+                <SubmitBtn label={"sign in"} isLoading={isSubmitting} />
             </Form>
         </section>
     );

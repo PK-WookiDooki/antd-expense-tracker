@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { ConfirmationModal } from "../../components";
+import { ConfirmationModal } from "@/components";
 import { useDeleteRecordMutation } from "./recordsApi";
 import { RecordCardBody } from "..";
 

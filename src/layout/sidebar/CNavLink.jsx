@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { toggleSidebar } from "../../app/global/globalSlice";
+import { toggleSidebar } from "@/app/global/globalSlice";
 import { useDispatch } from "react-redux";
 
 const CNavLink = ({ icon, title, path }) => {

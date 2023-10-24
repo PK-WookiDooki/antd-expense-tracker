@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { ChangePasswordModal, EditNameModal } from "../../features";
-import { useGetUserDataQuery } from "../../features/auth/userApi";
+import { ChangePasswordModal, EditNameModal } from "@/features";
+import { useGetUserDataQuery } from "@/features/auth/userApi";
 import { useSelector } from "react-redux";
 
 const Home = () => {
@@ -26,13 +26,12 @@ const Home = () => {
                 <div className="pb-6 border-b border-gray mt-4">
                     <h2 className="text-xl font-semibold">Email</h2>
                     <div className="flex items-center justify-between mt-2">
-                        <p> {userData?.email} </p>
+                        <p> {userData?.email || "example@gmail.com"} </p>
                         <Link
                             to={"changeEmail"}
-                            className="py-1 px-4 rounded-full border border-primaryGreen text-primaryGreen hover:text-whiteGray hover:bg-primaryGreen outline-none duration-200"
-                        >
+                            className="edit-btn"   >
                             {" "}
-                            Change Email{" "}
+                            Change{" "}
                         </Link>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
-import { DatePicker, Form } from "antd";
+import { DatePicker } from "antd";
 import dayjs from "dayjs";
-import { formatCurrency } from "../../core/functions/formatData";
+import { formatCurrency } from "@/core/functions/formatData";
 import { useGetUserDataQuery } from "../auth/userApi";
 import { useSelector } from "react-redux";
 
@@ -23,7 +23,7 @@ const DBHeader = ({ startDate, endDate, setStartDate, setEndDate }) => {
                 {/* balance */}
                 <div className="w-full lg:w-auto">
                     <p className="text-xl mb-2">Account Balance</p>
-                    <h2 className="text-4xl md:text-3xl font-medium lg:mb-8 md:mb-6 mb-4 ">
+                    <h2 className="text-4xl md:text-3xl font-medium lg:mb-8 md:mb-6 mb-4 font-rbs ">
                         {" "}
                         {formattedAmount}
                     </h2>
@@ -39,7 +39,7 @@ const DBHeader = ({ startDate, endDate, setStartDate, setEndDate }) => {
                     <div className="w-full md:w-min-w-[155px]">
                         <label
                             htmlFor="startDate"
-                            className="text-sm block mb-1 "
+                            className="text-sm block mb-1"
                         >
                             Start Date
                         </label>
@@ -55,10 +55,7 @@ const DBHeader = ({ startDate, endDate, setStartDate, setEndDate }) => {
                         />
                     </div>
                     <div className="w-full md:w-min-w-[155px]">
-                        <label
-                            htmlFor="endDate"
-                            className="text-sm block mb-1 "
-                        >
+                        <label htmlFor="endDate" className="text-sm block mb-1">
                             End Date
                         </label>
                         <DatePicker

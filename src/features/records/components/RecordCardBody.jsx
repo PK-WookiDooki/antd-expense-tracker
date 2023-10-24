@@ -28,7 +28,7 @@ const RecordCardBody = ({ record, isRemove, date }) => {
         >
             <div className="flex items-center gap-3">
                 <span
-                    className=" aspect-square h-12 bg-primary rounded-md flex items-center justify-center bg-primaryBlue text-white "
+                    className=" aspect-square md:h-12 h-10 bg-primary rounded-md flex items-center justify-center bg-primaryBlue text-white "
                     style={{
                         backgroundColor: userCategory?.iconBgColor,
                     }}

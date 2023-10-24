@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
-import { FormTitle, SubmitBtn } from "../../components";
+import { FormTitle, SubmitBtn } from "@/components";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Alert } from "antd";
 import { useResendOtpMutation, useVerifyOtpMutation } from "./authApi";
 import { useDispatch } from "react-redux";
-import { setMessage } from "../../app/global/globalSlice";
+import { setMessage } from "@/app/global/globalSlice";
 
 const VerifyOtpForm = () => {
     const { email, previousRoute } = useLocation().state;
@@ -13,6 +13,8 @@ const VerifyOtpForm = () => {
     const [isResent, setIsResent] = useState(false);
     const [timer, setTimer] = useState(59);
     const [error, setError] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const nav = useNavigate();
     const dispatch = useDispatch();
 
@@ -22,9 +24,10 @@ const VerifyOtpForm = () => {
     const onVerify = async (e) => {
         e.preventDefault();
         try {
+            setIsSubmitting(true);
             const { data, error } = await verifyOtp({ email, otp });
-            console.log(error);
             if (data?.success) {
+                setIsSubmitting(false);
                 if (previousRoute === "/signUp") {
                     dispatch(
                         setMessage({
@@ -46,6 +49,7 @@ const VerifyOtpForm = () => {
                     });
                 }
             } else {
+                setIsSubmitting(false);
                 dispatch(
                     setMessage({
                         msgType: "error",
@@ -80,7 +84,7 @@ const VerifyOtpForm = () => {
     const onResendOtp = async () => {
         setIsResent(true);
         try {
-            const { data, error: apiError } = await resendOtp(email);
+            const { data, error: apiError } = await resendOtp({ email });
             if (data?.success) {
                 dispatch(
                     setMessage({
@@ -162,7 +166,7 @@ const VerifyOtpForm = () => {
                     </button>
                 </div>
 
-                <SubmitBtn label={"Verify"} />
+                <SubmitBtn label={"Verify"} isLoading={isSubmitting} />
             </form>
         </section>
     );
