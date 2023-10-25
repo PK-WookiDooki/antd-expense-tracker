@@ -7,7 +7,7 @@ const CreateNewPasswordPage = () => {
         <section
             className="w-full flex  min-h-screen relative  lg:bg-[url('@/assets/imgs/img_bg.svg')] bg-[url('@/assets/imgs/img_bgMobile.svg')] lg:bg-center bg-cover bg-no-repeat">
             <div
-                className=" flex flex-col lg:flex-row max-w-[1440px] w-full mx-auto  lg:px-[10.8%] gap-9 md:gap-28 lg:gap-0 py-8 lg:py-0">
+                className="flex flex-col lg:flex-row lg:max-w-[1440px] w-full py-8 lg:py-0 mx-auto px-4 lg:px-[10.8%] items-center justify-center gap-9 md:gap-12">
                 <div className=" w-full flex flex-col text-white lg:pb-14">
                     <img
                         src={resetPwsSVG}
