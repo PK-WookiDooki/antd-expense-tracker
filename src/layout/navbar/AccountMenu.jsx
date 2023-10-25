@@ -51,10 +51,10 @@ const AccountMenu = () => {
     return (
         <Dropdown menu={{ items }} trigger={["click"]} placement="bottomRight">
             <button
-                className="lg:flex items-center gap-1 hidden"
+                className="lg:flex items-center gap-1 hidden text-sm "
             >
                 {" "}
-                <span className="material-symbols-outlined text-2xl h-10 w-10 rounded-full flex items-center justify-center bg-dark text-whiteGray mr-1">
+                <span className="material-symbols-outlined text-2xl h-10 w-10 rounded-full flex items-center justify-center bg-dark text-whiteGray mr-2">
                     person
                 </span>
                 {userData?.username || "Nexcoder"}

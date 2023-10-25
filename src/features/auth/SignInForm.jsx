@@ -53,20 +53,10 @@ const SignInForm = () => {
                 className="w-full max-w-[420px]  "
             >
                 <div className="mb-6 text-center">
-                    <FormTitle
-                        title={"Welcome Back!"}
-                        desc={
-                            <>
-                                Don&apos;t have an account?
-                                <Link
-                                    to={"/signUp"}
-                                    className="text-primaryBlue ml-2 "
-                                >
-                                    Sign Up
-                                </Link>
-                            </>
-                        }
-                    />
+                    <h2 className={`text-4xl md:text-[40px] text-primaryGreen mb-2 font-medium `}>
+                        Welcome Back!
+                    </h2>
+                    <p> Don&apos;t have an account? <Link to={"/signUp"} className={"text-primaryBlue hover:text-primaryBlue/80 duration-200"} >Sign Up</Link> </p>
                 </div>
                 <Form.Item
                     name="email"

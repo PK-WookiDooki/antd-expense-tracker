@@ -62,7 +62,7 @@ const DeleteConfirmationBox = ({ title, component, event, isDropdown }) => {
                     type="primary"
                     //size="small"
                     shape="round"
-                    className=" !h-6 md:!h-8 flex items-center justify-center text-sm !bg-danger !text-white hover:!bg-danger/80"
+                    className=" !h-6 md:!h-8 !px-4 flex items-center justify-center text-sm !bg-danger !text-white hover:!bg-danger/80"
                 >
                     Delete
                 </Button>
@@ -73,11 +73,12 @@ const DeleteConfirmationBox = ({ title, component, event, isDropdown }) => {
                 closeIcon={false}
                 footer={null}
                 width={isDropdown ? 580 : 480}
+                className={" confirmation-modal "}
             >
                 <h2 className="md:mb-8 mb-4 md:text-3xl text-xl text-center capitalize ">
                     Remove {title}
                 </h2>
-                <p className="text-center mb-8 md:text-base text-sm">
+                <p className="mb-6 md:text-base text-sm">
                     Are you sure you want to delete this {title}?
                 </p>
 

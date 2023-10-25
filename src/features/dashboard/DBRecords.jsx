@@ -1,5 +1,5 @@
 import { formatData } from "@/core/functions/formatData";
-import { RecordCard } from "..";
+import {NoRecords, RecordCard} from "..";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -14,8 +14,8 @@ const DBRecords = ({ recordsList, dateString }) => {
 
     return (
         <section className=" p-4 md:p-10 bg-whiteGray rounded-2xl">
-            <div className="flex items-center justify-between md:mb-9 mb-5 text-black">
-                <h2 className="md:text-2xl text-lg font-semibold text-primary text-lightGray">
+            <div className="flex items-center justify-between md:mb-9 mb-4 text-black">
+                <h2 className="transitions-tlt">
                     Transactions
                 </h2>
             </div>
@@ -27,12 +27,7 @@ const DBRecords = ({ recordsList, dateString }) => {
                     ))}
                 </div>
             ) : (
-                <div className=" h-full flex items-center justify-center">
-                    {" "}
-                    <h3 className="text-2xl font-medium text-lightGray">
-                        There is no transactions for now!
-                    </h3>{" "}
-                </div>
+               <NoRecords/>
             )}
 
             {formatData(recordsList)?.length > 3 ? (

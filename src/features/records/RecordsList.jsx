@@ -1,9 +1,8 @@
-import { useSelector } from "react-redux";
 import { Select } from "antd";
 import { formatData } from "@/core/functions/formatData";
-import { RecordCard } from "..";
+import {NoRecords, RecordCard} from "..";
 import { useEffect, useState } from "react";
-import useFormatRecords from "./hooks/useFormatRecords";
+
 
 const options = [
     {
@@ -27,7 +26,7 @@ const RecordsList = ({ recordsList }) => {
     const [selectedOpt, setSelectedOpt] = useState("ALL");
 
     useEffect(() => {
-        if (recordsList?.length) {
+        if (recordsList?.length > 0) {
             setRecords(formatData(recordsList));
         }
     }, [recordsList]);
@@ -60,19 +59,19 @@ const RecordsList = ({ recordsList }) => {
     }, [selectedOpt, isASC]);
 
     return (
-        <section className="h-full flex flex-col">
-            <div className="flex items-center justify-between mb-9 text-black">
-                <h2 className="md:text-2xl text-lg font-semibold text-primary text-lightGray">
+        <section className="h-full flex flex-col ">
+            <div className="flex items-center justify-between md:mb-9 mb-4 text-black">
+                <h2 className="transitions-tlt ">
                     Transactions
                 </h2>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center md:gap-3 gap-1">
                     <button
                         onClick={() => setIsASC(!isASC)}
-                        className=" w-10 h-10 bg-white border border-gray rounded-md "
+                        className=" h-8 aspect-square bg-white border border-gray rounded-sm "
                     >
                         {" "}
-                        <i className="material-symbols-outlined text-2xl  ">
+                        <i className="material-symbols-outlined text-xl flex items-center justify-center ">
                             swap_vert
                         </i>
                     </button>
@@ -80,23 +79,18 @@ const RecordsList = ({ recordsList }) => {
                         defaultValue={selectedOpt}
                         options={options}
                         onChange={(value) => setSelectedOpt(value)}
-                        className=" !w-32 !h-10  rounded-md"
+                        className=" !w-32 !h-8 "
                     />
                 </div>
             </div>
             {records?.length > 0 ? (
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col md:gap-2 gap-1">
                     {records?.map((record) => (
                         <RecordCard record={record} key={record.id} />
                     ))}
                 </div>
             ) : (
-                <div className=" flex-1   flex items-center justify-center">
-                    {" "}
-                    <h3 className="text-2xl font-medium text-lightGray">
-                        There is no transactions for now!
-                    </h3>{" "}
-                </div>
+               <NoRecords/>
             )}
         </section>
     );

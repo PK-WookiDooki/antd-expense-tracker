@@ -9,7 +9,7 @@ import { useGetUserDataQuery } from "../features/auth/userApi";
 const BudgetPage = () => {
     const { token } = useSelector((state) => state.authSlice);
     const [selectedMonth, setSelectedMonth] = useState(dayjs());
-    const { data: expensesList, isLoading: isELLoading } =
+    const { data: expensesList, isLoading: isELLoading, isFetching : isDataFetching } =
         useGetAllExpensesQuery({
             token,
             selectedMonth: selectedMonth.format("YYYY-MM"),
@@ -24,12 +24,12 @@ const BudgetPage = () => {
 
     const remainingBudget = parseInt(userData?.budget) - totalExpensePerMonth;
 
-    if (isUDLoading || isELLoading) {
+    if (isUDLoading || isELLoading || isDataFetching) {
         return <Loader />;
     }
 
     return (
-        <section className="h-full flex flex-col gap-6 ">
+        <section className="h-full flex flex-col md:gap-6 gap-4 ">
             <EditBudgetModal userBudget={userData?.budget} extraStyle={" md:hidden block "} />
             <BudgetHeader
                 remainingBudget={remainingBudget}

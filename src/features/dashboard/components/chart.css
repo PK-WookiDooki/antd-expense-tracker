@@ -1,39 +1,54 @@
-
 /* Target the legend container */
 .g2-legend {
-  padding: 10px;
-  border: 1px solid #ddd;
-  background-color: #f2f2f2;
-  border-radius: 5px;
+    padding: 1px;
+    border: 1px solid #ddd;
+    background-color: #f2f2f2;
+    border-radius: 5px;
 }
 
-/* Style the legend items (labels and markers) */
+/*Style the legend items (labels and markers) */
 .g2-legend-item {
-  margin: 5px;
-  font-size: 18px;
-  /* Add any other styles you want */
+    margin: 5px;
+    font-size: 16px;
 }
 
 /* Style the legend item markers */
 .g2-legend-item-marker {
-  width: 10px;
-  height: 10px;
-  margin-right: 5px;
-  border-radius: 50%;
-  /* Add any other styles you want */
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    border-radius: 50%;
+    /* Add any other styles you want */
 }
 
-.g2-html-annotation{
-  font-family: "Roboto Slab" !important;
+.g2-html-annotation {
+    font-family: "Roboto Slab" !important;
 }
-
 
 /* carousel */
-.slick-slide > div:has(.income-chart){
-  display: flex;
-  justify-content: flex-end;
+.slick-slide > div:has(.income-chart) {
+    display: flex;
+    justify-content: flex-end;
 }
 
-  .slick-slide{
-    padding: 0  8px !important;
-  }
+.slick-slide {
+    padding: 0 8px !important;
+}
+
+.slick-slider .slick-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center !important;
+    gap: 10px;
+}
+
+.slick-slider .slick-dots li button {
+    background-color: #262626;
+    height: 5px;
+    width: 30px;
+    border-radius: 30px;
+}
+
+.slick-slider .slick-dots li.slick-active button {
+    background-color: #262626;
+}

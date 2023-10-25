@@ -12,7 +12,7 @@ import { logoutAccount } from "./authSlice";
 const AuthVerifyOtpForm = () => {
     const { token } = useSelector((state) => state.authSlice);
     const { data: userData } = useGetUserDataQuery(token);
-    const newEmail = useLocation().state.email;
+    const newEmail = useLocation().state?.email || "example@gmail.com";
 
     const [otp, setOtp] = useState("");
     const [isResent, setIsResent] = useState(false);
@@ -101,22 +101,19 @@ const AuthVerifyOtpForm = () => {
     };
 
     return (
-        <section className=" h-full w-full flex flex-col items-center justify-center bg-whiteGray rounded-2xl ">
+        <section className=" h-full w-full flex flex-col items-center justify-center bg-whiteGray rounded-2xl p-4  ">
             <form
                 onSubmit={onOtpVerify}
-                className="w-full md:max-w-[480px] max-w-[92%] shadow-md md:p-10 p-0 "
+                className="w-full max-w-[480px] shadow-md md:p-10 p-4 "
             >
-                <div className="mb-8 text-center">
-                    <FormTitle
-                        title={"Verify Email"}
-                        desc={
-                            <>
-                                {" "}
-                                Please enter the verification code sent to{" "}
-                                <span className="font-bold">{newEmail}</span>.
-                            </>
-                        }
-                    />
+                <div className="mb-9 text-center">
+                    <h2 className="lg:text-4xl text-2xl font-medium text-dark mb-6">
+                        Verify Email
+                    </h2>
+                    <p className="md:text-base text-sm text-lightGray ">
+                        Please enter the verification code sent to <span className={"text-dark font-semibold"} > {newEmail} </span>
+                    </p>
+
                 </div>
 
                 {error?.trim().length > 0 ? (
@@ -160,7 +157,7 @@ const AuthVerifyOtpForm = () => {
                 </div>
 
                 <div className="mt-9 flex gap-10 items-center justify-center">
-                    <FixWButton isButton={false} label={"back"} />
+                    <FixWButton isButton={false} label={"back"} path={"/account/changeEmail"} />
                     <SubmitBtn
                         label={"confirm"}
                         extraStyle={"max-w-[180px] w-full"}

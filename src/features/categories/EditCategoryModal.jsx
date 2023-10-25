@@ -88,7 +88,7 @@ const EditCategoryModal = ({ category }) => {
                 onClick={() => setOpenModal(true)}
                 type="primary"
                 shape="round"
-                className=" !h-6 md:!h-8 text-sm !bg-primaryGreen !text-white hover:!bg-primaryGreen/80 flex items-center justify-center "
+                className=" !h-6 md:!h-8 !px-4 text-sm !bg-primaryGreen !text-white hover:!bg-primaryGreen/80 flex items-center justify-center "
             >
                 Edit
             </Button>
@@ -100,10 +100,10 @@ const EditCategoryModal = ({ category }) => {
                 footer={null}
                 closeIcon={false}
             >
-                <Form form={form} onFinish={onFormSubmit} layout="vertical">
-                    <h2 className="text-xl font-medium mb-10">
+                <Form form={form} onFinish={onFormSubmit} layout="vertical" className={"create-form"}>
+                    <h2 className="modal-form-tlt">
                         {" "}
-                        Update Category{" "}
+                        Edit Category{" "}
                     </h2>
 
                     {error !== null ? (
@@ -117,7 +117,7 @@ const EditCategoryModal = ({ category }) => {
                         ""
                     )}
 
-                    <Form.Item name={"type"} initialValue={category?.type}>
+                    <Form.Item name={"type"} initialValue={category?.type} className={"mb-8"} >
                         <Segmented
                             options={[
                                 {
@@ -145,6 +145,7 @@ const EditCategoryModal = ({ category }) => {
                                 message: "Category name is required!",
                             },
                         ]}
+                        className={"mb-8"}
                     >
                         <Input />
                     </Form.Item>
@@ -159,7 +160,7 @@ const EditCategoryModal = ({ category }) => {
                             },
                         ]}
                     >
-                        <div className="grid grid-cols-6 md:grid-cols-8 gap-2 p-2 rounded-md border border-secondary place-items-center min-h-[40px] ">
+                        <div className="icon-box">
                             {iconOptions?.map((item, index) => {
                                 return (
                                     <div key={index}>
@@ -199,7 +200,7 @@ const EditCategoryModal = ({ category }) => {
                         </div>
                     </Form.Item>
 
-                    <div className="mt-9 flex md:gap-10 gap-4 items-center justify-center">
+                    <div className="category-form-footer">
                         <FixWButton
                             isButton={true}
                             event={closeModal}
@@ -208,7 +209,7 @@ const EditCategoryModal = ({ category }) => {
                             buttonType={"default"}
                         />
                         <FixWButton
-                            label={"confirm"}
+                            label={"save"}
                             htmlType={"submit"}
                             buttonType={"primary"}
                             isButton={true}

@@ -8,21 +8,21 @@ import {
     Alert,
     Input,
 } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { setIsAddRecordModalOpen } from "./recordsSlice";
-import { CreateBtn, FixWButton } from "@/components";
+import {useDispatch, useSelector} from "react-redux";
+import {setIsAddRecordModalOpen} from "./recordsSlice";
+import {CreateBtn, FixWButton} from "@/components";
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
-import { setMessage } from "@/app/global/globalSlice";
-import { useAddNewRecordMutation } from "./recordsApi";
-import { useGetAllCategoriesQuery } from "../categories/categoriesApi";
+import {useEffect, useState} from "react";
+import {setMessage} from "@/app/global/globalSlice";
+import {useAddNewRecordMutation} from "./recordsApi";
+import {useGetAllCategoriesQuery} from "../categories/categoriesApi";
 
 const AddNewRecordForm = () => {
-    const { token } = useSelector((state) => state.authSlice);
-    const { isAddRecordModalOpen } = useSelector((state) => state.recordsSlice);
+    const {token} = useSelector((state) => state.authSlice);
+    const {isAddRecordModalOpen} = useSelector((state) => state.recordsSlice);
     const [isSubmitting, setIsSubmitting] = useState(false)
 
-    const { data: userCategories } = useGetAllCategoriesQuery(token);
+    const {data: userCategories} = useGetAllCategoriesQuery(token);
 
     const [type, setType] = useState("EXPENSE");
 
@@ -69,8 +69,8 @@ const AddNewRecordForm = () => {
                 "YYYY-MM-DD"
             );
             delete values.createdDate;
-            const record = { ...values, createdDate: formattedDate };
-            const { data, error: apiError } = await addNewRecord({
+            const record = {...values, createdDate: formattedDate};
+            const {data, error: apiError} = await addNewRecord({
                 record,
                 token,
             });
@@ -97,7 +97,8 @@ const AddNewRecordForm = () => {
         setError(null);
         setIsSubmitting(false)
         setType("EXPENSE")
-        dispatch(setIsAddRecordModalOpen(false));}
+        dispatch(setIsAddRecordModalOpen(false));
+    }
 
     return (
         <section>
@@ -118,9 +119,9 @@ const AddNewRecordForm = () => {
                     form={form}
                     onFinish={onFormSubmit}
                     layout="vertical"
-                    className="!font-sans py-5 "
+                    className="!font-sans create-form "
                 >
-                    <h2 className="text-xl font-medium mb-10 text-center">
+                    <h2 className="modal-form-tlt">
                         {" "}
                         Add New Record{" "}
                     </h2>
@@ -171,7 +172,7 @@ const AddNewRecordForm = () => {
                                     },
                                 ]}
                             >
-                                <InputNumber className="flex flex-col justify-center !w-full" />
+                                <InputNumber className="flex flex-col justify-center !w-full "/>
                             </Form.Item>
                             <Form.Item
                                 label="Date"
@@ -187,6 +188,7 @@ const AddNewRecordForm = () => {
                                 <DatePicker
                                     format={"DD-MM-YYYY"}
                                     allowClear={false}
+                                    inputReadOnly={true}
                                 />
                             </Form.Item>
                             <Form.Item
@@ -201,7 +203,7 @@ const AddNewRecordForm = () => {
                                 ]}
                                 //className="md:!mb-0"
                             >
-                                <Select options={catOptions} />
+                                <Select options={catOptions}/>
                             </Form.Item>
                         </div>
 
@@ -210,10 +212,10 @@ const AddNewRecordForm = () => {
                             name={"description"}
                             className="w-full note-input"
                         >
-                            <Input.TextArea className=" !resize-none" />
+                            <Input.TextArea className=" !resize-none"/>
                         </Form.Item>
                     </div>
-                    <div className="md:mt-9 flex gap-10 items-center justify-center">
+                    <div className="record-form-footer">
                         <FixWButton
                             isButton={true}
                             event={closeModal}
@@ -222,7 +224,7 @@ const AddNewRecordForm = () => {
                             buttonType={"default"}
                         />
                         <FixWButton
-                            label={"confirm"}
+                            label={"save"}
                             htmlType={"submit"}
                             buttonType={"primary"}
                             isButton={true}

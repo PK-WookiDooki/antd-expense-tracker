@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import { setMessage } from "@/app/global/globalSlice";
-import { SubmitBtn } from "@/components";
+import {ModalHeader, SubmitBtn} from "@/components";
 import { useChangeUsernameMutation } from "./userApi";
 
 const EditNameModal = ({ username }) => {
@@ -55,7 +55,7 @@ const EditNameModal = ({ username }) => {
 
     return (
         <section className="pb-6 border-b border-gray">
-            <h2 className="text-xl font-semibold">Name</h2>
+            <h2 className="text-xl font-medium">Name</h2>
             <div className="flex items-center justify-between mt-2">
                 <p> {username || "Nexcoder"} </p>
                 <button
@@ -73,17 +73,18 @@ const EditNameModal = ({ username }) => {
                 closeIcon={false}
                 footer={null}
             >
-                <div className="bg-primaryGreen px-6 py-4 text-whiteGray flex items-center justify-between">
-                    <h2 className="text-2xl font-semibold"> Change Name </h2>
-                    <button
-                        type="button"
-                        onClick={closeModal}
-                        className="text-xl"
-                    >
-                        {" "}
-                        <RxCross1 />{" "}
-                    </button>
-                </div>
+                {/*<div className="bg-primaryGreen px-6 py-4 text-whiteGray flex items-center justify-between">*/}
+                {/*    <h2 className="text-xl"> Change Name </h2>*/}
+                {/*    <button*/}
+                {/*        type="button"*/}
+                {/*        onClick={closeModal}*/}
+                {/*        className="text-xl"*/}
+                {/*    >*/}
+                {/*        {" "}*/}
+                {/*        <RxCross1 />{" "}*/}
+                {/*    </button>*/}
+                {/*</div>*/}
+                <ModalHeader title={"change name"} event={closeModal} />
                 <Form
                     form={form}
                     layout="vertical"

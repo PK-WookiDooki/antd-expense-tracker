@@ -1,21 +1,21 @@
 import { Form, Input } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FixWButton, SubmitBtn } from "@/components";
+import {FixWButton, SubmitBtn} from "@/components";
 import { useDispatch, useSelector } from "react-redux";
 import { useChangeEmailMutation } from "./userApi";
 import { setMessage } from "@/app/global/globalSlice";
 import { useState } from "react";
 
 const ChangeEmailForm = () => {
+    const { token } = useSelector((state) => state.authSlice);
+
     const nav = useNavigate();
     const currentRoute = useLocation().pathname;
 
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const { token } = useSelector((state) => state.authSlice);
-    const [changeEmail] = useChangeEmailMutation();
     const dispatch = useDispatch();
 
+    const [changeEmail] = useChangeEmailMutation();
     const onFormSubmit = async (values) => {
         try {
             setIsSubmitting(true);
@@ -52,21 +52,22 @@ const ChangeEmailForm = () => {
         }
     };
     return (
-        <section className=" h-full w-full flex items-center justify-center bg-whiteGray rounded-2xl ">
+        <section className=" h-full w-full flex items-center justify-center bg-whiteGray rounded-2xl px-4  ">
             <Form
                 layout="vertical"
                 onFinish={onFormSubmit}
-                className="w-full md:max-w-[570px] p-10 max-w-[92%] shadow"
+                className="w-full max-w-[570px] md:p-10 p-4 shadow"
             >
                 <div className="mb-9 text-left">
-                    <h2 className="text-4xl font-medium text-dark mb-6">
+                    <h2 className="lg:text-4xl text-2xl font-medium text-dark mb-6">
                         {" "}
                         Change Email Address{" "}
                     </h2>
-                    <p className="text-base">
+                    <p className="md:text-base text-sm text-lightGray ">
                         Enter new email address and current password to change
                         email address!
                     </p>
+
                 </div>
                 <Form.Item
                     name="newEmail"
@@ -91,7 +92,7 @@ const ChangeEmailForm = () => {
                 </Form.Item>
 
                 <div className="mt-9 flex gap-10 items-center justify-center">
-                    <FixWButton isButton={false} label={"cancel"} />
+                    <FixWButton isButton={false} label={"cancel"} path={".."} />
                     <SubmitBtn
                         label={"confirm"}
                         extraStyle={"max-w-[180px] w-full"}

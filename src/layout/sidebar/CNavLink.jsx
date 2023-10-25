@@ -17,7 +17,7 @@ const CNavLink = ({ icon, title, path }) => {
             to={path}
         >
             <i className="material-symbols-outlined"> {icon} </i>
-            <span>{title}</span>
+            <span className={"text-lg font-medium"} >{title}</span>
         </NavLink>
     );
 };

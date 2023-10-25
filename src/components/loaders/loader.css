@@ -1,7 +1,7 @@
 .three-body {
   --uib-size: 70px;
   --uib-speed: 0.8s;
-  --uib-color: var(--primaryGreen);
+  --uib-color: white;
   display: inline-block;
   position: relative;
   width: var(--uib-size);
@@ -99,5 +99,10 @@
    transform: translateY(66%) scale(0.65);
    opacity: 0.8;
   }
+ }
+
+ @media screen and (max-width: 768px) {
+  .three-body {
+   --uib-size: 50px;}
  }
  

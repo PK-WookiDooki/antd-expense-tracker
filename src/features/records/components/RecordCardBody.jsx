@@ -24,7 +24,7 @@ const RecordCardBody = ({ record, isRemove, date }) => {
 
     return (
         <div
-            className={`flex items-center justify-between py-1 px-5 bg-white rounded-md `}
+            className={`flex items-center justify-between py-1 md:px-6 px-2 bg-white rounded-md`}
         >
             <div className="flex items-center gap-3">
                 <span
@@ -39,14 +39,15 @@ const RecordCardBody = ({ record, isRemove, date }) => {
                     </i>
                 </span>
                 <div className="flex flex-col gap-1 text-dark">
-                    <h2 className="md:text-xl font-medium capitalize">
+                    <h2 className="md:text-xl capitalize">
                         {" "}
                         {userCategory?.name}{" "}
                     </h2>
-                    <p className="md:text-sm text-xs line-clamp-1  ">
-                        {" "}
-                        {description}{" "}
-                    </p>
+                    {description !== null || description?.trim().length > 0 ?
+                        <p className="md:text-base text-xs line-clamp-1  ">
+                            {" "}
+                            {description}{" "}
+                        </p> : ""}
                 </div>
             </div>
             <div className="flex items-center gap-3 record">

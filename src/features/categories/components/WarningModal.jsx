@@ -11,7 +11,7 @@ const WarningModal = ({ actionType }) => {
                 onClick={() => setOpenModal(true)}
                 type="primary"
                 shape="round"
-                className={`!h-6 md:!h-8 text-sm flex items-center justify-center !text-white capitalize ${
+                className={`!h-6 md:!h-8 !px-4 text-sm flex items-center justify-center !text-white capitalize ${
                     actionType === "edit"
                         ? "!bg-primaryGreen  hover:!bg-primaryGreen/80"
                         : " !bg-danger hover:!bg-danger/80"

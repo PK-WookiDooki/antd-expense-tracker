@@ -5,12 +5,15 @@
 .ant-input, .ant-picker, .ant-select{
   width: 100% !important;
   height: 40px !important;
-  /*font-family: "Lucida Sans", sans-serif !important;*/
-  font-size: 16px !important;
+  font-size: 14px !important;
 }
 
 .ant-picker,  .ant-select{
   cursor: pointer;
+}
+
+.ant-select .ant-select-selector, .ant-picker{
+  border-radius: 2px !important;
 }
 
 .account-modal .ant-modal-content{
@@ -23,14 +26,28 @@
 .ant-segmented{
   border: 1px solid var(--primaryGreen) !important;
   background-color: transparent !important;
+  border-radius: 8px !important;
+  padding: 0 !important;
+  overflow: hidden;
+  height: 56px !important;
+}
+
+.ant-segmented-item-label{
+  font-size: 24px !important;
+  font-weight: 500;
 }
 
 .ant-segmented .ant-segmented-thumb{
   background-color: var(--primaryGreen) !important;
+  border-radius: 0 !important;
 }
 
 .ant-segmented .ant-segmented-item{
   color: var(--primaryGreen) !important;
+  border-radius: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ant-segmented .ant-segmented-item-selected{
@@ -53,8 +70,34 @@
   flex-wrap: nowrap !important;
 }
 
+/* modals */
+.confirmation-modal .ant-modal-content{
+  padding: 40px !important;
+}
+
+/* form */
+.create-form{
+  padding: 16px !important;
+}
+
 @media screen and (max-width: 768px) {
   .note-input .ant-form-item-control-input{
     height: 120px !important;
   }
+
+  .ant-segmented{
+    height: 40px !important;
+  }
+
+  .ant-segmented-item-label{
+    font-size: 16px !important;
+    font-weight: 400;
+  }
+
+  /* form */
+  .create-form{
+    padding: 16px 0 !important;
+  }
+
+
 }

@@ -10,7 +10,7 @@ const MainLayout = () => {
             <Sidebar />
             <main className=" bg-lightGreen flex flex-1 flex-col min-h-screen overflow-clip  ">
                 <Header />
-                <section className="md:px-8 lg:pr-14 px-4 py-3 flex-1 max-w-[100vw]">
+                <section className="md:px-8 lg:pr-14 px-4 py-6 lg:py-3 flex-1 max-w-[100vw]">
                     <Outlet />{" "}
                     <div
                         className={` fixed top-0 left-0 w-full h-full bg-black/40 transform  ${

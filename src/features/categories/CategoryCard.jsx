@@ -5,10 +5,10 @@ const CategoryCard = ({ category, isRemove }) => {
     return (
         <div
             className={` ${
-                isRemove ? "p-0" : "md:p-3"
-            } rounded-md md:bg-white text-black flex items-center justify-between`}
+                isRemove ? "p-0" : "md:px-6 md:py-1"
+            } rounded-md bg-white text-black flex items-center justify-between`}
         >
-            <div className=" capitalize flex items-center gap-3 ">
+            <div className=" capitalize flex items-center md:gap-3 gap-2 ">
                 <span
                     className={`md:h-12 aspect-square h-10  rounded-md text-white flex items-center justify-center`}
                     style={{ backgroundColor: category.iconBgColor }}

@@ -15,6 +15,7 @@ export { default as RecordPageHeader } from "./records/RecordPageHeader";
 export { default as AddNewRecordModal } from "./records/AddNewRecordForm";
 export { default as EditRecordModal } from "./records/EditRecordForm";
 export { default as DeleteRecordModal } from "./records/DeleteRecordModal";
+export {default as NoRecords} from "./records/components/NoRecordsMessage.jsx"
 
 //categories
 export { default as CategoriesList } from "./categories/CategoriesList";

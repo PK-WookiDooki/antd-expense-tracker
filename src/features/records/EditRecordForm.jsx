@@ -8,19 +8,19 @@ import {
     Segmented,
     Select,
 } from "antd";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import dayjs from "dayjs";
-import { FixWButton } from "@/components";
-import { useGetAllCategoriesQuery } from "../categories/categoriesApi";
-import { useUpdateRecordMutation } from "./recordsApi";
-import { setMessage } from "@/app/global/globalSlice";
+import {FixWButton} from "@/components";
+import {useGetAllCategoriesQuery} from "../categories/categoriesApi";
+import {useUpdateRecordMutation} from "./recordsApi";
+import {setMessage} from "@/app/global/globalSlice";
 
-const EditRecordForm = ({ record, date }) => {
+const EditRecordForm = ({record, date}) => {
     const [form] = Form.useForm();
 
-    const { token } = useSelector((state) => state.authSlice);
-    const { data: userCategories } = useGetAllCategoriesQuery(token);
+    const {token} = useSelector((state) => state.authSlice);
+    const {data: userCategories} = useGetAllCategoriesQuery(token);
 
     const [openModal, setOpenModal] = useState(false);
     const [error, setError] = useState(null);
@@ -54,7 +54,7 @@ const EditRecordForm = ({ record, date }) => {
                     <p className="flex items-center gap-1 capitalize">
                         <i
                             className="material-symbols-outlined w-8 h-8 rounded-md text-white flex items-center justify-center"
-                            style={{ backgroundColor: category?.iconBgColor }}
+                            style={{backgroundColor: category?.iconBgColor}}
                         >
                             {category.iconName}
                         </i>{" "}
@@ -82,7 +82,7 @@ const EditRecordForm = ({ record, date }) => {
                 createdDate: formattedDate,
             };
 
-            const { data, error: apiError } = await updateRecord({
+            const {data, error: apiError} = await updateRecord({
                 recordId: record?.recordId,
                 record: updatedRecord,
                 token,
@@ -118,7 +118,7 @@ const EditRecordForm = ({ record, date }) => {
             <button
                 type="button"
                 onClick={() => setOpenModal(true)}
-                className="text-primaryBlue menu-item "
+                className="text-primaryBlue menu-item"
             >
                 {" "}
                 Edit
@@ -136,9 +136,9 @@ const EditRecordForm = ({ record, date }) => {
                     form={form}
                     layout="vertical"
                     onFinish={onFormSubmit}
-                    className="!font-sans py-5"
+                    className="!font-sans p-4"
                 >
-                    <h2 className="text-xl font-medium mb-10 text-center ">
+                    <h2 className="modal-form-tlt ">
                         {" "}
                         Edit Record{" "}
                     </h2>
@@ -187,7 +187,7 @@ const EditRecordForm = ({ record, date }) => {
                                     },
                                 ]}
                             >
-                                <InputNumber className="flex flex-col justify-center !w-full" />
+                                <InputNumber className="flex flex-col justify-center !w-full"/>
                             </Form.Item>
                             <Form.Item
                                 label="Date"
@@ -203,6 +203,8 @@ const EditRecordForm = ({ record, date }) => {
                                     className="default-input shadow-none "
                                     format={"DD-MM-YYYY"}
                                     allowClear={false}
+                                    inputReadOnly={true}
+
                                 />
                             </Form.Item>{" "}
                             <Form.Item
@@ -215,7 +217,7 @@ const EditRecordForm = ({ record, date }) => {
                                     },
                                 ]}
                             >
-                                <Select options={catOptions} />
+                                <Select options={catOptions}/>
                             </Form.Item>
                         </div>
 
@@ -224,11 +226,11 @@ const EditRecordForm = ({ record, date }) => {
                             name={"description"}
                             className="w-full note-input"
                         >
-                            <Input.TextArea className="!resize-none" />
+                            <Input.TextArea className="!resize-none"/>
                         </Form.Item>
                     </div>
 
-                    <div className="md:mt-9 flex gap-10 items-center justify-center">
+                    <div className="record-form-footer">
                         <FixWButton
                             isButton={true}
                             event={closeModal}
@@ -237,7 +239,7 @@ const EditRecordForm = ({ record, date }) => {
                             buttonType={"default"}
                         />
                         <FixWButton
-                            label={"confirm"}
+                            label={"save"}
                             htmlType={"submit"}
                             buttonType={"primary"}
                             isButton={true}

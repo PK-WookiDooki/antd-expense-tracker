@@ -16,7 +16,7 @@ const DashboardPage = () => {
         endDate: endDate.format("YYYY-MM-DD"),
     }).toString();
 
-    const { data: recordsList, isLoading: isRecordsLoading } =
+    const { data: recordsList, isLoading: isRecordsLoading, isFetching : isRecordsFetching } =
         useGetAllRecordsQuery({
             token,
             startDate: startDate.format("YYYY-MM-DD"),
@@ -26,12 +26,13 @@ const DashboardPage = () => {
 
     // console.log(recordsList)
 
-    if (isRecordsLoading) {
+    if (isRecordsLoading || isRecordsFetching) {
        return <Loader />;
     }
 
     return (
         <section className="flex flex-col gap-6">
+
             <DBHeader
                 startDate={startDate}
                 endDate={endDate}

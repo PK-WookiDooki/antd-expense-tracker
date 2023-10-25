@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { RecordCard } from "..";
+import {NoRecords, RecordCard} from "..";
 import { formatData } from "@/core/functions/formatData";
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
@@ -36,16 +36,16 @@ const ExpenseRecords = ({
     }, [isASC, expensesList]);
 
     return (
-        <section className="md:p-10 p-4 rounded-2xl bg-whiteGray flex flex-col gap-9 h-full">
+        <section className="md:p-10 p-4 rounded-2xl bg-whiteGray flex flex-col md:gap-9 gap-3  h-full">
             <div className="flex items-center justify-between">
-                <h2 className="md:text-2xl text-xl font-medium text-lightGray"> Transactions </h2>
+                <h2 className="transitions-tlt"> Transactions </h2>
                 <div className="flex items-center gap-2 ">
                     <button
                         onClick={() => setIsASC(!isASC)}
-                        className="min-w-[40px] h-10 border border-gray rounded-md bg-white flex items-center justify-center"
+                        className=" !h-8 aspect-square border border-gray rounded-sm bg-white flex items-center justify-center"
                     >
                         {" "}
-                        <i className="material-symbols-outlined">
+                        <i className="material-symbols-outlined text-xl ">
                             swap_vert
                         </i>{" "}
                     </button>
@@ -53,8 +53,9 @@ const ExpenseRecords = ({
                         defaultValue={selectedMonth}
                         format={"MMMM YYYY"}
                         onChange={(value) => setSelectedMonth(value)}
-                        className=" md:!w-60"
+                        className=" md:!w-60 !h-8 "
                         allowClear={false}
+                        inputReadOnly={true}
                     />
                 </div>
             </div>
@@ -66,12 +67,7 @@ const ExpenseRecords = ({
                     ))}
                 </div>
             ) : (
-                <div className=" h-full flex items-center justify-center">
-                    {" "}
-                    <h3 className="text-2xl font-medium text-lightGray">
-                        There is no transactions for now!
-                    </h3>{" "}
-                </div>
+               <NoRecords month={selectedMonth.format("MMMM")} />
             )}
         </section>
     );

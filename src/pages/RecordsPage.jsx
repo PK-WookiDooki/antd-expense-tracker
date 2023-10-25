@@ -19,19 +19,19 @@ const RecordsPage = () => {
     const [startDate, setStartDate] = useState(startedDate);
     const [endDate, setEndDate] = useState(endedDate);
 
-    const { data: records, isLoading: isRecordsLoading } =
+    const { data: records, isLoading: isRecordsLoading, isFetching : isRecordsFetching } =
         useGetAllRecordsQuery({
             token,
             startDate: startDate.format("YYYY-MM-DD"),
             endDate: endDate.format("YYYY-MM-DD"),
         });
 
-    if (isRecordsLoading) {
+    if (isRecordsLoading || isRecordsFetching) {
         return <Loader />;
     }
 
     return (
-        <section className=" lg:p-10 p-5 bg-white rounded-2xl flex flex-col gap-10 h-full ">
+        <section className=" lg:p-10 md:p-5 p-4 rounded-2xl flex flex-col gap-6 h-full bg-whiteGray">
             <RecordPageHeader
                 startDate={startDate}
                 endDate={endDate}

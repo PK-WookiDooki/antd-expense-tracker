@@ -1,9 +1,9 @@
-import { Pie, measureTextWidth } from "@ant-design/plots";
+import {Pie, measureTextWidth} from "@ant-design/plots";
 import "./chart.css";
 
-const PieChart = ({ chartData, dataColor, chartTitle, extraStyle }) => {
+const PieChart = ({chartData, dataColor, chartTitle, extraStyle}) => {
     function renderStatistic(containerWidth, text, style) {
-        const { width: textWidth, height: textHeight } = measureTextWidth(
+        const {width: textWidth, height: textHeight} = measureTextWidth(
             text,
             style
         );
@@ -16,8 +16,8 @@ const PieChart = ({ chartData, dataColor, chartTitle, extraStyle }) => {
                 Math.sqrt(
                     Math.abs(
                         Math.pow(R, 2) /
-                            (Math.pow(textWidth / 2, 2) +
-                                Math.pow(textHeight, 2))
+                        (Math.pow(textWidth / 2, 2) +
+                            Math.pow(textHeight, 2))
                     )
                 ),
                 1
@@ -30,7 +30,7 @@ const PieChart = ({ chartData, dataColor, chartTitle, extraStyle }) => {
         };">${text}</div>`;
     }
 
-    const data = [{ type: "Total", value: 0 }];
+    const data = [{type: "Total", value: 0}];
 
     const customColorPalette = ["#595959"];
 
@@ -45,20 +45,38 @@ const PieChart = ({ chartData, dataColor, chartTitle, extraStyle }) => {
         legend:
             chartData?.length > 0
                 ? {
-                      position: "bottom",
-                      itemName: {
-                          style: {
-                              fontSize: 16,
-                              fontFamily: "Roboto",
-                          },
-                      },
-                      marker: {
-                          symbol: "circle",
-                          style: {
-                              r: 8,
-                          },
-                      },
-                  }
+                    position: "bottom",
+                    itemName: {
+                        style: {
+                            fontSize: 16,
+                            fontFamily: "Roboto",
+                            paddingBlock: 6,
+                        },
+                    },
+                    marker: {
+                        symbol: "circle",
+                        style: {
+                            r: 8,
+                        },
+                    },
+                    pageNavigator: {
+                        marker: {
+                            style: {
+                                inactiveFill: '#000',
+                                inactiveOpacity: 0.3,
+                                fill: '#000',
+                                opacity: 0.8,
+                                size: 20,
+                            },
+                        },
+                        text: {
+                            style: {
+                                fill: '#000',
+                                fontSize: 14,
+                            },
+                        },
+                    }
+                }
                 : false,
         meta: {
             value: {
@@ -70,7 +88,7 @@ const PieChart = ({ chartData, dataColor, chartTitle, extraStyle }) => {
             offset: "-50%",
             style: {
                 textAlign: "center",
-                fontSize: 14,
+                fontSize: 12,
             },
             autoRotate: false,
             content: chartData?.length > 1 ? "{percentage}" : "",
@@ -82,7 +100,7 @@ const PieChart = ({ chartData, dataColor, chartTitle, extraStyle }) => {
                     fontSize: "20px",
                 },
                 customHtml: (container, view, item) => {
-                    const { width, height } = container.getBoundingClientRect();
+                    const {width, height} = container.getBoundingClientRect();
                     const d = Math.sqrt(
                         Math.pow(width / 2, 2) + Math.pow(height / 2, 2)
                     );
@@ -97,7 +115,7 @@ const PieChart = ({ chartData, dataColor, chartTitle, extraStyle }) => {
                     fontSize: 20,
                 },
                 customHtml: (container, view, item, data) => {
-                    const { width } = container.getBoundingClientRect();
+                    const {width} = container.getBoundingClientRect();
                     const text = item
                         ? `MMK ${item.value}`
                         : `MMK ${data.reduce((r, d) => r + d.value, 0)}`;
@@ -119,13 +137,13 @@ const PieChart = ({ chartData, dataColor, chartTitle, extraStyle }) => {
     };
     return (
         <div
-            className={`w-full md:max-w-[480px]  bg-pieBg p-5 rounded-xl shadow-sm ${extraStyle} `}
+            className={`w-full md:max-w-[480px]  bg-pieBg p-5 rounded-xl shadow-sm ${extraStyle} flex flex-col items-center `}
         >
-            <h2 className="text-black text-center md:text-2xl text-lg font-medium">
+            <h2 className="text-black md:text-2xl text-lg font-medium">
                 {" "}
                 {chartTitle}{" "}
             </h2>
-            <Pie {...config} />
+            <Pie {...config} style={{width: "300px"}}/>
         </div>
     );
 };

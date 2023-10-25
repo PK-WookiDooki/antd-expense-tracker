@@ -17,7 +17,7 @@ const CategoriesPage = () => {
     }
 
     return (
-        <section className="lg:p-10 p-5 bg-whiteGray rounded-2xl flex flex-col gap-8 h-full">
+        <section className="lg:p-10 md:p-5 p-4 bg-whiteGray rounded-2xl flex flex-col gap-8 h-full">
             <AddNewCategoryForm iconsList={iconsList} />
             <CategoriesList categoriesList = {categoriesList} />
             <FloatingBtn />

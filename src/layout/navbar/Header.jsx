@@ -8,14 +8,15 @@ import { toggleSidebar } from "@/app/global/globalSlice";
 const Header = () => {
     const { isSidebarOpen } = useSelector((state) => state.globalSlice);
     const dispatch = useDispatch();
-    const handleSidebar = () => {
+    const handleSidebar = (e) => {
+        e.preventDefault();
         dispatch(toggleSidebar(!isSidebarOpen));
     };
 
     return (
-        <header className="lg:pr-14 md:px-8 lg:pt-6 lg:pb-8 p-4 lg:shadow-none shadow flex items-center justify-between lg:justify-end w-full sticky top-0 z-10 lg:bg-lightGreen bg-white">
-            <div className="flex items-center gap-5 lg:hidden">
-                <button onClick={handleSidebar} className="text-3xl">
+        <header className="lg:pr-14 md:px-8 lg:pt-6 lg:pb-8 px-4 py-[10px] lg:shadow-none shadow flex items-center justify-between lg:justify-end w-full sticky top-0 z-10 lg:bg-lightGreen bg-white">
+            <div className="flex items-center gap-2 lg:hidden">
+                <button onClick={handleSidebar} className="text-2xl">
                     {" "}
                     {isSidebarOpen ? <RxCross1 /> : <RxHamburgerMenu />}{" "}
                 </button>
@@ -31,7 +32,7 @@ const Header = () => {
                         onClick={() => dispatch(toggleSidebar(false))}
                         className=" lg:pointer-events-none lg:hidden "
                     >
-                        <span className="material-symbols-outlined text-2xl h-10 w-10 rounded-full flex items-center justify-center bg-dark text-whiteGray ">
+                        <span className="material-symbols-outlined text-2xl md:h-10 h-8 aspect-square rounded-full flex items-center justify-center bg-dark text-whiteGray ">
                             person
                         </span>
                     </Link>

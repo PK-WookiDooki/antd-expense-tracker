@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import OTPInput from "react-otp-input";
-import { FormTitle, SubmitBtn } from "@/components";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Alert } from "antd";
-import { useResendOtpMutation, useVerifyOtpMutation } from "./authApi";
-import { useDispatch } from "react-redux";
-import { setMessage } from "@/app/global/globalSlice";
+import {FormTitle, SubmitBtn} from "@/components";
+import {useLocation, useNavigate} from "react-router-dom";
+import {Alert} from "antd";
+import {useResendOtpMutation, useVerifyOtpMutation} from "./authApi";
+import {useDispatch} from "react-redux";
+import {setMessage} from "@/app/global/globalSlice";
 
 const VerifyOtpForm = () => {
-    const { email, previousRoute } = useLocation().state;
+    const {email, previousRoute} = useLocation().state;
     const [otp, setOtp] = useState("");
     const [isResent, setIsResent] = useState(false);
     const [timer, setTimer] = useState(59);
@@ -25,7 +25,7 @@ const VerifyOtpForm = () => {
         e.preventDefault();
         try {
             setIsSubmitting(true);
-            const { data, error } = await verifyOtp({ email, otp });
+            const {data, error} = await verifyOtp({email, otp});
             if (data?.success) {
                 setIsSubmitting(false);
                 if (previousRoute === "/signUp") {
@@ -35,7 +35,7 @@ const VerifyOtpForm = () => {
                             msgContent: "Account registered successfully!",
                         })
                     );
-                    nav("/signIn", { replace: true });
+                    nav("/signIn", {replace: true});
                 } else if (previousRoute === "/signIn/forgotPassword") {
                     dispatch(
                         setMessage({
@@ -84,7 +84,7 @@ const VerifyOtpForm = () => {
     const onResendOtp = async () => {
         setIsResent(true);
         try {
-            const { data, error: apiError } = await resendOtp({ email });
+            const {data, error: apiError} = await resendOtp({email});
             if (data?.success) {
                 dispatch(
                     setMessage({
@@ -93,12 +93,6 @@ const VerifyOtpForm = () => {
                     })
                 );
             } else {
-                //dispatch(
-                //    setMessage({
-                //        msgType: "error",
-                //        msgContent: error?.data?.message,
-                //    })
-                //);
                 setError(apiError?.data?.message || apiError?.error);
             }
         } catch (error) {
@@ -110,10 +104,11 @@ const VerifyOtpForm = () => {
         <section className="w-full flex flex-col items-center justify-center">
             <form
                 onSubmit={onVerify}
-                className="w-full max-w-[440px] md:shadow-md md:p-10 p-4 md:bg-white/80"
+                className="w-full max-w-[440px] md:shadow-md lg:p-10 md:p-6 md:bg-white/80"
             >
                 <div className="mb-8 text-center">
                     <FormTitle
+                        isCenter={true}
                         title={"Verify Email"}
                         desc={
                             <>
@@ -166,7 +161,7 @@ const VerifyOtpForm = () => {
                     </button>
                 </div>
 
-                <SubmitBtn label={"Verify"} isLoading={isSubmitting} />
+                <SubmitBtn label={"Verify"} isLoading={isSubmitting}/>
             </form>
         </section>
     );

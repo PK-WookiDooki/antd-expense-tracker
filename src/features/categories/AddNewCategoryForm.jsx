@@ -83,8 +83,8 @@ const AddNewCategoryForm = ({ iconsList }) => {
             />
 
             <Modal centered open={openModal} footer={null} closeIcon={false}>
-                <Form form={form} onFinish={onFormSubmit} layout="vertical">
-                    <h2 className="text-xl font-medium mb-10">
+                <Form form={form} onFinish={onFormSubmit} layout="vertical" className=" create-form " >
+                    <h2 className="modal-form-tlt">
                         {" "}
                         Add New Category{" "}
                     </h2>
@@ -100,7 +100,7 @@ const AddNewCategoryForm = ({ iconsList }) => {
                         ""
                     )}
 
-                    <Form.Item name={"type"} initialValue={"EXPENSE"}>
+                    <Form.Item name={"type"} initialValue={"EXPENSE"} className={"mb-8"} >
                         <Segmented
                             options={[
                                 {
@@ -128,6 +128,7 @@ const AddNewCategoryForm = ({ iconsList }) => {
                                 message: "Category name is required!",
                             },
                         ]}
+                        className={"mb-8"}
                     >
                         <Input />
                     </Form.Item>
@@ -142,7 +143,7 @@ const AddNewCategoryForm = ({ iconsList }) => {
                             },
                         ]}
                     >
-                        <div className="grid grid-cols-5 md:grid-cols-8 gap-2 p-2 rounded-md border border-gray min-h-[40px]">
+                        <div className="icon-box ">
                             {iconOptions?.map((item, index) => {
                                 return (
                                     <div key={index}>
@@ -182,7 +183,7 @@ const AddNewCategoryForm = ({ iconsList }) => {
                         </div>
                     </Form.Item>
 
-                    <div className="mt-9 flex md:gap-10 gap-4 items-center justify-center">
+                    <div className="category-form-footer">
                         <FixWButton
                             isButton={true}
                             event={closeModal}
@@ -191,7 +192,7 @@ const AddNewCategoryForm = ({ iconsList }) => {
                             buttonType={"default"}
                         />
                         <FixWButton
-                            label={"confirm"}
+                            label={"save"}
                             htmlType={"submit"}
                             buttonType={"primary"}
                             isButton={true}

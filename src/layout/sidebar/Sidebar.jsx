@@ -12,7 +12,7 @@ const Sidebar = () => {
     const dispatch = useDispatch();
     const nav = useNavigate();
 
-    const handleLogout = () => {
+    const handleLogout = (e) => {
         dispatch(logoutAccount());
         dispatch(
             setMessage({ msgType: "success", msgContent: "Logout successful!" })
@@ -23,7 +23,7 @@ const Sidebar = () => {
 
     return (
         <section
-            className={`flex flex-col self-start w-full lg:w-[224px] h-full gap-5 lg:sticky top-0 fixed left-0 bg-white z-10 transform pt-20 lg:pt-0 ${
+            className={`flex flex-col self-start w-full lg:w-[224px] h-full gap-5 lg:sticky top-0 fixed left-0 bg-white z-10 transform pt-[72px] lg:pt-0 ${
                 isSidebarOpen
                     ? " translate-x-0 w-full md:w-[50vw] opacity-100 "
                     : " -translate-x-[100vw] lg:translate-x-0 opacity-0 lg:opacity-100 "
@@ -54,14 +54,14 @@ const Sidebar = () => {
                     icon={"production_quantity_limits"}
                 />
             </ul>
-            <div className="p-8 mt-auto ">
+            <div className="pb-6 px-4 md:p-8 mt-auto ">
                 <Button
                     onClick={handleLogout}
                     type="primary"
-                    className="flex items-center gap-2 lg:hidden !bg-danger hover:!bg-danger/80 w-full justify-center"
+                    className="flex text-lg items-center gap-2 lg:hidden !bg-danger hover:!bg-danger/80 w-full justify-center font-medium !rounded-sm "
                 >
                     {" "}
-                    <i className="material-symbols-outlined">
+                    <i className="material-symbols-outlined text-2xl">
                         logout
                     </i> Logout{" "}
                 </Button>

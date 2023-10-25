@@ -6,6 +6,7 @@ import { setMessage } from "@/app/global/globalSlice";
 import ModalHeader from "@/components/modals/ModalHeader";
 import { SubmitBtn } from "@/components";
 import { useChangePasswordMutation } from "./userApi";
+import {logoutAccount} from "@/features/auth/authSlice.js";
 
 const ChangePasswordModal = () => {
     const { token } = useSelector((state) => state.authSlice);
@@ -46,6 +47,7 @@ const ChangePasswordModal = () => {
                         msgContent: "Password changed successfully!",
                     })
                 );
+                dispatch(logoutAccount())
                 closeModal();
             } else {
                 setIsSubmitting(false)
@@ -65,7 +67,7 @@ const ChangePasswordModal = () => {
     return (
         <section className="mt-4">
             <div className="flex items-center justify-between">
-                <h2 className="text-xl font-semibold">Password</h2>
+                <h2 className="text-xl font-medium">Password</h2>
                 <button
                     onClick={() => setOpenModal(true)}
                     className="edit-btn">
@@ -81,7 +83,7 @@ const ChangePasswordModal = () => {
                 closeIcon={false}
                 footer={null}
             >
-                <ModalHeader event={closeModal} title={"Change Password"} />
+                <ModalHeader event={closeModal} title={"change password"} />
                 <Form
                     form={form}
                     layout="vertical"

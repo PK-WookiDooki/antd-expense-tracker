@@ -18,10 +18,11 @@ const CreateNewPasswordForm = () => {
     const onFormSubmit = async (values) => {
         try {
             setIsSubmitting(true);
-            const { data, error } = await resetPassword({
-                email,
+            const updatedPws ={
+                    email,
                 password: values.password,
-            });
+                }
+            const { data, error } = await resetPassword(updatedPws);
 
             console.log({ email, password: values.password });
 
@@ -32,8 +33,7 @@ const CreateNewPasswordForm = () => {
                 });
                 dispatch(
                     setMessage({
-                        msgType: "success",
-                        msgContent: data?.message,
+                        msgType: "success", msgContent: data?.message,
                     })
                 );
             } else {
@@ -41,7 +41,7 @@ const CreateNewPasswordForm = () => {
                 dispatch(
                     setMessage({
                         msgType: "error",
-                        msgContent: error?.data?.error || error?.error,
+                        msgContent: error?.data?.message || error?.error,
                     })
                 );
             }
@@ -54,10 +54,11 @@ const CreateNewPasswordForm = () => {
             <Form
                 layout="vertical"
                 onFinish={onFormSubmit}
-                className="w-full max-w-[440px] md:p-10 p-4 md:shadow-md md:bg-white/80"
+                className="w-full max-w-[440px] lg:p-10 md:p-6 md:shadow-md md:bg-white/80"
             >
                 <div className="mb-6">
                     <FormTitle
+                        isCenter={true}
                         title={"Create New Password"}
                         desc={
                             "Your password have to be different from previous one!"
