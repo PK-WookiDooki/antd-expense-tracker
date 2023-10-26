@@ -1,24 +1,19 @@
-import { Button, Modal } from "antd";
-import { useState } from "react";
-import { MdError } from "react-icons/md";
+import {Button, Modal} from "antd";
+import {useState} from "react";
+import {MdError} from "react-icons/md";
 
-const WarningModal = ({ actionType }) => {
+const WarningModal = ({actionType}) => {
     const [openModal, setOpenModal] = useState(false);
 
     return (
         <section>
-            <Button
+            <button
                 onClick={() => setOpenModal(true)}
-                type="primary"
-                shape="round"
-                className={`!h-6 md:!h-8 !px-4 text-sm flex items-center justify-center !text-white capitalize ${
-                    actionType === "edit"
-                        ? "!bg-primaryGreen  hover:!bg-primaryGreen/80"
-                        : " !bg-danger hover:!bg-danger/80"
-                } `}
-            >
-                {actionType}
-            </Button>
+                className={` ${actionType === "edit" ? " bg-primaryBlue hover:bg-primaryBlue/80 " :
+                    " bg-danger hover:bg-danger/80 "}  text-white md:h-10 h-8 aspect-square flex items-center justify-center rounded duration-200 `}>
+                <i className={"material-symbols-outlined text-base md:text-2xl "}> {actionType} </i>
+            </button>
+
             <Modal
                 centered
                 open={openModal}
@@ -29,17 +24,18 @@ const WarningModal = ({ actionType }) => {
             >
                 {" "}
                 <div className=" flex items-center gap-2 justify-center mb-6 text-yellow-400 ">
-                    <MdError className="text-2xl" />
+                    <MdError className="text-2xl"/>
                     <p className="text-lg text-dark">
                         {" "}
-                        Sorry! you can't {actionType} the system category.{" "}
+                        Sorry! you can&apos;t {actionType} the system category.{" "}
                     </p>
-                </div>{" "}
+                </div>
+                {" "}
                 <Button
                     onClick={() => setOpenModal(false)}
                     type="primary"
                     shape="round"
-                    className=" !bg-primaryGreen hover:!bg-primaryGreen/80 w-full"
+                    className=" !bg-primaryGreen hover:!bg-primaryGreen/80 block ml-auto "
                 >
                     Ok
                 </Button>

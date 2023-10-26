@@ -8,46 +8,52 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components{
-  .base-btn{
-    @apply !rounded-full !h-10 !px-5 text-whiteGray capitalize
-  ;}
+@layer components {
+    .base-btn {
+        @apply !rounded-full !h-10 !px-5 text-whiteGray capitalize
+        ;
+    }
 
-  .menu-item{
-    @apply flex gap-1 md:py-[6px] pl-3 pr-6 py-1 text-sm
-  ;}
+    .menu-item {
+        @apply flex gap-1 md:py-[6px] pl-3 pr-6 py-1 text-sm
+        ;
+    }
 
-  .icon-box{
-    @apply grid grid-cols-6 md:grid-cols-7 gap-2 p-3 rounded-sm border border-gray min-h-[40px] overflow-auto;
-  }
+    .icon-style {
+        @apply md:h-12 h-10 aspect-square rounded-md border cursor-pointer flex items-center justify-center
+    }
 
-  .category-form-footer{
-    @apply md:mt-12 mt-9 flex md:gap-10 gap-4 items-center justify-center
-  }
+    .icon-box {
+        @apply grid grid-cols-6 md:grid-cols-8 gap-2 p-3 rounded-sm border border-gray min-h-[40px] overflow-auto;
+    }
 
-  .modal-form-tlt{
-    @apply md:text-3xl text-xl md:mb-8 mb-5 text-center
-  }
+    .category-form-footer {
+        @apply md:mt-12 mt-9 flex md:gap-10 gap-4 items-center justify-center
+    }
 
-  .record-form-footer{
-    @apply md:mt-9 flex md:gap-10 gap-4 items-center justify-center
-  }
+    .modal-form-tlt {
+        @apply md:text-3xl text-xl md:mb-8 mb-5 text-center
+    }
 
-  .datepicker-wrapper{
-    @apply w-full md:min-w-[155px] flex flex-col gap-2;
-  }
+    .record-form-footer {
+        @apply md:mt-9 flex md:gap-10 gap-4 items-center justify-center
+    }
 
-  .datepicker-label{
-    @apply text-xs md:text-sm;
-  }
+    .datepicker-wrapper {
+        @apply w-full md:min-w-[155px] flex flex-col gap-2;
+    }
 
-  .transitions-tlt{
-    @apply md:text-2xl font-medium text-lightGray
-  }
+    .datepicker-label {
+        @apply text-xs md:text-sm;
+    }
+
+    .transitions-tlt {
+        @apply md:text-2xl font-medium text-[#8C8C8C]
+    }
 
 }
 
-*{
-  box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+* {
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
 }

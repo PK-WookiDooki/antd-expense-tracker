@@ -1,6 +1,6 @@
-import { Button } from "antd";
+import {Button} from "antd";
 
-const CreateButton = ({ label, icon, event, type }) => {
+const CreateButton = ({label, event}) => {
     return (
         <Button
             onClick={event}
@@ -8,13 +8,13 @@ const CreateButton = ({ label, icon, event, type }) => {
             htmlType="button"
             shape="round"
             className={`${
-                type === "record"
+                label === "record"
                     ? " !bg-primaryGreen hover:!bg-primaryGreen/80 hidden md:flex "
-                    : " !bg-primaryBlue hover:!bg-primaryBlue/80 "
-            } flex items-center text-base`}
+                    : " !bg-primaryBlue hover:!bg-primaryBlue/80 !h-9 "
+            } flex items-center text-base capitalize `}
         >
             {" "}
-            <i className="material-symbols-outlined"> {icon} </i> {label}{" "}
+            <i className="material-symbols-outlined"> add </i> {label}{" "}
         </Button>
     );
 };

@@ -1,61 +1,61 @@
-import { baseApi } from "@/app/global/baseApi";
+import {baseApi} from "@/app/global/baseApi";
 
 const endPoint = "/transactions";
 
 export const recordsApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllRecords: builder.query({
-            query: ({ startDate, endDate, keyword, token }) => ({
+            query: ({startDate, endDate, token}) => ({
                 url: `${endPoint}?startDate=${startDate}&endDate=${endDate}&filter=ALL`,
                 method: "GET",
-                headers: { authorization: `Bearer ${token}` },
+                headers: {authorization: `Bearer ${token}`},
             }),
-            providesTags: ["records"],
+            providesTags: ["records", "categories"],
         }),
 
         getAllExpenses: builder.query({
-            query: ({ selectedMonth, token }) => ({
+            query: ({selectedMonth, token}) => ({
                 url: `${endPoint}?selectedMonth=${selectedMonth}`,
                 method: "GET",
-                headers: { authorization: `Bearer ${token}` },
+                headers: {authorization: `Bearer ${token}`},
             }),
-            providesTags: ["records"],
+            providesTags: ["records", "categories"],
         }),
 
         addNewRecord: builder.mutation({
-            query: ({ record, token }) => ({
+            query: ({record, token}) => ({
                 url: `${endPoint}`,
                 method: "POST",
-                headers: { authorization: `Bearer ${token}` },
+                headers: {authorization: `Bearer ${token}`},
                 body: record,
             }),
             invalidatesTags: ["records"],
         }),
 
         updateRecord: builder.mutation({
-            query: ({ record, token, recordId }) => ({
+            query: ({record, token, recordId}) => ({
                 url: `${endPoint}/${recordId}`,
                 method: "PUT",
-                headers: { authorization: `Bearer ${token}` },
+                headers: {authorization: `Bearer ${token}`},
                 body: record,
             }),
             invalidatesTags: ["records"],
         }),
 
         deleteRecord: builder.mutation({
-            query: ({ recordId, token }) => ({
+            query: ({recordId, token}) => ({
                 url: `${endPoint}/${recordId}`,
                 method: "DELETE",
-                headers: { authorization: `Bearer ${token}` },
+                headers: {authorization: `Bearer ${token}`},
             }),
             invalidatesTags: ["records"],
         }),
 
         getRecordById: builder.query({
-            query: ({ recordId, token }) => ({
+            query: ({recordId, token}) => ({
                 url: `${endPoint}/${recordId}`,
                 method: "GET",
-                headers: { authorization: `Bearer ${token}` },
+                headers: {authorization: `Bearer ${token}`},
             }),
             providesTags: ["records"],
         }),

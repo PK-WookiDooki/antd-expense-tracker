@@ -9,7 +9,7 @@ export default {
                 pieBg: "#00AA703B",
                 danger: "#F5222D",
                 primaryBlue: "#1890FF",
-                darkGray: "#003A8C",
+                darkBlue: "#003A8C",
                 dark: "#262626",
                 lightGray: "#595959",
                 gray: "#D9D9D9",

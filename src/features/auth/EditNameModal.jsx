@@ -1,12 +1,12 @@
-import { Alert, Form, Input, Modal } from "antd";
-import { useEffect, useState } from "react";
-import { RxCross1 } from "react-icons/rx";
-import { useDispatch, useSelector } from "react-redux";
-import { setMessage } from "@/app/global/globalSlice";
+import {Alert, Form, Input, Modal} from "antd";
+import {useEffect, useState} from "react";
+import {RxCross1} from "react-icons/rx";
+import {useDispatch, useSelector} from "react-redux";
+import {setMessage} from "@/app/global/globalSlice";
 import {ModalHeader, SubmitBtn} from "@/components";
-import { useChangeUsernameMutation } from "./userApi";
+import {useChangeUsernameMutation} from "./userApi";
 
-const EditNameModal = ({ username }) => {
+const EditNameModal = ({username}) => {
     const [openModal, setOpenModal] = useState(false);
     const [form] = Form.useForm();
     const dispatch = useDispatch();
@@ -16,17 +16,17 @@ const EditNameModal = ({ username }) => {
 
     useEffect(() => {
         if (username) {
-            form.setFieldsValue({ username });
+            form.setFieldsValue({username});
         }
     }, [openModal]);
 
-    const { token } = useSelector((state) => state.authSlice);
+    const {token} = useSelector((state) => state.authSlice);
     const [changeUsername] = useChangeUsernameMutation();
 
     const onFormSubmit = async (values) => {
         try {
             setIsSubmitting(true)
-            const { data, error: apiError } = await changeUsername({
+            const {data, error: apiError} = await changeUsername({
                 username: values.username,
                 token,
             });
@@ -54,8 +54,8 @@ const EditNameModal = ({ username }) => {
     };
 
     return (
-        <section className="pb-6 border-b border-gray">
-            <h2 className="text-xl font-medium">Name</h2>
+        <section className="pb-6 border-b border-gray text-dark ">
+            <h2 className="text-xl">Name</h2>
             <div className="flex items-center justify-between mt-2">
                 <p> {username || "Nexcoder"} </p>
                 <button
@@ -73,18 +73,7 @@ const EditNameModal = ({ username }) => {
                 closeIcon={false}
                 footer={null}
             >
-                {/*<div className="bg-primaryGreen px-6 py-4 text-whiteGray flex items-center justify-between">*/}
-                {/*    <h2 className="text-xl"> Change Name </h2>*/}
-                {/*    <button*/}
-                {/*        type="button"*/}
-                {/*        onClick={closeModal}*/}
-                {/*        className="text-xl"*/}
-                {/*    >*/}
-                {/*        {" "}*/}
-                {/*        <RxCross1 />{" "}*/}
-                {/*    </button>*/}
-                {/*</div>*/}
-                <ModalHeader title={"change name"} event={closeModal} />
+                <ModalHeader title={"change name"} event={closeModal}/>
                 <Form
                     form={form}
                     layout="vertical"
@@ -111,7 +100,7 @@ const EditNameModal = ({ username }) => {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input/>
                     </Form.Item>
                     <div className="py-3 border-t border-gray">
                         <SubmitBtn

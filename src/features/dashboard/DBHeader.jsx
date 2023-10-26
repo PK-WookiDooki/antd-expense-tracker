@@ -31,7 +31,8 @@ const DBHeader = ({startDate, endDate, setStartDate, setEndDate}) => {
                     </p>
                 </div>
                 <span className=" md:w-[1px] w-full h-[1px] md:h-auto bg-whiteGray block md:self-stretch"></span>
-                <div className="flex items-center lg:gap-9 gap-4 md:p-6 p-3 rounded-md bg-black/30 w-full lg:w-auto">
+                <div
+                    className="flex items-center lg:gap-9 md:gap-2 gap-4 lg:p-6 md:p-4 p-3 rounded-md bg-black/30 w-full lg:w-auto">
                     <div className="datepicker-wrapper">
                         <label
                             htmlFor="startDate"

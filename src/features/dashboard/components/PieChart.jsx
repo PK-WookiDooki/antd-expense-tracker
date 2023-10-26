@@ -32,7 +32,7 @@ const PieChart = ({chartData, dataColor, chartTitle, extraStyle}) => {
 
     const data = [{type: "Total", value: 0}];
 
-    const customColorPalette = ["#595959"];
+    const customColorPalette = ["rgba(140,140,140, 0.5)"];
 
     const config = {
         appendPadding: 10,
@@ -46,27 +46,29 @@ const PieChart = ({chartData, dataColor, chartTitle, extraStyle}) => {
             chartData?.length > 0
                 ? {
                     position: "bottom",
+                    itemHeight: 20,
                     itemName: {
                         style: {
                             fontSize: 16,
                             fontFamily: "Roboto",
-                            paddingBlock: 6,
+                            fill: "#434343",
+                            textBaseline: "middle"
                         },
                     },
                     marker: {
                         symbol: "circle",
                         style: {
-                            r: 8,
+                            r: 10,
                         },
                     },
                     pageNavigator: {
                         marker: {
                             style: {
-                                inactiveFill: '#000',
-                                inactiveOpacity: 0.3,
-                                fill: '#000',
+                                inactiveFill: '#1C1B1F',
+                                inactiveOpacity: 0.5,
+                                fill: '#1C1B1F',
                                 opacity: 0.8,
-                                size: 20,
+                                size: 18,
                             },
                         },
                         text: {
@@ -88,7 +90,7 @@ const PieChart = ({chartData, dataColor, chartTitle, extraStyle}) => {
             offset: "-50%",
             style: {
                 textAlign: "center",
-                fontSize: 12,
+                fontSize: 14,
             },
             autoRotate: false,
             content: chartData?.length > 1 ? "{percentage}" : "",
@@ -97,7 +99,9 @@ const PieChart = ({chartData, dataColor, chartTitle, extraStyle}) => {
             title: {
                 offsetY: -4,
                 style: {
-                    fontSize: "20px",
+                    fontSize: 20,
+                    fontWeight: 500,
+                    color: "#434343"
                 },
                 customHtml: (container, view, item) => {
                     const {width, height} = container.getBoundingClientRect();
@@ -113,6 +117,7 @@ const PieChart = ({chartData, dataColor, chartTitle, extraStyle}) => {
                 style: {
                     fontWeight: 500,
                     fontSize: 20,
+                    color: "#262626",
                 },
                 customHtml: (container, view, item, data) => {
                     const {width} = container.getBoundingClientRect();
@@ -139,7 +144,7 @@ const PieChart = ({chartData, dataColor, chartTitle, extraStyle}) => {
         <div
             className={`w-full md:max-w-[480px]  bg-pieBg p-5 rounded-xl shadow-sm ${extraStyle} flex flex-col items-center `}
         >
-            <h2 className="text-black md:text-2xl text-lg font-medium">
+            <h2 className="text-black md:text-2xl text-base font-medium mt-3 md:mt-0">
                 {" "}
                 {chartTitle}{" "}
             </h2>

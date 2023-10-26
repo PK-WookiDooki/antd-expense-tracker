@@ -21,8 +21,8 @@
     /* Add any other styles you want */
 }
 
-.g2-html-annotation {
-    font-family: "Roboto Slab" !important;
+.g2-html-annotation:nth-child(3) div {
+    font-family: "Roboto Slab", sans-serif !important;
 }
 
 /* carousel */
@@ -35,20 +35,42 @@
     padding: 0 8px !important;
 }
 
+.slick-slider {
+    position: relative;
+}
+
 .slick-slider .slick-dots {
-    display: flex;
-    align-items: center;
+    /*background-color: red;*/
+    display: flex !important;
+    align-items: center !important;;
     justify-content: center !important;
-    gap: 10px;
+    gap: 16px;
+    z-index: 10;
+    height: 10px !important;
+    padding: 0 !important;
+}
+
+.slick-slider .slick-dots li {
+    border: 1px solid #595959;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    margin-inline: 0;
+    opacity: 100%;
+    overflow: hidden;
 }
 
 .slick-slider .slick-dots li button {
-    background-color: #262626;
-    height: 5px;
-    width: 30px;
-    border-radius: 30px;
+    background-color: transparent !important;
+    width: 100%;
+    height: 100%;
 }
 
-.slick-slider .slick-dots li.slick-active button {
-    background-color: #262626;
+.slick-slider .slick-dots li.slick-active {
+    background-color: #595959;
+    height: 10px;
+    width: 36px;
+    border-radius: 10px;
+    margin-inline: 0;
+    opacity: 100%;
 }

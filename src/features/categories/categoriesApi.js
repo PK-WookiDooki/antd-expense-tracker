@@ -1,4 +1,4 @@
-import { baseApi } from "@/app/global/baseApi";
+import {baseApi} from "@/app/global/baseApi";
 
 const endPoint = "/user-categories";
 
@@ -8,45 +8,45 @@ export const categoriesApi = baseApi.injectEndpoints({
             query: (token) => ({
                 url: `${endPoint}`,
                 method: "GET",
-                headers: { Authorization: `Bearer ${token}` },
+                headers: {Authorization: `Bearer ${token}`},
             }),
             providesTags: ["categories"],
         }),
 
         addNewCategory: builder.mutation({
-            query: ({ category, token }) => ({
+            query: ({category, token}) => ({
                 url: `${endPoint}`,
                 method: "POST",
-                headers: { Authorization: `Bearer ${token}` },
+                headers: {Authorization: `Bearer ${token}`},
                 body: category,
             }),
             invalidatesTags: ["categories"],
         }),
 
         updateCategory: builder.mutation({
-            query: ({ categoryId, category, token }) => ({
+            query: ({categoryId, category, token}) => ({
                 url: `${endPoint}/${categoryId}`,
                 method: "PUT",
-                headers: { Authorization: `Bearer ${token}` },
+                headers: {Authorization: `Bearer ${token}`},
                 body: category,
             }),
-            invalidatesTags: ["categories"],
+            invalidatesTags: ["categories", "records"],
         }),
 
         deleteCategory: builder.mutation({
-            query: ({ categoryId, token }) => ({
+            query: ({categoryId, token}) => ({
                 url: `${endPoint}/${categoryId}`,
                 method: "DELETE",
-                headers: { Authorization: `Bearer ${token}` },
+                headers: {Authorization: `Bearer ${token}`},
             }),
-            invalidatesTags: ["categories"],
+            invalidatesTags: ["categories", "records"],
         }),
 
         getCategoryById: builder.query({
-            query: ({ categoryId, token }) => ({
+            query: ({categoryId, token}) => ({
                 url: `${endPoint}/${categoryId}`,
                 method: "GET",
-                headers: { Authorization: `Bearer ${token}` },
+                headers: {Authorization: `Bearer ${token}`},
             }),
             providesTags: ["categories"],
         }),
@@ -56,7 +56,7 @@ export const categoriesApi = baseApi.injectEndpoints({
             query: (token) => ({
                 url: `icons`,
                 method: "GET",
-                headers: { Authorization: `Bearer ${token}` },
+                headers: {Authorization: `Bearer ${token}`},
             }),
             providesTags: ["categories"],
         }),

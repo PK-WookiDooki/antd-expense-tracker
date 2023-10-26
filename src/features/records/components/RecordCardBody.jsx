@@ -1,9 +1,9 @@
-import { Dropdown } from "antd";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { DeleteRecordModal, EditRecordModal } from "../..";
+import {Dropdown} from "antd";
+import {BsThreeDotsVertical} from "react-icons/bs";
+import {DeleteRecordModal, EditRecordModal} from "../..";
 
-const RecordCardBody = ({ record, isRemove, date }) => {
-    const { type, userCategory, amount, description } = record;
+const RecordCardBody = ({record, isRemove, date}) => {
+    const {type, userCategory, amount, description} = record;
 
     const formattedAmount = amount.toLocaleString("en-US", {
         style: "currency",
@@ -12,11 +12,11 @@ const RecordCardBody = ({ record, isRemove, date }) => {
 
     const items = [
         {
-            label: <EditRecordModal record={record} date={date} />,
+            label: <EditRecordModal record={record} date={date}/>,
             key: 1,
         },
         {
-            label: <DeleteRecordModal record={record} />,
+            label: <DeleteRecordModal record={record}/>,
             key: 2,
             danger: true,
         },
@@ -24,7 +24,7 @@ const RecordCardBody = ({ record, isRemove, date }) => {
 
     return (
         <div
-            className={`flex items-center justify-between py-1 md:px-6 px-2 bg-white rounded-md`}
+            className={`flex items-center justify-between md:py-2 py-1 md:px-6 px-2 bg-white rounded-md text-dark`}
         >
             <div className="flex items-center gap-3">
                 <span
@@ -52,7 +52,7 @@ const RecordCardBody = ({ record, isRemove, date }) => {
             </div>
             <div className="flex items-center gap-3 record">
                 <p
-                    className={` min-w-max md:text-lg font-medium ${
+                    className={` min-w-max md:text-lg text-sm font-rbs md:font-medium ${
                         type === "EXPENSE" ? "text-danger" : "text-primaryGreen"
                     } `}
                 >
@@ -63,13 +63,13 @@ const RecordCardBody = ({ record, isRemove, date }) => {
                 </p>
                 {!isRemove ? (
                     <Dropdown
-                        menu={{ items }}
+                        menu={{items}}
                         trigger={["click"]}
                         placement="bottomRight"
                     >
                         <button className="text-xl text-dark">
                             {" "}
-                            <BsThreeDotsVertical />{" "}
+                            <BsThreeDotsVertical/>{" "}
                         </button>
                     </Dropdown>
                 ) : (

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import "./index.css";
 import {
     Account,
@@ -14,24 +14,24 @@ import {
     Verification,
 } from "./pages";
 import MainLayout from "./layout/MainLayout";
-import { ChangeEmailPage, AuthVerifyOtpPage } from "./features";
-import { IsAuth, IsNotAuth, OTPGuard } from "./components";
-import { useDispatch, useSelector } from "react-redux";
-import { ConfigProvider, message } from "antd";
-import { useEffect } from "react";
-import { MdCheckCircle, MdError, MdWarning } from "react-icons/md";
-import { setMessage } from "./app/global/globalSlice";
+import {ChangeEmailPage, AuthVerifyOtpPage} from "./features";
+import {IsAuth, IsNotAuth, OTPGuard} from "./components";
+import {useDispatch, useSelector} from "react-redux";
+import {ConfigProvider, message} from "antd";
+import {useEffect} from "react";
+import {MdCheckCircle, MdError, MdWarning} from "react-icons/md";
+import {setMessage} from "./app/global/globalSlice";
 
 const App = () => {
     //notification
-    const { message: apiMessage } = useSelector((state) => state.globalSlice);
+    const {message: apiMessage} = useSelector((state) => state.globalSlice);
     const [messageApi, contextHolder] = message.useMessage();
     const dispatch = useDispatch();
     useEffect(() => {
         if (apiMessage.msgType && apiMessage.msgContent) {
             openNotification();
             setTimeout(() => {
-                dispatch(setMessage({ msgType: null, msgContent: null }));
+                dispatch(setMessage({msgType: null, msgContent: null}));
             }, 5000);
         }
     }, [apiMessage]);
@@ -42,11 +42,11 @@ const App = () => {
             content: apiMessage.msgContent,
             icon:
                 apiMessage.msgType === "success" ? (
-                    <MdCheckCircle className=" inline-block mr-2 text-primaryGreen text-xl " />
+                    <MdCheckCircle className=" inline-block mr-2 text-primaryGreen text-xl "/>
                 ) : apiMessage.msgType === "error" ? (
-                    <MdError className=" inline-block mr-2 text-danger text-xl " />
+                    <MdError className=" inline-block mr-2 text-danger text-xl "/>
                 ) : (
-                    <MdWarning className=" inline-block mr-2 text-yellow-500 text-xl " />
+                    <MdWarning className=" inline-block mr-2 text-yellow-500 text-xl "/>
                 ),
             duration: 3,
         });
@@ -87,31 +87,31 @@ const App = () => {
                         path="/"
                         element={
                             <IsAuth>
-                            <MainLayout />
+                                <MainLayout/>
                             </IsAuth>
                         }
                     >
-                        <Route index element={<DashBoard />} />
+                        <Route index element={<DashBoard/>}/>
                         <Route path="account">
-                            <Route index element={<Account />} />
+                            <Route index element={<Account/>}/>
                             <Route
                                 path="changeEmail"
-                                element={<ChangeEmailPage />}
+                                element={<ChangeEmailPage/>}
                             />
                             <Route
                                 path="verify"
-                                element={<AuthVerifyOtpPage />}
+                                element={<AuthVerifyOtpPage/>}
                             />
                         </Route>
-                        <Route path="records" element={<Records />} />
-                        <Route path="categories" element={<Categories />} />
-                        <Route path="budget" element={<Budget />} />
+                        <Route path="transactions" element={<Records/>}/>
+                        <Route path="categories" element={<Categories/>}/>
+                        <Route path="budget" element={<Budget/>}/>
                     </Route>
                     <Route
                         path="/signUp"
                         element={
                             <IsNotAuth>
-                                <SignUp />
+                                <SignUp/>
                             </IsNotAuth>
                         }
                     />
@@ -120,7 +120,7 @@ const App = () => {
                             index
                             element={
                                 <IsNotAuth>
-                                    <SignIn />
+                                    <SignIn/>
                                 </IsNotAuth>
                             }
                         />
@@ -128,7 +128,7 @@ const App = () => {
                             path="forgotPassword"
                             element={
                                 <IsNotAuth>
-                                    <ForgotPassword />
+                                    <ForgotPassword/>
                                 </IsNotAuth>
                             }
                         />
@@ -136,7 +136,7 @@ const App = () => {
                             path="createNewPassword"
                             element={
                                 <IsNotAuth>
-                                    <CreateNewPassword />
+                                    <CreateNewPassword/>
                                 </IsNotAuth>
                             }
                         />
@@ -145,11 +145,11 @@ const App = () => {
                         path="verify"
                         element={
                             <OTPGuard>
-                                <Verification />
+                                <Verification/>
                             </OTPGuard>
                         }
                     />
-                    <Route path="*" element={<PNFPage />} />
+                    <Route path="*" element={<PNFPage/>}/>
                 </Routes>
             </BrowserRouter>
         </ConfigProvider>

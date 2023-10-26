@@ -11,7 +11,7 @@ const DBPieCharts = ({recordsList}) => {
 
     return (
         <section className="lg:p-8 lg:py-10 md:p-3 md:py-5 p-2 py-4 rounded-2xl bg-whiteGray relative z-[1]">
-            <h2 className="md:text-2xl text-lg font-medium text-lightGray mb-5 px-2">
+            <h2 className="md:text-2xl font-medium text-[#8C8C8C] mb-5 px-2 ">
                 Pie Charts Categories
             </h2>
             <Carousel
@@ -25,11 +25,11 @@ const DBPieCharts = ({recordsList}) => {
                         breakpoint: 1024,
                         settings: {
                             slidesToShow: 2,
-                            dots: false,
+                            dots: true,
                         },
                     },
                     {
-                        breakpoint: 768,
+                        breakpoint: 767,
                         settings: {
                             slidesToShow: 1,
                             slidesToScroll: 1,

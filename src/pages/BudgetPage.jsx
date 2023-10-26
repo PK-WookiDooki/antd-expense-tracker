@@ -1,20 +1,20 @@
-import { useSelector } from "react-redux";
-import { FloatingBtn, Loader } from "../components";
-import { BudgetExpenses, BudgetHeader, EditBudgetModal } from "../features";
-import { useGetAllExpensesQuery } from "../features/records/recordsApi";
-import { useState } from "react";
+import {useSelector} from "react-redux";
+import {FloatingBtn, Loader} from "../components";
+import {BudgetExpenses, BudgetHeader, EditBudgetModal} from "../features";
+import {useGetAllExpensesQuery} from "../features/records/recordsApi";
+import {useState} from "react";
 import dayjs from "dayjs";
-import { useGetUserDataQuery } from "../features/auth/userApi";
+import {useGetUserDataQuery} from "../features/auth/userApi";
 
 const BudgetPage = () => {
-    const { token } = useSelector((state) => state.authSlice);
+    const {token} = useSelector((state) => state.authSlice);
     const [selectedMonth, setSelectedMonth] = useState(dayjs());
-    const { data: expensesList, isLoading: isELLoading, isFetching : isDataFetching } =
+    const {data: expensesList, isLoading: isELLoading, isFetching: isDataFetching} =
         useGetAllExpensesQuery({
             token,
             selectedMonth: selectedMonth.format("YYYY-MM"),
         });
-    const { data: userData, isLoading: isUDLoading } =
+    const {data: userData, isLoading: isUDLoading} =
         useGetUserDataQuery(token);
 
     const totalExpensePerMonth = expensesList?.reduce(
@@ -22,15 +22,15 @@ const BudgetPage = () => {
         0
     );
 
-    const remainingBudget = parseInt(userData?.budget) - totalExpensePerMonth;
+    const remainingBudget = parseInt(userData?.budget) - totalExpensePerMonth > 0 ? parseInt(userData?.budget) - totalExpensePerMonth : totalExpensePerMonth - parseInt(userData?.budget);
 
     if (isUDLoading || isELLoading || isDataFetching) {
-        return <Loader />;
+        return <Loader/>;
     }
 
     return (
         <section className="h-full flex flex-col md:gap-6 gap-4 ">
-            <EditBudgetModal userBudget={userData?.budget} extraStyle={" md:hidden block "} />
+            <EditBudgetModal userBudget={userData?.budget} extraStyle={" md:hidden block "}/>
             <BudgetHeader
                 remainingBudget={remainingBudget}
                 totalExpensePerMonth={totalExpensePerMonth}
@@ -42,7 +42,7 @@ const BudgetPage = () => {
                 selectedMonth={selectedMonth}
                 setSelectedMonth={setSelectedMonth}
             />
-            <FloatingBtn />
+            <FloatingBtn/>
         </section>
     );
 };

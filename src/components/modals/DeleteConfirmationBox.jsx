@@ -1,11 +1,11 @@
 import Modal from "antd/es/modal/Modal";
-import { useEffect, useState } from "react";
-import { FixWButton } from "@/components";
-import { Alert, Button } from "antd";
-import { useDispatch } from "react-redux";
-import { setMessage } from "@/app/global/globalSlice";
+import {useEffect, useState} from "react";
+import {FixWButton} from "@/components";
+import {Alert, Button} from "antd";
+import {useDispatch} from "react-redux";
+import {setMessage} from "@/app/global/globalSlice";
 
-const DeleteConfirmationBox = ({ title, component, event, isDropdown }) => {
+const DeleteConfirmationBox = ({title, component, event, isDropdown}) => {
     const [openModal, setOpenModal] = useState(false);
     const [error, setError] = useState(null);
     const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const DeleteConfirmationBox = ({ title, component, event, isDropdown }) => {
     const onDelete = async () => {
         try {
             setIsSubmitting(true)
-            const { data, error: apiError } = await event();
+            const {data, error: apiError} = await event();
             if (data?.success) {
                 closeModal();
                 dispatch(
@@ -57,15 +57,11 @@ const DeleteConfirmationBox = ({ title, component, event, isDropdown }) => {
                     Delete
                 </button>
             ) : (
-                <Button
+                <button
                     onClick={() => setOpenModal(true)}
-                    type="primary"
-                    //size="small"
-                    shape="round"
-                    className=" !h-6 md:!h-8 !px-4 flex items-center justify-center text-sm !bg-danger !text-white hover:!bg-danger/80"
-                >
-                    Delete
-                </Button>
+                    className={"bg-danger hover:bg-danger/80 text-white md:h-10 h-8 aspect-square flex items-center justify-center rounded duration-200 "}>
+                    <i className={"material-symbols-outlined text-base md:text-2xl "}> delete </i>
+                </button>
             )}
             <Modal
                 centered

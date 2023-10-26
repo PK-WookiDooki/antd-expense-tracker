@@ -1,15 +1,15 @@
-import { Form, Input, Modal } from "antd";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setMessage } from "@/app/global/globalSlice";
+import {Form, Input, Modal} from "antd";
+import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {setMessage} from "@/app/global/globalSlice";
 import ModalHeader from "@/components/modals/ModalHeader";
-import { SubmitBtn } from "@/components";
-import { useChangePasswordMutation } from "./userApi";
+import {SubmitBtn} from "@/components";
+import {useChangePasswordMutation} from "./userApi";
 import {logoutAccount} from "@/features/auth/authSlice.js";
 
 const ChangePasswordModal = () => {
-    const { token } = useSelector((state) => state.authSlice);
+    const {token} = useSelector((state) => state.authSlice);
     const [openModal, setOpenModal] = useState(false);
     const [error, setError] = useState(null);
 
@@ -33,8 +33,8 @@ const ChangePasswordModal = () => {
         try {
             setIsSubmitting(true)
             delete values.password_confirmation;
-            const { data, error: apiError } = await changePassword({
-                passwords: { ...values },
+            const {data, error: apiError} = await changePassword({
+                passwords: {...values},
                 token,
             });
             if (data?.success) {
@@ -66,8 +66,8 @@ const ChangePasswordModal = () => {
 
     return (
         <section className="mt-4">
-            <div className="flex items-center justify-between">
-                <h2 className="text-xl font-medium">Password</h2>
+            <div className="flex items-center justify-between text-dark">
+                <h2 className="text-xl">Password</h2>
                 <button
                     onClick={() => setOpenModal(true)}
                     className="edit-btn">
@@ -83,7 +83,7 @@ const ChangePasswordModal = () => {
                 closeIcon={false}
                 footer={null}
             >
-                <ModalHeader event={closeModal} title={"change password"} />
+                <ModalHeader event={closeModal} title={"change password"}/>
                 <Form
                     form={form}
                     layout="vertical"
@@ -100,7 +100,7 @@ const ChangePasswordModal = () => {
                             },
                         ]}
                     >
-                        <Input.Password />
+                        <Input.Password/>
                     </Form.Item>
                     <Form.Item
                         name="newPassword"
@@ -123,7 +123,7 @@ const ChangePasswordModal = () => {
                             },
                         ]}
                     >
-                        <Input.Password />
+                        <Input.Password/>
                     </Form.Item>
                     <Form.Item
                         name="password_confirmation"
@@ -134,7 +134,7 @@ const ChangePasswordModal = () => {
                                 required: true,
                                 message: "Password confirmation is required!",
                             },
-                            ({ getFieldValue }) => ({
+                            ({getFieldValue}) => ({
                                 validator(_, value) {
                                     if (
                                         !value ||
@@ -151,7 +151,7 @@ const ChangePasswordModal = () => {
                             }),
                         ]}
                     >
-                        <Input.Password />
+                        <Input.Password/>
                     </Form.Item>
                     <div className="py-3 border-t border-gray">
                         <SubmitBtn

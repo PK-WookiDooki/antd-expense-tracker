@@ -1,7 +1,7 @@
-import { Select } from "antd";
-import { formatData } from "@/core/functions/formatData";
+import {Select} from "antd";
+import {formatData} from "@/core/functions/formatData";
 import {NoRecords, RecordCard} from "..";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 
 
 const options = [
@@ -19,7 +19,7 @@ const options = [
     },
 ];
 
-const RecordsList = ({ recordsList }) => {
+const RecordsList = ({recordsList}) => {
     //const { recordsList } = useSelector((state) => state.recordsSlice);
     const [records, setRecords] = useState([]);
     const [isASC, setIsASC] = useState(false);
@@ -84,13 +84,13 @@ const RecordsList = ({ recordsList }) => {
                 </div>
             </div>
             {records?.length > 0 ? (
-                <div className="flex flex-col md:gap-2 gap-1">
+                <div className="flex flex-col gap-1">
                     {records?.map((record) => (
-                        <RecordCard record={record} key={record.id} />
+                        <RecordCard record={record} key={record.id}/>
                     ))}
                 </div>
             ) : (
-               <NoRecords/>
+                <NoRecords/>
             )}
         </section>
     );

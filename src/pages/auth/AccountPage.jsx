@@ -26,8 +26,8 @@ const Home = () => {
             </div>
             <div className="lg:max-w-[660px] md:max-w-[450px] w-full mx-auto mt-20 duration-300 md:p-0 px-5">
                 <EditNameModal username={userData?.username}/>
-                <div className="pb-6 border-b border-gray mt-4">
-                    <h2 className="text-xl font-medium">Email</h2>
+                <div className="pb-6 border-b border-gray mt-4 text-dark ">
+                    <h2 className="text-xl">Email</h2>
                     <div className="flex items-center justify-between mt-2">
                         <p> {userData?.email || "example@gmail.com"} </p>
                         <Link

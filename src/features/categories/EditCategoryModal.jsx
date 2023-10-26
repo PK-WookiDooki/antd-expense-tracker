@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
-import { FixWButton } from "@/components";
-import { Alert, Button, Form, Input, Modal, Segmented } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import {useEffect, useState} from "react";
+import {FixWButton} from "@/components";
+import {Alert, Button, Form, Input, Modal, Segmented} from "antd";
+import {useDispatch, useSelector} from "react-redux";
 import {
     useGetAllIconsQuery,
     useUpdateCategoryMutation,
 } from "./categoriesApi";
-import { setMessage } from "@/app/global/globalSlice";
+import {setMessage} from "@/app/global/globalSlice";
 import WarningModal from "./components/WarningModal";
 
-const EditCategoryModal = ({ category }) => {
-    const { token } = useSelector((state) => state.authSlice);
+const EditCategoryModal = ({category}) => {
+    const {token} = useSelector((state) => state.authSlice);
     const [openModal, setOpenModal] = useState(false);
     const [error, setError] = useState(null);
     const [icon, setIcon] = useState(category?.iconName);
     const [type, setType] = useState(category?.type);
     const [isSubmitting, setIsSubmitting] = useState(false)
 
-    const { data: iconsList } = useGetAllIconsQuery(token);
+    const {data: iconsList} = useGetAllIconsQuery(token);
 
     const [iconOptions, setIconOptions] = useState(
         iconsList?.filter((icon) => icon.type === type || icon.type === null)
@@ -53,7 +53,7 @@ const EditCategoryModal = ({ category }) => {
     const onFormSubmit = async (values) => {
         try {
             setIsSubmitting(true)
-            const { data, error: apiError } = await updateCategory({
+            const {data, error: apiError} = await updateCategory({
                 categoryId: category?.id,
                 category: values,
                 token,
@@ -81,22 +81,19 @@ const EditCategoryModal = ({ category }) => {
     };
 
     return category?.type === null ? (
-        <WarningModal actionType={"edit"} />
+        <WarningModal actionType={"edit"}/>
     ) : (
         <section>
-            <Button
+            <button
                 onClick={() => setOpenModal(true)}
-                type="primary"
-                shape="round"
-                className=" !h-6 md:!h-8 !px-4 text-sm !bg-primaryGreen !text-white hover:!bg-primaryGreen/80 flex items-center justify-center "
-            >
-                Edit
-            </Button>
+                className={"bg-primaryBlue hover:bg-primaryBlue/80 text-white md:h-10 h-8 aspect-square flex items-center justify-center rounded duration-200 "}>
+                <i className={"material-symbols-outlined text-base md:text-2xl "}> edit </i>
+            </button>
 
             <Modal
                 centered
                 open={openModal}
-                //width={600}
+                width={600}
                 footer={null}
                 closeIcon={false}
             >
@@ -117,7 +114,7 @@ const EditCategoryModal = ({ category }) => {
                         ""
                     )}
 
-                    <Form.Item name={"type"} initialValue={category?.type} className={"mb-8"} >
+                    <Form.Item name={"type"} initialValue={category?.type} className={"mb-8"}>
                         <Segmented
                             options={[
                                 {
@@ -147,12 +144,12 @@ const EditCategoryModal = ({ category }) => {
                         ]}
                         className={"mb-8"}
                     >
-                        <Input />
+                        <Input/>
                     </Form.Item>
 
                     <Form.Item
                         name={"iconName"}
-                        label="Icon"
+                        label="Select Icon"
                         rules={[
                             {
                                 required: true,
@@ -166,7 +163,8 @@ const EditCategoryModal = ({ category }) => {
                                     <div key={index}>
                                         <label
                                             htmlFor={`category${category.id}${item.name}`}
-                                            className={`w-12 h-12 rounded-md border cursor-pointer flex items-center justify-center `}
+                                            className={`icon-style
+                                           `}
                                             style={{
                                                 color:
                                                     icon === item.name
@@ -179,7 +177,7 @@ const EditCategoryModal = ({ category }) => {
                                                 borderColor: item.iconBgColor,
                                             }}
                                         >
-                                            <i className="material-symbols-outlined text-3xl">
+                                            <i className="material-symbols-outlined text-lg md:text-2xl">
                                                 {item.name}
                                             </i>
                                         </label>

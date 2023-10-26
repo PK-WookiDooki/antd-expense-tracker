@@ -60,8 +60,8 @@ const SignInForm = () => {
                     <h2 className={`text-4xl md:text-[40px] text-primaryGreen mb-2 font-medium `}>
                         Welcome Back!
                     </h2>
-                    <p> Don&apos;t have an account? <Link to={"/signUp"}
-                                                          className={"text-primaryBlue hover:text-primaryBlue/80 duration-200"}>Sign
+                    <p className={"text-dark text-base "}> Don&apos;t have an account? <Link to={"/signUp"}
+                                                                                             className={"text-[#2200CC] hover:text-primaryBlue/80 duration-200"}>Sign
                         Up</Link></p>
                 </div>
                 <Form.Item
@@ -92,7 +92,7 @@ const SignInForm = () => {
 
                 <Link
                     to={"/signIn/forgotPassword"}
-                    className="text-primaryBlue mb-6 block"
+                    className="text-[#2200CC] mb-6 block w-fit"
                 >
                     {" "}
                     Forgot Password?{" "}

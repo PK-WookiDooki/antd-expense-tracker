@@ -1,13 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import CNavLink from "./CNavLink";
 import "./sidebar.css";
-import { useDispatch, useSelector } from "react-redux";
-import { Button } from "antd";
-import { logoutAccount } from "@/features/auth/authSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {Button} from "antd";
+import {logoutAccount} from "@/features/auth/authSlice";
 import {setMessage, toggleSidebar} from "@/app/global/globalSlice";
 
 const Sidebar = () => {
-    const { isSidebarOpen } = useSelector((state) => state.globalSlice);
+    const {isSidebarOpen} = useSelector((state) => state.globalSlice);
 
     const dispatch = useDispatch();
     const nav = useNavigate();
@@ -15,15 +15,15 @@ const Sidebar = () => {
     const handleLogout = (e) => {
         dispatch(logoutAccount());
         dispatch(
-            setMessage({ msgType: "success", msgContent: "Logout successful!" })
+            setMessage({msgType: "success", msgContent: "Logout successful!"})
         );
         dispatch(toggleSidebar(false))
-        nav("/signIn", { replace: true });
+        nav("/signIn", {replace: true});
     };
 
     return (
         <section
-            className={`flex flex-col self-start w-full lg:w-[224px] h-full gap-5 lg:sticky top-0 fixed left-0 bg-white z-10 transform pt-[72px] lg:pt-0 ${
+            className={`flex flex-col self-start w-full lg:w-[224px] h-full gap-5 lg:sticky top-0 fixed left-0 bg-white z-10 transform md:pt-[72px] pt-16 lg:pt-0 ${
                 isSidebarOpen
                     ? " translate-x-0 w-full md:w-[50vw] opacity-100 "
                     : " -translate-x-[100vw] lg:translate-x-0 opacity-0 lg:opacity-100 "
@@ -37,10 +37,10 @@ const Sidebar = () => {
             </h1>
 
             <ul className="flex flex-col gap-3">
-                <CNavLink title={"dashboard"} path={"/"} icon={"dashboard"} />
+                <CNavLink title={"dashboard"} path={"/"} icon={"dashboard"}/>
                 <CNavLink
-                    title={"records"}
-                    path={"/records"}
+                    title={"transactions"}
+                    path={"/transactions"}
                     icon={"compare_arrows"}
                 />
                 <CNavLink

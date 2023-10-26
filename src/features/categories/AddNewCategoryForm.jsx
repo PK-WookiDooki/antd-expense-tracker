@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { CreateBtn, FixWButton } from "@/components";
-import { Alert, Form, Input, Modal, Segmented } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { useAddNewCategoryMutation } from "./categoriesApi";
-import { setMessage } from "@/app/global/globalSlice";
+import {useEffect, useState} from "react";
+import {CreateBtn, FixWButton} from "@/components";
+import {Alert, Form, Input, Modal, Segmented} from "antd";
+import {useDispatch, useSelector} from "react-redux";
+import {useAddNewCategoryMutation} from "./categoriesApi";
+import {setMessage} from "@/app/global/globalSlice";
 
-const AddNewCategoryForm = ({ iconsList }) => {
-    const { token } = useSelector((state) => state.authSlice);
+const AddNewCategoryForm = ({iconsList}) => {
+    const {token} = useSelector((state) => state.authSlice);
     //const { iconsList } = useSelector((state) => state.categoriesSlice);
     const [openModal, setOpenModal] = useState(false);
     const [error, setError] = useState(null);
@@ -43,8 +43,8 @@ const AddNewCategoryForm = ({ iconsList }) => {
     const onFormSubmit = async (values) => {
         try {
             setIsSubmitting(true)
-            const { data, error: apiError } = await addNewCategory({
-                category: { ...values },
+            const {data, error: apiError} = await addNewCategory({
+                category: {...values},
                 token,
             });
 
@@ -76,14 +76,12 @@ const AddNewCategoryForm = ({ iconsList }) => {
     return (
         <section>
             <CreateBtn
-                label={"Category"}
-                icon={"add"}
-                type={"category"}
+                label={"category"}
                 event={() => setOpenModal(true)}
             />
 
-            <Modal centered open={openModal} footer={null} closeIcon={false}>
-                <Form form={form} onFinish={onFormSubmit} layout="vertical" className=" create-form " >
+            <Modal centered open={openModal} footer={null} closeIcon={false} width={600}>
+                <Form form={form} onFinish={onFormSubmit} layout="vertical" className=" create-form ">
                     <h2 className="modal-form-tlt">
                         {" "}
                         Add New Category{" "}
@@ -100,7 +98,7 @@ const AddNewCategoryForm = ({ iconsList }) => {
                         ""
                     )}
 
-                    <Form.Item name={"type"} initialValue={"EXPENSE"} className={"mb-8"} >
+                    <Form.Item name={"type"} initialValue={"EXPENSE"} className={"mb-8"}>
                         <Segmented
                             options={[
                                 {
@@ -130,12 +128,12 @@ const AddNewCategoryForm = ({ iconsList }) => {
                         ]}
                         className={"mb-8"}
                     >
-                        <Input />
+                        <Input/>
                     </Form.Item>
 
                     <Form.Item
                         name={"iconName"}
-                        label="Icon"
+                        label="Select Icon"
                         rules={[
                             {
                                 required: true,
@@ -149,7 +147,7 @@ const AddNewCategoryForm = ({ iconsList }) => {
                                     <div key={index}>
                                         <label
                                             htmlFor={item.name}
-                                            className={`w-12 h-12 rounded-md border cursor-pointer flex items-center justify-center `}
+                                            className={`icon-style `}
                                             style={{
                                                 color:
                                                     icon == item.name
@@ -162,7 +160,7 @@ const AddNewCategoryForm = ({ iconsList }) => {
                                                 borderColor: item.iconBgColor,
                                             }}
                                         >
-                                            <i className="material-symbols-outlined text-3xl">
+                                            <i className="material-symbols-outlined text-lg md:text-2xl">
                                                 {item.name}
                                             </i>
                                         </label>

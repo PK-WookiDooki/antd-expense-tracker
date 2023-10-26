@@ -103,10 +103,8 @@ const AddNewRecordForm = () => {
     return (
         <section>
             <CreateBtn
-                label={"Record"}
-                icon={"add"}
+                label={"record"}
                 event={() => dispatch(setIsAddRecordModalOpen(true))}
-                type={"record"}
             />
             <Modal
                 centered
@@ -119,7 +117,7 @@ const AddNewRecordForm = () => {
                     form={form}
                     onFinish={onFormSubmit}
                     layout="vertical"
-                    className="!font-sans create-form "
+                    className="!font-sans create-form"
                 >
                     <h2 className="modal-form-tlt">
                         {" "}

@@ -1,11 +1,11 @@
-import { Form, Input } from "antd";
-import { SubmitBtn } from "@/components";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useRegisterAccountMutation } from "./authApi";
-import { setMessage } from "@/app/global/globalSlice";
+import {Form, Input} from "antd";
+import {SubmitBtn} from "@/components";
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import {useRegisterAccountMutation} from "./authApi";
+import {setMessage} from "@/app/global/globalSlice";
 
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+import {useDispatch} from "react-redux";
+import {useState} from "react";
 
 const SignUpForm = () => {
     const nav = useNavigate();
@@ -25,7 +25,7 @@ const SignUpForm = () => {
             delete values.username;
 
             const userData = {...values, username}
-            const { data, error } = await registerAccount(userData);
+            const {data, error} = await registerAccount(userData);
             if (data?.success) {
                 setIsSubmitting(false);
                 nav("/verify", {
@@ -54,7 +54,8 @@ const SignUpForm = () => {
         }
     };
     return (
-        <section className=" min-h-screen w-full flex flex-col items-center justify-center py-5 md:bg-[url('src/assets/imgs/img_signupMobile.png')] bg-cover bg-center lg:bg-[url('')] lg:bg-white ">
+        <section
+            className=" min-h-screen w-full flex flex-col items-center justify-center py-5 md:bg-[url('src/assets/imgs/img_signupMobile.png')] bg-cover bg-center lg:bg-[url('')] lg:bg-white ">
             <div className=" w-full md:max-w-[420px] text-white mb-14 px-5 hidden md:block lg:hidden mt-auto">
                 <p className="text-3xl">Welcome to</p>
                 <h2 className="text-[60px] leading-[70px] font-dms ">
@@ -70,21 +71,19 @@ const SignUpForm = () => {
                 className="w-full max-w-[420px] my-auto md:my-0 lg:mt-auto md:bg-white md:p-10 lg:p-0 rounded-2xl"
             >
                 {" "}
-                <div className="mb-2 md:hidden font-medium">
+                <div className="mb-2 md:hidden font-medium text-dark">
                     <p>Welcome to</p>
                     <h3 className="text-3xl font-dms">Nextracker</h3>
                 </div>
-                <h2 className="text-4xl mb-6 font-medium text-primaryGreen ">
+                <h2 className="text-[38px] md:text-[40px] mb-6 font-medium text-primaryGreen ">
                     {" "}
                     Create Account{" "}
                 </h2>
                 <Form.Item
                     name="username"
                     label="Name"
-                    rules={[{ required: true, message: "Name is required!" }, {
-                        min : 4, message : "Username is too short!"
-                    },
-                        ({ getFieldValue }) => ({
+                    rules={[{required: true, message: "Name is required!"},
+                        ({getFieldValue}) => ({
                             validator(_, value) {
                                 if (
                                     value.trim().length > 0
@@ -100,7 +99,7 @@ const SignUpForm = () => {
                         }),
                     ]}
                 >
-                    <Input placeholder="Nexcoder" />
+                    <Input placeholder="Nexcoder"/>
                 </Form.Item>
                 <Form.Item
                     name="email"
@@ -116,13 +115,13 @@ const SignUpForm = () => {
                         },
                     ]}
                 >
-                    <Input placeholder="example@gmail.com" type="email" />
+                    <Input placeholder="example@gmail.com" type="email"/>
                 </Form.Item>
                 <Form.Item
                     name="password"
                     label="Password"
                     rules={[
-                        { required: true, message: "Password is required!" },
+                        {required: true, message: "Password is required!"},
                         {
                             pattern:
                                 /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
@@ -136,7 +135,7 @@ const SignUpForm = () => {
                         },
                     ]}
                 >
-                    <Input.Password />
+                    <Input.Password/>
                 </Form.Item>
                 <Form.Item
                     name="password_confirmation"
@@ -147,7 +146,7 @@ const SignUpForm = () => {
                             required: true,
                             message: "Password confirmation is required!",
                         },
-                        ({ getFieldValue }) => ({
+                        ({getFieldValue}) => ({
                             validator(_, value) {
                                 if (
                                     !value ||
@@ -164,14 +163,14 @@ const SignUpForm = () => {
                         }),
                     ]}
                 >
-                    <Input.Password />
+                    <Input.Password/>
                 </Form.Item>
-                <SubmitBtn label={"sign up"} isLoading={isSubmitting} />
+                <SubmitBtn label={"sign up"} isLoading={isSubmitting}/>
             </Form>
-            <p className="mt-auto md:text-white lg:text-black">
+            <p className="mt-auto md:text-white lg:text-dark text-base">
                 {" "}
                 Already have an account?{" "}
-                <Link to={"/signIn"} className="text-primaryBlue">
+                <Link to={"/signIn"} className="text-[#20C]">
                     {" "}
                     Sign In{" "}
                 </Link>{" "}

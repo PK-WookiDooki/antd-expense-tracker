@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import OTPInput from "react-otp-input";
-import { FixWButton, FormTitle, SubmitBtn } from "@/components";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Alert } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { useResendOtpMutation, useVerifyOtpMutation } from "./authApi";
-import { setMessage } from "@/app/global/globalSlice";
-import { useGetUserDataQuery } from "./userApi";
-import { logoutAccount } from "./authSlice";
+import {FixWButton, SubmitBtn} from "@/components";
+import {useLocation, useNavigate} from "react-router-dom";
+import {Alert} from "antd";
+import {useDispatch, useSelector} from "react-redux";
+import {useResendOtpMutation, useVerifyOtpMutation} from "./authApi";
+import {setMessage} from "@/app/global/globalSlice";
+import {useGetUserDataQuery} from "./userApi";
+import {logoutAccount} from "./authSlice";
 
 const AuthVerifyOtpForm = () => {
-    const { token } = useSelector((state) => state.authSlice);
-    const { data: userData } = useGetUserDataQuery(token);
+    const {token} = useSelector((state) => state.authSlice);
+    const {data: userData} = useGetUserDataQuery(token);
     const newEmail = useLocation().state?.email || "example@gmail.com";
 
     const [otp, setOtp] = useState("");
@@ -33,11 +33,11 @@ const AuthVerifyOtpForm = () => {
                 return;
             }
 
-            const otpData = { otp, newEmail, email: userData?.email };
-            const { data, error: apiError } = await verifyOtp(otpData);
+            const otpData = {otp, newEmail, email: userData?.email};
+            const {data, error: apiError} = await verifyOtp(otpData);
             if (data?.success) {
                 setIsSubmitting(false);
-                nav("/signIn", { replace: true });
+                nav("/signIn", {replace: true});
                 dispatch(
                     setMessage({
                         msgType: "success",
@@ -59,29 +59,35 @@ const AuthVerifyOtpForm = () => {
                 setError(null);
             }, 5000);
         }
+    }, [error]);
 
-        if (isResent === true || timer === 0) {
-            setTimeout(() => {
-                setIsResent(false);
-                setTimer(59);
-            }, 60000);
+    useEffect(() => {
+        let counter;
+        if (isResent) {
+            counter = setInterval(decreaseTimer, 1000)
+        } else (
+            clearInterval(counter)
+        )
+        return () => clearInterval(counter)
+    }, [timer, isResent])
+
+    const decreaseTimer = () => {
+        if (timer > 0) {
+            setTimer(timer - 1)
+        } else {
+            setIsResent(false)
         }
-
-        const counter =
-            isResent &&
-            timer > 0 &&
-            setInterval(() => setTimer(timer - 1), 1000);
-        return () => clearInterval(counter);
-    }, [timer, isResent, error]);
+    }
 
     const [resendOtp] = useResendOtpMutation();
 
     const onResendOtp = async (e) => {
         e.preventDefault();
+        setIsResent(true);
+        setTimer(59)
         try {
             setOtp("");
-            setIsResent(true);
-            const { data, error: apiError } = await resendOtp({
+            const {data, error: apiError} = await resendOtp({
                 newEmail,
                 email: userData?.email,
             });
@@ -111,7 +117,8 @@ const AuthVerifyOtpForm = () => {
                         Verify Email
                     </h2>
                     <p className="md:text-base text-sm text-lightGray ">
-                        Please enter the verification code sent to <span className={"text-dark font-semibold"} > {newEmail} </span>
+                        Please enter the verification code sent to <span
+                        className={"text-dark font-semibold"}> {newEmail} </span>
                     </p>
 
                 </div>
@@ -157,7 +164,7 @@ const AuthVerifyOtpForm = () => {
                 </div>
 
                 <div className="mt-9 flex gap-10 items-center justify-center">
-                    <FixWButton isButton={false} label={"back"} path={"/account/changeEmail"} />
+                    <FixWButton isButton={false} label={"back"} path={"/account/changeEmail"}/>
                     <SubmitBtn
                         label={"confirm"}
                         extraStyle={"max-w-[180px] w-full"}

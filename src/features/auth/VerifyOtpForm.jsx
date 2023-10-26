@@ -11,6 +11,7 @@ const VerifyOtpForm = () => {
     const {email, previousRoute} = useLocation().state;
     const [otp, setOtp] = useState("");
     const [isResent, setIsResent] = useState(false);
+    // const [timer, setTimer] = useState(59);
     const [timer, setTimer] = useState(59);
     const [error, setError] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -67,22 +68,31 @@ const VerifyOtpForm = () => {
                 setError(null);
             }, 5000);
         }
+    }, [error]);
 
-        if (isResent === true) {
-            setTimeout(() => {
-                setIsResent(false);
-            }, 60000);
+    useEffect(() => {
+        let counter;
+        if (isResent) {
+            counter = setInterval(decreaseTimer, 1000)
+        } else (
+            clearInterval(counter)
+        )
+        return () => clearInterval(counter)
+    }, [timer, isResent])
+
+    const decreaseTimer = () => {
+        if (timer > 0) {
+            setTimer(timer - 1)
+        } else {
+            setIsResent(false)
         }
-
-        const counter =
-            isResent &&
-            timer > 0 &&
-            setInterval(() => setTimer(timer - 1), 1000);
-        return () => clearInterval(counter);
-    }, [timer, isResent, error]);
+    }
 
     const onResendOtp = async () => {
         setIsResent(true);
+        setTimer(59)
+        setOtp("")
+        return;
         try {
             const {data, error: apiError} = await resendOtp({email});
             if (data?.success) {
@@ -140,7 +150,7 @@ const VerifyOtpForm = () => {
                     shouldAutoFocus={true}
                 />
 
-                <div className="flex flex-col my-8 gap-1 items-center">
+                <div className="flex flex-col my-8 gap-1 items-center text-dark ">
                     <p>Do not receive an OTP?</p>
                     <p className={`text-xl ${isResent ? "block" : "hidden"} `}>
                         {" "}
