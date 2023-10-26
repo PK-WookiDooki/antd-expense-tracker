@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import {ChangePasswordModal, EditNameModal} from "@/features";
 import {useGetUserDataQuery} from "@/features/auth/userApi";
 import {useSelector} from "react-redux";
-import dbImgPc from "@/assets/imgs/img_dbPc.png";
+import dbImg from "@/assets/imgs/img_dbHeader.svg"
 import {Loader} from "@/components/index.js";
 
 const Home = () => {
@@ -16,7 +16,9 @@ const Home = () => {
     return (
         <section className=" bg-whiteGray w-full rounded-2xl h-full pb-5 overflow-hidden">
             <div className="relative bg-cover bg-no-repeat bg-right md:h-[250px] h-[170px]"
-                 style={{backgroundImage: `url(${dbImgPc})`}}
+                 style={{
+                     backgroundImage: `url(${dbImg})`
+                 }}
             >
                 <span
                     className="material-symbols-outlined text-[70px] w-28 h-28 rounded-full bg-dark text-whiteGray flex items-center justify-center outline outline-4 outline-whiteGray absolute left-1/2 transform bottom-0 translate-y-1/2 -translate-x-1/2">

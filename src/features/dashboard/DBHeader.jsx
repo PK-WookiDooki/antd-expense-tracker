@@ -1,9 +1,8 @@
 import {DatePicker} from "antd";
-import dayjs from "dayjs";
 import {formatCurrency} from "@/core/functions/formatData";
 import {useGetUserDataQuery} from "../auth/userApi";
 import {useSelector} from "react-redux";
-import dbImgPc from "@/assets/imgs/img_dbPc.png"
+import dbImg from "@/assets/imgs/img_dbHeader.svg"
 
 const DBHeader = ({startDate, endDate, setStartDate, setEndDate}) => {
     const {token} = useSelector((state) => state.authSlice);
@@ -13,7 +12,7 @@ const DBHeader = ({startDate, endDate, setStartDate, setEndDate}) => {
 
     return (
         <section className="relative rounded-2xl bg-cover bg-no-repeat bg-right"
-                 style={{backgroundImage: `url(${dbImgPc})`}}>
+                 style={{backgroundImage: `url(${dbImg})`}}>
             <div
                 className="flex flex-col md:flex-row justify-between text-white p-4 lg:p-10 md:p-5 md:items-center gap-4">
                 {/* balance */}

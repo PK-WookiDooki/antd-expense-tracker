@@ -20,12 +20,12 @@ const WarningModal = ({actionType}) => {
                 onOk={() => setOpenModal(false)}
                 closeIcon={false}
                 footer={null}
-                width={""}
+                width={"py-6"}
             >
                 {" "}
-                <div className=" flex items-center gap-2 justify-center mb-6 text-yellow-400 ">
+                <div className=" flex items-center gap-2 justify-center mb-6 text-[#FFA940]">
                     <MdError className="text-2xl"/>
-                    <p className="text-lg text-dark">
+                    <p className=" text-xl text-dark">
                         {" "}
                         Sorry! you can&apos;t {actionType} the system category.{" "}
                     </p>
@@ -35,7 +35,7 @@ const WarningModal = ({actionType}) => {
                     onClick={() => setOpenModal(false)}
                     type="primary"
                     shape="round"
-                    className=" !bg-primaryGreen hover:!bg-primaryGreen/80 block ml-auto "
+                    className=" !bg-primaryGreen hover:!bg-primaryGreen/80 w-full"
                 >
                     Ok
                 </Button>
