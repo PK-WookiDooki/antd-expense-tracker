@@ -1,30 +1,34 @@
-import { Form, Input } from "antd";
-import { FormTitle, SubmitBtn } from "@/components";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setMessage } from "@/app/global/globalSlice";
+import {Form, Input} from "antd";
+import {SubmitBtn} from "@/components";
+import {Link, useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {setMessage} from "@/app/global/globalSlice";
 
-import { useLoginAccountMutation } from "./authApi";
-import { setLoggedInStatus } from "./authSlice";
+import {useLoginAccountMutation} from "./authApi";
+import {setLoggedInStatus} from "./authSlice";
 import Cookies from "js-cookie";
-import { useState } from "react";
+import {useState} from "react";
 
 const SignInForm = () => {
     const nav = useNavigate();
     const dispatch = useDispatch();
 
     const [isSubmitting, setIsSubmitting] = useState(false);
-
     const [loginAccount] = useLoginAccountMutation();
-
     const onFormSubmit = async (values) => {
         try {
             setIsSubmitting(true);
-            const { data, error } = await loginAccount(values);
+            const {data, error} = await loginAccount(values);
+
             if (data?.token) {
+
+                const tokenDuration = new Date(data?.expiredAt).getTime() - new Date(Date.now()).getTime()
+                const dayInMilliseconds = 24 * 60 * 60 * 1000;
+                const tokenExpiredTime = tokenDuration / dayInMilliseconds
+
                 setIsSubmitting(false);
-                dispatch(setLoggedInStatus({ token: data?.token }));
-                Cookies.set("token", data?.token);
+                dispatch(setLoggedInStatus({token: data?.token}));
+                Cookies.set("token", data?.token, {expires: tokenExpiredTime});
                 nav("/");
                 dispatch(
                     setMessage({
@@ -56,7 +60,9 @@ const SignInForm = () => {
                     <h2 className={`text-4xl md:text-[40px] text-primaryGreen mb-2 font-medium `}>
                         Welcome Back!
                     </h2>
-                    <p> Don&apos;t have an account? <Link to={"/signUp"} className={"text-primaryBlue hover:text-primaryBlue/80 duration-200"} >Sign Up</Link> </p>
+                    <p> Don&apos;t have an account? <Link to={"/signUp"}
+                                                          className={"text-primaryBlue hover:text-primaryBlue/80 duration-200"}>Sign
+                        Up</Link></p>
                 </div>
                 <Form.Item
                     name="email"
@@ -72,16 +78,16 @@ const SignInForm = () => {
                         },
                     ]}
                 >
-                    <Input placeholder="example@gmail.com" type="email" />
+                    <Input placeholder="example@gmail.com" type="email"/>
                 </Form.Item>
                 <Form.Item
                     name="password"
                     label="Password"
                     rules={[
-                        { required: true, message: "Password is required!" },
+                        {required: true, message: "Password is required!"},
                     ]}
                 >
-                    <Input.Password />
+                    <Input.Password/>
                 </Form.Item>
 
                 <Link
@@ -92,7 +98,7 @@ const SignInForm = () => {
                     Forgot Password?{" "}
                 </Link>
 
-                <SubmitBtn label={"sign in"} isLoading={isSubmitting} />
+                <SubmitBtn label={"sign in"} isLoading={isSubmitting}/>
             </Form>
         </section>
     );

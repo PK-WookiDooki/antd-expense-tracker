@@ -1,19 +1,21 @@
-import { DatePicker } from "antd";
+import {DatePicker} from "antd";
 import dayjs from "dayjs";
-import { formatCurrency } from "@/core/functions/formatData";
-import { useGetUserDataQuery } from "../auth/userApi";
-import { useSelector } from "react-redux";
+import {formatCurrency} from "@/core/functions/formatData";
+import {useGetUserDataQuery} from "../auth/userApi";
+import {useSelector} from "react-redux";
 import dbImgPc from "@/assets/imgs/img_dbPc.png"
 
-const DBHeader = ({ startDate, endDate, setStartDate, setEndDate }) => {
-    const { token } = useSelector((state) => state.authSlice);
-    const { data: userData } = useGetUserDataQuery(token);
+const DBHeader = ({startDate, endDate, setStartDate, setEndDate}) => {
+    const {token} = useSelector((state) => state.authSlice);
+    const {data: userData} = useGetUserDataQuery(token);
     const balance = parseInt(userData?.balance);
     const formattedAmount = formatCurrency(balance);
 
     return (
-        <section className="relative rounded-2xl bg-cover bg-no-repeat bg-right" style={{backgroundImage: `url(${dbImgPc})` }} >
-            <div className="flex flex-col md:flex-row justify-between text-white p-4 lg:p-10 md:p-5 md:items-center gap-4">
+        <section className="relative rounded-2xl bg-cover bg-no-repeat bg-right"
+                 style={{backgroundImage: `url(${dbImgPc})`}}>
+            <div
+                className="flex flex-col md:flex-row justify-between text-white p-4 lg:p-10 md:p-5 md:items-center gap-4">
                 {/* balance */}
                 <div className="w-full lg:w-auto">
                     <p className=" text-sm md:text-base lg:text-xl mb-2">Account Balance</p>
@@ -24,7 +26,7 @@ const DBHeader = ({ startDate, endDate, setStartDate, setEndDate }) => {
                     <p className="text-[10px] md:text-sm lg:text-base font-light ">
                         {" "}
                         &ldquo; Your financial compass: The Main Balance – your
-                        central <br className=" md:hidden " /> hub <br className="lg:block hidden" /> for
+                        central <br className=" md:hidden "/> hub <br className="lg:block hidden"/> for
                         tracking and managing expenses effortlessly. &rdquo;
                     </p>
                 </div>
@@ -39,7 +41,7 @@ const DBHeader = ({ startDate, endDate, setStartDate, setEndDate }) => {
                         </label>
                         <DatePicker
                             id="startDate"
-                            defaultValue={dayjs().startOf("months")}
+                            defaultValue={startDate}
                             format={"DD-MM-YYYY"}
                             onChange={(value) => setStartDate(value)}
                             disabledDate={(date) =>
@@ -56,7 +58,7 @@ const DBHeader = ({ startDate, endDate, setStartDate, setEndDate }) => {
                         </label>
                         <DatePicker
                             id="endDate"
-                            defaultValue={dayjs().endOf("months")}
+                            defaultValue={endDate}
                             format={"DD-MM-YYYY"}
                             onChange={(value) => setEndDate(value)}
                             disabledDate={(date) =>
