@@ -1,32 +1,32 @@
-import { DatePicker } from "antd";
+import {DatePicker} from "antd";
 
-const RecordPageHeader = ({ startDate, endDate, setStartDate, setEndDate }) => {
+const RecordPageHeader = ({dates, setDates}) => {
 
     return (
         <div className=" flex items-center gap-8 md:max-w-[400px] w-full text-black">
             <div className="datepicker-wrapper">
                 <label htmlFor="startDate" className="datepicker-label">Start Date</label>
                 <DatePicker
-                    defaultValue={startDate}
-                    onChange={(dateString) => setStartDate(dateString)}
+                    defaultValue={dates.startDate}
+                    onChange={(startDate) => setDates({...dates, startDate})}
                     id="startDate"
                     format={"DD-MM-YYYY"}
                     className="!h-8 !text-base"
                     allowClear={false}
-                    disabledDate={(date) => !date || date.isAfter(endDate)}
+                    disabledDate={(date) => !date || date.isAfter(dates.endDate)}
                     inputReadOnly={true}
                 />
             </div>
             <div className="datepicker-wrapper">
                 <label htmlFor="endDate" className="datepicker-label">End Date</label>
                 <DatePicker
-                    defaultValue={endDate}
-                    onChange={(dateString) => setEndDate(dateString)}
+                    defaultValue={dates.endDate}
+                    onChange={(endDate) => setDates({...dates, endDate})}
                     id="endDate"
                     format={"DD-MM-YYYY"}
                     className="!h-8 !text-base"
                     allowClear={false}
-                    disabledDate={(date) => !date || date.isBefore(startDate)}
+                    disabledDate={(date) => !date || date.isBefore(dates.startDate)}
                     inputReadOnly={true}
                 />
             </div>

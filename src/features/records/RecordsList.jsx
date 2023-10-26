@@ -19,11 +19,11 @@ const options = [
     },
 ];
 
-const RecordsList = ({recordsList}) => {
+const RecordsList = ({recordsList, selectedOpt, setSelectedOpt}) => {
     //const { recordsList } = useSelector((state) => state.recordsSlice);
     const [records, setRecords] = useState([]);
     const [isASC, setIsASC] = useState(false);
-    const [selectedOpt, setSelectedOpt] = useState("ALL");
+
 
     useEffect(() => {
         if (recordsList?.length > 0) {
@@ -56,7 +56,7 @@ const RecordsList = ({recordsList}) => {
                 setRecords(formatData(filteredRecords));
             }
         }
-    }, [selectedOpt, isASC]);
+    }, [selectedOpt, isASC, recordsList]);
 
     return (
         <section className="h-full flex flex-col ">
