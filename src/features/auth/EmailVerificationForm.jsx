@@ -21,7 +21,6 @@ const EmailVerificationForm = () => {
             const {data, error} = await resendOtp({email: values.email});
             if (data?.success) {
                 setIsSubmitting(false);
-
                 nav("/verify", {
                     state: {email: values.email, previousRoute: currentRoute},
                 });
@@ -37,7 +36,7 @@ const EmailVerificationForm = () => {
                 dispatch(
                     setMessage({
                         msgType: "error",
-                        msgContent: error?.data?.message || error?.error,
+                        msgContent: error?.data?.message || error?.message,
                     })
                 );
             }
@@ -50,8 +49,7 @@ const EmailVerificationForm = () => {
             <Form
                 layout="vertical"
                 onFinish={onFormSubmit}
-                className="w-full max-w-[440px] rounded md:shadow-xl lg:p-10 md:p-6 md:bg-white md:border border-cD9  "
-            >
+                className="w-full max-w-[440px] rounded md:shadow-xl lg:p-10 md:p-6 md:bg-white md:border border-cD9">
                 <div className="mb-6 text-center">
                     <FormTitle
                         isCenter={true}

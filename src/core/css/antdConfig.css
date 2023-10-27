@@ -98,4 +98,8 @@
     .create-form {
         padding: 16px 0 !important;
     }
+
+    .confirmation-modal .ant-modal-content {
+        padding: 24px !important;
+    }
 }

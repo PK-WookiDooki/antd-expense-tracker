@@ -1,4 +1,4 @@
-import {Form, Input, Modal} from "antd";
+import {Alert, Form, Input, Modal} from "antd";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -37,6 +37,8 @@ const ChangePasswordModal = () => {
                 passwords: {...values},
                 token,
             });
+
+            console.log(data, apiError)
             if (data?.success) {
                 nav("/signIn", {
                     replace: true,
@@ -44,7 +46,7 @@ const ChangePasswordModal = () => {
                 dispatch(
                     setMessage({
                         msgType: "success",
-                        msgContent: "Password changed successfully!",
+                        msgContent: data?.message,
                     })
                 );
                 dispatch(logoutAccount())
@@ -91,6 +93,8 @@ const ChangePasswordModal = () => {
                 >
                     <div className={"p-6 pb-0"}>
 
+                        {error !== null ?
+                            <Alert message={error} type={"error"} showIcon={true} className={"mb-3"}/> : ""}
 
                         <Form.Item
                             name="oldPassword"
@@ -116,12 +120,7 @@ const ChangePasswordModal = () => {
                                     pattern:
                                         /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                                     message:
-                                        "Password must have minimum eight characters, at least one uppercase letter, one number and one special character.",
-                                },
-                                {
-                                    min: 8,
-                                    message:
-                                        "Password must have at least 8 characters!",
+                                        "Password must have minimum eight characters with at least one uppercase letter, one number and one special character.",
                                 },
                             ]}
                         >

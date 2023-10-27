@@ -26,6 +26,11 @@ const VerifyOtpForm = () => {
         e.preventDefault();
         try {
             setIsSubmitting(true);
+            if (otp?.trim().length === 0) {
+                setError("Please enter OTP code!");
+                setIsSubmitting(false)
+                return;
+            }
             const {data, error} = await verifyOtp({email, otp});
             if (data?.success) {
                 setIsSubmitting(false);
@@ -41,7 +46,7 @@ const VerifyOtpForm = () => {
                     dispatch(
                         setMessage({
                             msgType: "success",
-                            msgContent: "Email verified successfully!",
+                            msgContent: "Password changed successfully!",
                         })
                     );
                     nav("/signIn/createNewPassword", {

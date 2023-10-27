@@ -126,12 +126,7 @@ const SignUpForm = () => {
                             pattern:
                                 /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                             message:
-                                "Password must have minimum eight characters, at least one uppercase letter, one number and one special character. Password can not include space keyword.",
-                        },
-                        {
-                            min: 8,
-                            message:
-                                "Password must have at least 8 characters!",
+                                "Password must have minimum eight characters with at least one uppercase letter, one number and one special character. Password can not include space keyword.",
                         },
                     ]}
                 >

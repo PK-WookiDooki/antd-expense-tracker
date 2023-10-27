@@ -187,11 +187,11 @@ const AddNewCategoryForm = ({iconsList}) => {
                             isButton={true}
                             event={closeModal}
                             label={"cancel"}
-                            htmlType={"button"}
                             buttonType={"default"}
+                            cssWidthConfig={"lg:max-w-[180px] max-w-[148px]"}
                         />
                         <SubmitBtn label={"save"} isLoading={isSubmitting} isFixedWidth={true}
-                                   extraStyle={" max-w-[180px] w-full "}/>
+                                   extraStyle={" lg:max-w-[180px] max-w-[148px] w-full "}/>
                     </div>
                 </Form>
             </Modal>

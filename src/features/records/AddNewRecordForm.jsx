@@ -79,7 +79,7 @@ const AddNewRecordForm = () => {
                 dispatch(
                     setMessage({
                         msgType: "success",
-                        msgContent: "New record created successfully!",
+                        msgContent: data?.message,
                     })
                 );
                 closeModal();
@@ -153,7 +153,7 @@ const AddNewRecordForm = () => {
                             onChange={(value) => setType(value)}
                         />
                     </Form.Item>
-                    <div className=" flex flex-col md:flex-row md:gap-10 ">
+                    <div className=" flex flex-col md:flex-row lg:gap-10 md:gap-6 gap-4 ">
                         <div className="w-full">
                             <Form.Item
                                 label="Amount"
@@ -219,11 +219,11 @@ const AddNewRecordForm = () => {
                             isButton={true}
                             event={closeModal}
                             label={"cancel"}
-                            htmlType={"button"}
                             buttonType={"default"}
+                            cssWidthConfig={" md:max-w-[180px] max-w-[148px] "}
                         />
                         <SubmitBtn label={"save"} isLoading={isSubmitting} isFixedWidth={true}
-                                   extraStyle={" max-w-[180px] w-full "}/>
+                                   extraStyle={"md:max-w-[180px] max-w-[148px] w-full "}/>
                     </div>
                 </Form>
             </Modal>

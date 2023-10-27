@@ -4,7 +4,7 @@ import "./sidebar.css";
 import {useDispatch, useSelector} from "react-redux";
 import {Button} from "antd";
 import {logoutAccount} from "@/features/auth/authSlice";
-import {setMessage, toggleSidebar} from "@/app/global/globalSlice";
+import {toggleSidebar} from "@/app/global/globalSlice";
 
 const Sidebar = () => {
     const {isSidebarOpen} = useSelector((state) => state.globalSlice);
@@ -12,11 +12,8 @@ const Sidebar = () => {
     const dispatch = useDispatch();
     const nav = useNavigate();
 
-    const handleLogout = (e) => {
+    const handleLogout = () => {
         dispatch(logoutAccount());
-        dispatch(
-            setMessage({msgType: "success", msgContent: "Logout successful!"})
-        );
         dispatch(toggleSidebar(false))
         nav("/signIn", {replace: true});
     };

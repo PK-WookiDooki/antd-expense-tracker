@@ -28,8 +28,9 @@ const AuthVerifyOtpForm = () => {
         e.preventDefault();
         try {
             setIsSubmitting(true);
-            if (otp?.trim().length != 6) {
-                setError("Invalid OTP received!");
+            if (otp?.trim().length === 0) {
+                setError("Please enter OTP code!");
+                setIsSubmitting(false)
                 return;
             }
 
@@ -96,7 +97,7 @@ const AuthVerifyOtpForm = () => {
                 dispatch(
                     setMessage({
                         msgType: "success",
-                        msgContent: data?.message,
+                        msgContent: "Email address is changed successfully!",
                     })
                 );
             } else {
@@ -111,7 +112,7 @@ const AuthVerifyOtpForm = () => {
         <section className=" h-full w-full flex flex-col items-center justify-center bg-cFA rounded-2xl p-4  ">
             <form
                 onSubmit={onOtpVerify}
-                className="w-full max-w-[480px] shadow-md md:p-10 p-4  "
+                className="w-full max-w-[480px] shadow-md md:p-10 p-4"
             >
                 <div className="mb-9 text-center">
                     <h2 className="lg:text-4xl text-2xl font-medium text-c26 mb-6">
@@ -119,7 +120,7 @@ const AuthVerifyOtpForm = () => {
                     </h2>
                     <p className="md:text-base text-sm text-c59 ">
                         Please enter the verification code sent to <span
-                        className={"text-c26 font-semibold"}> {newEmail} </span>
+                        className={"text-c26 font-semibold "}> {newEmail} </span>
                     </p>
 
                 </div>
@@ -164,14 +165,12 @@ const AuthVerifyOtpForm = () => {
                     </button>
                 </div>
 
-                <div className="mt-9 flex gap-10 items-center justify-center">
-                    <FixWButton isButton={false} label={"back"} path={"/account/changeEmail"}/>
-                    <SubmitBtn
-                        label={"confirm"}
-                        extraStyle={"max-w-[180px] w-full"}
-                        isFixedWidth={true}
-                        isLoading={isSubmitting}
+                <div className="mt-9 flex lg:gap-10 md:gap-6 gap-4 items-center justify-center">
+                    <FixWButton isButton={false} label={"back"} path={"/account/changeEmail"}
+                                cssWidthConfig={"lg:max-w-[180px] md:max-w-[160px] max-w-[138px]"}
                     />
+                    <SubmitBtn label={"confirm"} isLoading={isSubmitting} isFixedWidth={true}
+                               extraStyle={"lg:max-w-[180px] md:max-w-[160px] max-w-[138px] w-full "}/>
                 </div>
             </form>
         </section>

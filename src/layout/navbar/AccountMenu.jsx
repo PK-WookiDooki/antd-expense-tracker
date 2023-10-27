@@ -2,7 +2,7 @@ import {Dropdown} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import {logoutAccount} from "@/features/auth/authSlice";
-import {setMessage} from "@/app/global/globalSlice";
+import {toggleSidebar} from "@/app/global/globalSlice";
 import {useGetUserDataQuery} from "@/features/auth/userApi";
 
 const AccountMenu = () => {
@@ -11,9 +11,7 @@ const AccountMenu = () => {
 
     const handleLogout = () => {
         dispatch(logoutAccount());
-        dispatch(
-            setMessage({msgType: "success", msgContent: "Logout successful!"})
-        );
+        dispatch(toggleSidebar(false))
         nav("/signIn", {replace: true});
     };
     const {token} = useSelector((state) => state.authSlice);
@@ -60,7 +58,7 @@ const AccountMenu = () => {
                 </span>
                 {userData?.username || "Nexcoder"}
 
-                <i className="material-symbols-outlined">expand_more </i>
+                <i className="material-symbols-outlined">expand_more</i>
 
             </button>
         </Dropdown>

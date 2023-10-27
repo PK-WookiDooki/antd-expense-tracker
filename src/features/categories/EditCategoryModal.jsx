@@ -14,21 +14,15 @@ const EditCategoryModal = ({category}) => {
     const [openModal, setOpenModal] = useState(false);
     const [error, setError] = useState(null);
     const [icon, setIcon] = useState(category?.iconName);
-    const [type, setType] = useState(category?.type);
     const [isSubmitting, setIsSubmitting] = useState(false)
 
     const {data: iconsList} = useGetAllIconsQuery(token);
 
-    const [iconOptions, setIconOptions] = useState(
-        iconsList?.filter((icon) => icon.type === type || icon.type === null)
-    );
+    const iconOptions = iconsList?.filter((icon) => icon.type === category?.type || icon.type === null);
 
     const dispatch = useDispatch();
 
     const [form] = Form.useForm();
-
-    const [updateCategory] = useUpdateCategoryMutation();
-
     useEffect(() => {
         if (error !== null) {
             setTimeout(() => {
@@ -36,26 +30,21 @@ const EditCategoryModal = ({category}) => {
             }, 5000);
         }
 
-        if (type) {
-            setIconOptions(
-                iconsList?.filter(
-                    (icon) => icon.type === type || icon.type === null
-                )
-            );
-        }
-
         if (category) {
             form.setFieldValue("userCategoryName", category?.name);
             form.setFieldValue("iconName", category?.iconName);
         }
-    }, [error, type, openModal]);
+    }, [error, openModal]);
 
+    const [updateCategory] = useUpdateCategoryMutation();
     const onFormSubmit = async (values) => {
         try {
+
             setIsSubmitting(true)
+            const updatedData = {...values, type: category?.type}
             const {data, error: apiError} = await updateCategory({
                 categoryId: category?.id,
-                category: values,
+                category: updatedData,
                 token,
             });
             if (data?.success) {
@@ -113,25 +102,6 @@ const EditCategoryModal = ({category}) => {
                     ) : (
                         ""
                     )}
-
-                    <Form.Item name={"type"} initialValue={category?.type} className={"mb-8"}>
-                        <Segmented
-                            options={[
-                                {
-                                    label: "Expense",
-                                    value: "EXPENSE",
-                                },
-                                {
-                                    label: "Income",
-                                    value: "INCOME",
-                                },
-                            ]}
-                            onChange={(value) => setType(value)}
-                            className="w-full"
-                            size="large"
-                            block
-                        />
-                    </Form.Item>
 
                     <Form.Item
                         label="Category Name"
@@ -203,11 +173,11 @@ const EditCategoryModal = ({category}) => {
                             isButton={true}
                             event={closeModal}
                             label={"cancel"}
-                            htmlType={"button"}
                             buttonType={"default"}
+                            cssWidthConfig={"md:max-w-[180px] max-w-[148px]"}
                         />
                         <SubmitBtn label={"save"} isLoading={isSubmitting} isFixedWidth={true}
-                                   extraStyle={" max-w-[180px] w-full "}/>
+                                   extraStyle={" md:max-w-[180px] max-w-[148px] w-full "}/>
                     </div>
                 </Form>
             </Modal>

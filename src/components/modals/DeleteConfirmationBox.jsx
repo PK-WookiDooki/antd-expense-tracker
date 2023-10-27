@@ -1,7 +1,7 @@
 import Modal from "antd/es/modal/Modal";
 import {useEffect, useState} from "react";
 import {FixWButton} from "@/components";
-import {Alert, Button} from "antd";
+import {Alert} from "antd";
 import {useDispatch} from "react-redux";
 import {setMessage} from "@/app/global/globalSlice";
 
@@ -96,16 +96,16 @@ const DeleteConfirmationBox = ({title, component, event, isDropdown}) => {
                         isButton={true}
                         event={() => setOpenModal(false)}
                         label={"No"}
-                        htmlType={"button"}
                         buttonType={"default"}
+                        cssWidthConfig={" md:max-w-[180px] max-w-[148px] "}
                     />
                     <FixWButton
                         label={"Yes"}
-                        htmlType={"submit"}
                         buttonType={"primary"}
                         isButton={true}
                         event={onDelete}
                         isLoading={isSubmitting}
+                        cssWidthConfig={" md:max-w-[180px] max-w-[148px] "}
                     />
                 </div>
             </Modal>

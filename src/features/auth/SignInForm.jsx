@@ -30,12 +30,6 @@ const SignInForm = () => {
                 dispatch(setLoggedInStatus({token: data?.token}));
                 Cookies.set("token", data?.token, {expires: tokenExpiredTime});
                 nav("/");
-                dispatch(
-                    setMessage({
-                        msgType: "success",
-                        msgContent: "Login Successful!",
-                    })
-                );
             } else {
                 setIsSubmitting(false);
                 dispatch(

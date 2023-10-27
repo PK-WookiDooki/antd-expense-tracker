@@ -91,14 +91,11 @@ const ChangeEmailForm = () => {
                     <Input.Password placeholder={"Enter your current password"}/>
                 </Form.Item>
 
-                <div className="mt-9 flex gap-10 items-center justify-center">
-                    <FixWButton isButton={false} label={"cancel"} path={".."}/>
-                    <SubmitBtn
-                        label={"confirm"}
-                        extraStyle={"max-w-[180px] w-full"}
-                        isFixedWidth={true}
-                        isLoading={isSubmitting}
-                    />
+                <div className="mt-9 flex lg:gap-10 md:gap-6 gap-4 items-center justify-center">
+                    <FixWButton isButton={false} label={"cancel"} path={".."}
+                                cssWidthConfig={"lg:max-w-[180px] md:max-w-[160px] max-w-[138px]"}/>
+                    <SubmitBtn label={"confirm"} isLoading={isSubmitting} isFixedWidth={true}
+                               extraStyle={" lg:max-w-[180px] md:max-w-[160px] max-w-[138px] w-full "}/>
                 </div>
             </Form>
         </section>

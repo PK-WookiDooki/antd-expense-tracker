@@ -34,14 +34,28 @@ const EditRecordForm = ({record, date}) => {
             }, 3000);
         }
 
+
+    }, [error]);
+
+    useEffect(() => {
         if (record) {
             form.setFieldValue("type", record?.type);
             form.setFieldValue("amount", record?.amount);
             form.setFieldValue("createdDate", dayjs(date));
-            form.setFieldValue("userCategoryId", record?.userCategory.id);
             form.setFieldValue("description", record?.description);
         }
-    }, [error, record]);
+    }, [record]);
+
+    useEffect(() => {
+        if (type === record?.type) {
+            form.setFieldValue("userCategoryId", record?.userCategory.id);
+        } else {
+            form.resetFields(["userCategoryId"])
+        }
+
+        console.log(type)
+
+    }, [type, record]);
 
 
     const catOptions = userCategories
@@ -171,7 +185,7 @@ const EditRecordForm = ({record, date}) => {
                             onChange={(value) => setType(value)}
                         />
                     </Form.Item>
-                    <div className="flex flex-col md:flex-row md:gap-10  ">
+                    <div className="flex flex-col md:flex-row lg:gap-10 md:gap-6 gap-4  ">
                         <div className="w-full">
                             <Form.Item
                                 label={"Amount"}
@@ -236,11 +250,11 @@ const EditRecordForm = ({record, date}) => {
                             isButton={true}
                             event={closeModal}
                             label={"cancel"}
-                            htmlType={"button"}
                             buttonType={"default"}
+                            cssWidthConfig={"md:max-w-[180px] max-w-[148px] w-full "}
                         />
                         <SubmitBtn label={"save"} isLoading={isSubmitting} isFixedWidth={true}
-                                   extraStyle={" max-w-[180px] w-full "}/>
+                                   extraStyle={"md:max-w-[180px] max-w-[148px] w-full "}/>
                     </div>
                 </Form>
             </Modal>
