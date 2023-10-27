@@ -11,8 +11,8 @@ const FixWidthButton = ({label, buttonType, htmlType, event, isButton, isLoading
             shape="round"
             className={` max-w-[180px] w-full ${
                 buttonType === "primary"
-                    ? " !bg-primaryGreen hover:!bg-primaryGreen/80 "
-                    : " !border-dark !text-dark hover:!border-danger hover:!bg-danger hover:!text-whiteGray"
+                    ? " !bg-danger hover:!bg-danger/80 "
+                    : " !border-c26 !text-c26 hover:!bg-c26/10 !bg-cFA "
             } capitalize duration-300 `}
         >
             {" "}
@@ -22,7 +22,7 @@ const FixWidthButton = ({label, buttonType, htmlType, event, isButton, isLoading
         <Link
             to={path}
             replace={true}
-            className=" max-w-[180px] w-full border rounded-full flex items-center justify-center h-10 !border-dark !text-dark hover:!border-danger hover:!bg-danger hover:!text-whiteGray capitalize duration-300"
+            className=" max-w-[180px] w-full border rounded-full flex items-center justify-center h-10 !border-c26 !text-c26 hover:!bg-c26/10 !bg-cFA capitalize duration-300 "
         >
             {label}
         </Link>

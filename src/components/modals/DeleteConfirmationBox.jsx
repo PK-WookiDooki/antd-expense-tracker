@@ -52,7 +52,7 @@ const DeleteConfirmationBox = ({title, component, event, isDropdown}) => {
             {isDropdown ? (
                 <button
                     onClick={() => setOpenModal(true)}
-                    className=" menu-item "
+                    className="menu-item "
                 >
                     Delete
                 </button>

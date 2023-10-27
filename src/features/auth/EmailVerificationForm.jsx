@@ -50,7 +50,7 @@ const EmailVerificationForm = () => {
             <Form
                 layout="vertical"
                 onFinish={onFormSubmit}
-                className="w-full max-w-[440px] md:shadow-md lg:p-10 md:p-6 md:bg-white/80 "
+                className="w-full max-w-[440px] rounded md:shadow-xl lg:p-10 md:p-6 md:bg-white md:border border-cD9  "
             >
                 <div className="mb-6 text-center">
                     <FormTitle
@@ -75,7 +75,7 @@ const EmailVerificationForm = () => {
                         },
                     ]}
                 >
-                    <Input placeholder="example@gmail.com"/>
+                    <Input placeholder="Enter your email address"/>
                 </Form.Item>
 
                 <SubmitBtn label={"Confirm"} isLoading={isSubmitting}/>

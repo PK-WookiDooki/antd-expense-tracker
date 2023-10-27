@@ -13,7 +13,7 @@ const DBRecords = ({recordsList, dateString}) => {
     }, [recordsList]);
 
     return (
-        <section className=" p-4 md:p-5 lg:p-10 bg-whiteGray rounded-2xl">
+        <section className=" p-4 md:p-5 lg:p-10 bg-cFA rounded-2xl">
             <h2 className="transitions-tlt md:mb-8 mb-5">
                 Transactions
             </h2>

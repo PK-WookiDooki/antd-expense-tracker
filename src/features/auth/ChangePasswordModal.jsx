@@ -66,7 +66,7 @@ const ChangePasswordModal = () => {
 
     return (
         <section className="mt-4">
-            <div className="flex items-center justify-between text-dark">
+            <div className="flex items-center justify-between text-c26">
                 <h2 className="text-xl">Password</h2>
                 <button
                     onClick={() => setOpenModal(true)}
@@ -88,72 +88,75 @@ const ChangePasswordModal = () => {
                     form={form}
                     layout="vertical"
                     onFinish={onFormSubmit}
-                    className="p-6 pb-0"
                 >
-                    <Form.Item
-                        name="oldPassword"
-                        label="Current Password"
-                        rules={[
-                            {
-                                required: true,
-                                message: "Current password is required!",
-                            },
-                        ]}
-                    >
-                        <Input.Password/>
-                    </Form.Item>
-                    <Form.Item
-                        name="newPassword"
-                        label="Password"
-                        rules={[
-                            {
-                                required: true,
-                                message: "Password is required!",
-                            },
-                            {
-                                pattern:
-                                    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                                message:
-                                    "Password must have minimum eight characters, at least one uppercase letter, one number and one special character.",
-                            },
-                            {
-                                min: 8,
-                                message:
-                                    "Password must have at least 8 characters!",
-                            },
-                        ]}
-                    >
-                        <Input.Password/>
-                    </Form.Item>
-                    <Form.Item
-                        name="password_confirmation"
-                        label="Confirm Password"
-                        dependencies={["newPassword"]}
-                        rules={[
-                            {
-                                required: true,
-                                message: "Password confirmation is required!",
-                            },
-                            ({getFieldValue}) => ({
-                                validator(_, value) {
-                                    if (
-                                        !value ||
-                                        getFieldValue("newPassword") === value
-                                    ) {
-                                        return Promise.resolve();
-                                    }
-                                    return Promise.reject(
-                                        new Error(
-                                            "The password confirmation does not match!"
-                                        )
-                                    );
+                    <div className={"p-6 pb-0"}>
+
+
+                        <Form.Item
+                            name="oldPassword"
+                            label="Current Password"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Current password is required!",
                                 },
-                            }),
-                        ]}
-                    >
-                        <Input.Password/>
-                    </Form.Item>
-                    <div className="py-3 border-t border-gray">
+                            ]}
+                        >
+                            <Input.Password placeholder={"Enter your current password"}/>
+                        </Form.Item>
+                        <Form.Item
+                            name="newPassword"
+                            label="Password"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Password is required!",
+                                },
+                                {
+                                    pattern:
+                                        /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                                    message:
+                                        "Password must have minimum eight characters, at least one uppercase letter, one number and one special character.",
+                                },
+                                {
+                                    min: 8,
+                                    message:
+                                        "Password must have at least 8 characters!",
+                                },
+                            ]}
+                        >
+                            <Input.Password placeholder={"Enter your new password"}/>
+                        </Form.Item>
+                        <Form.Item
+                            name="password_confirmation"
+                            label="Confirm Password"
+                            dependencies={["newPassword"]}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Password confirmation is required!",
+                                },
+                                ({getFieldValue}) => ({
+                                    validator(_, value) {
+                                        if (
+                                            !value ||
+                                            getFieldValue("newPassword") === value
+                                        ) {
+                                            return Promise.resolve();
+                                        }
+                                        return Promise.reject(
+                                            new Error(
+                                                "The password confirmation does not match!"
+                                            )
+                                        );
+                                    },
+                                }),
+                            ]}
+                        >
+                            <Input.Password placeholder={"Confirm your new password"}/>
+                        </Form.Item>
+                    </div>
+                    <div className="py-3 px-6 border-t border-cD9/60">
                         <SubmitBtn
                             label={"save"}
                             isFixedWidth={true}

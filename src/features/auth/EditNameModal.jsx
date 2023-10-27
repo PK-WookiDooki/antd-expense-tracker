@@ -54,7 +54,7 @@ const EditNameModal = ({username}) => {
     };
 
     return (
-        <section className="pb-6 border-b border-gray text-dark ">
+        <section className="pb-6 border-b border-cD9 text-c26 ">
             <h2 className="text-xl">Name</h2>
             <div className="flex items-center justify-between mt-2">
                 <p> {username || "Nexcoder"} </p>
@@ -78,35 +78,39 @@ const EditNameModal = ({username}) => {
                     form={form}
                     layout="vertical"
                     onFinish={onFormSubmit}
-                    className="p-6 pb-0"
                 >
-                    {error !== null ? (
-                        <Alert
-                            message={error}
-                            type="error"
-                            showIcon
-                            className="mb-3"
-                        />
-                    ) : (
-                        ""
-                    )}
 
-                    <Form.Item
-                        name="username"
-                        rules={[
-                            {
-                                required: true,
-                                message: "Name is required!",
-                            },
-                        ]}
-                    >
-                        <Input/>
-                    </Form.Item>
-                    <div className="py-3 border-t border-gray">
+                    <div className={" p-6 pb-0"}>
+
+                        {error !== null ? (
+                            <Alert
+                                message={error}
+                                type="error"
+                                showIcon
+                                className="mb-3"
+                            />
+                        ) : (
+                            ""
+                        )}
+
+                        <Form.Item
+                            label={"Name"}
+                            name="username"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Name is required!",
+                                },
+                            ]}
+                        >
+                            <Input placeholder={"Enter your name"}/>
+                        </Form.Item>
+                    </div>
+                    <div className="py-3 border-t px-6 border-cD9/60">
                         <SubmitBtn
                             label={"save"}
                             isFixedWidth={true}
-                            extraStyle={" block ml-auto"}
+                            extraStyle={"block ml-auto"}
                             isLoading={isSubmitting}
                         />
                     </div>

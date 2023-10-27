@@ -10,13 +10,11 @@
 
 @layer components {
     .base-btn {
-        @apply !rounded-full !h-10 !px-5 text-whiteGray capitalize
-        ;
+        @apply !rounded-full !h-10 !px-5 text-cFA capitalize;
     }
 
     .menu-item {
-        @apply flex gap-1 md:py-[6px] pl-3 pr-6 py-1 text-sm
-        ;
+        @apply flex gap-1 md:py-[6px] pl-3 pr-6 py-1 text-sm;
     }
 
     .icon-style {
@@ -24,7 +22,7 @@
     }
 
     .icon-box {
-        @apply grid grid-cols-6 md:grid-cols-8 gap-2 p-3 rounded-sm border border-gray min-h-[40px] overflow-auto;
+        @apply grid grid-cols-6 md:grid-cols-8 gap-2 p-3 rounded-sm border border-cD9 min-h-[40px] overflow-auto;
     }
 
     .category-form-footer {
@@ -48,7 +46,7 @@
     }
 
     .transitions-tlt {
-        @apply md:text-2xl font-medium text-[#8C8C8C]
+        @apply md:text-2xl font-medium text-c8C
     }
 
 }

@@ -1,10 +1,10 @@
-import { Form, Input } from "antd";
-import { FormTitle, SubmitBtn } from "@/components";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useResetPasswordMutation } from "./authApi";
-import { useDispatch } from "react-redux";
-import { setMessage } from "@/app/global/globalSlice";
-import { useState } from "react";
+import {Form, Input} from "antd";
+import {FormTitle, SubmitBtn} from "@/components";
+import {useLocation, useNavigate} from "react-router-dom";
+import {useResetPasswordMutation} from "./authApi";
+import {useDispatch} from "react-redux";
+import {setMessage} from "@/app/global/globalSlice";
+import {useState} from "react";
 
 const CreateNewPasswordForm = () => {
     const nav = useNavigate();
@@ -18,14 +18,11 @@ const CreateNewPasswordForm = () => {
     const onFormSubmit = async (values) => {
         try {
             setIsSubmitting(true);
-            const updatedPws ={
-                    email,
+            const updatedPws = {
+                email,
                 password: values.password,
-                }
-            const { data, error } = await resetPassword(updatedPws);
-
-            console.log({ email, password: values.password });
-
+            }
+            const {data, error} = await resetPassword(updatedPws);
             if (data?.success) {
                 setIsSubmitting(false);
                 nav("/signIn", {
@@ -54,7 +51,7 @@ const CreateNewPasswordForm = () => {
             <Form
                 layout="vertical"
                 onFinish={onFormSubmit}
-                className="w-full max-w-[440px] lg:p-10 md:p-6 md:shadow-md md:bg-white/80"
+                className="w-full max-w-[440px] rounded md:shadow-xl lg:p-10 md:p-6 md:bg-white md:border border-cD9 "
             >
                 <div className="mb-6">
                     <FormTitle
@@ -69,21 +66,16 @@ const CreateNewPasswordForm = () => {
                     name="password"
                     label="Password"
                     rules={[
-                        { required: true, message: "Password is required!" },
+                        {required: true, message: "Password is required!"},
                         {
                             pattern:
                                 /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                             message:
-                                "Password must have minimum eight characters, at least one uppercase letter, one number and one special character.",
-                        },
-                        {
-                            min: 8,
-                            message:
-                                "Password must have at least 8 characters!",
+                                "Password must have minimum eight characters with at least one uppercase letter, one number and one special character.",
                         },
                     ]}
                 >
-                    <Input.Password />
+                    <Input.Password placeholder={"Enter new password"}/>
                 </Form.Item>
                 <Form.Item
                     name="password_confirmation"
@@ -93,7 +85,7 @@ const CreateNewPasswordForm = () => {
                             required: true,
                             message: "Password confirmation is required!",
                         },
-                        ({ getFieldValue }) => ({
+                        ({getFieldValue}) => ({
                             validator(_, value) {
                                 if (
                                     !value ||
@@ -110,10 +102,10 @@ const CreateNewPasswordForm = () => {
                         }),
                     ]}
                 >
-                    <Input.Password />
+                    <Input.Password placeholder={"Confirm your password"}/>
                 </Form.Item>
 
-                <SubmitBtn label={"Confirm"} isLoading={isSubmitting} />
+                <SubmitBtn label={"Confirm"} isLoading={isSubmitting}/>
             </Form>
         </section>
     );

@@ -36,7 +36,7 @@ const RecordsPage = () => {
     }
 
     return (
-        <section className=" lg:p-10 md:p-5 p-4 rounded-2xl flex flex-col gap-6 h-full bg-whiteGray">
+        <section className=" lg:p-10 md:p-5 p-4 rounded-2xl flex flex-col gap-6 h-full bg-cFA">
             <RecordPageHeader
                 dates={dates}
                 setDates={setDates}

@@ -92,7 +92,6 @@ const VerifyOtpForm = () => {
         setIsResent(true);
         setTimer(59)
         setOtp("")
-        return;
         try {
             const {data, error: apiError} = await resendOtp({email});
             if (data?.success) {
@@ -114,7 +113,7 @@ const VerifyOtpForm = () => {
         <section className="w-full flex flex-col items-center justify-center">
             <form
                 onSubmit={onVerify}
-                className="w-full max-w-[440px] md:shadow-md lg:p-10 md:p-6 md:bg-white/80"
+                className="w-full max-w-[440px] rounded md:shadow-xl lg:p-10 md:p-6 md:bg-white md:border border-cD9 "
             >
                 <div className="mb-8 text-center">
                     <FormTitle
@@ -150,7 +149,7 @@ const VerifyOtpForm = () => {
                     shouldAutoFocus={true}
                 />
 
-                <div className="flex flex-col my-8 gap-1 items-center text-dark ">
+                <div className="flex flex-col my-8 gap-1 items-center text-c26 ">
                     <p>Do not receive an OTP?</p>
                     <p className={`text-xl ${isResent ? "block" : "hidden"} `}>
                         {" "}

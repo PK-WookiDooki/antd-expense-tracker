@@ -54,14 +54,14 @@ const SignInForm = () => {
             <Form
                 layout="vertical"
                 onFinish={onFormSubmit}
-                className="w-full max-w-[420px]  "
+                className="w-full max-w-[440px] rounded md:shadow-xl lg:p-10 md:p-6 md:bg-white md:border border-cD9 "
             >
                 <div className="mb-6 text-center">
                     <h2 className={`text-4xl md:text-[40px] text-primaryGreen mb-2 font-medium `}>
                         Welcome Back!
                     </h2>
-                    <p className={"text-dark text-base "}> Don&apos;t have an account? <Link to={"/signUp"}
-                                                                                             className={"text-[#2200CC] hover:text-primaryBlue/80 duration-200"}>Sign
+                    <p className={"text-c26 text-base "}> Don&apos;t have an account? <Link to={"/signUp"}
+                                                                                            className={"text-[#2200CC] hover:text-primaryBlue/80 duration-200"}>Sign
                         Up</Link></p>
                 </div>
                 <Form.Item
@@ -78,7 +78,7 @@ const SignInForm = () => {
                         },
                     ]}
                 >
-                    <Input placeholder="example@gmail.com" type="email"/>
+                    <Input placeholder="Enter your email address" type="email"/>
                 </Form.Item>
                 <Form.Item
                     name="password"
@@ -86,8 +86,9 @@ const SignInForm = () => {
                     rules={[
                         {required: true, message: "Password is required!"},
                     ]}
+                    className={" !mb-2 "}
                 >
-                    <Input.Password/>
+                    <Input.Password placeholder={"Enter your password"}/>
                 </Form.Item>
 
                 <Link

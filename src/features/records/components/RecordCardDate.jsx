@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 const months = [
     "January",
     "February",
@@ -14,14 +16,16 @@ const months = [
 ];
 
 const RecordCardDate = ({record}) => {
-    const {date: usageDate} = record;
+    const {date: createdDate} = record;
 
-    const date = new Date(usageDate).getDate();
-    const month = new Date(usageDate).getMonth();
-    const year = new Date(usageDate).getFullYear();
+    // console.log(dayjs(createdDate).format("DD MMMM YYYY"))
+
+    const date = dayjs(createdDate).date();
+    const month = dayjs(createdDate).month();
+    const year = dayjs(createdDate).year();
 
     return (
-        <div className="bg-[#F0F0F0] py-1 md:px-5 px-2 rounded-md text-darkBlue">
+        <div className="bg-cF0 py-1 md:px-5 px-2 rounded-md text-c3A">
             <div className="flex items-center gap-2 md:text-xl font-medium">
                 <p className="md:text-[40px] text-3xl font-semibold  md:h-[52px] h-11 aspect-square flex items-center justify-center">
                     {" "}

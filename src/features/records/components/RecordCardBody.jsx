@@ -24,7 +24,7 @@ const RecordCardBody = ({record, isRemove, date}) => {
 
     return (
         <div
-            className={`flex items-center justify-between md:py-2 py-1 md:px-6 px-2 bg-white rounded-md text-dark`}
+            className={`flex items-center justify-between md:py-2 py-1 gap-2 md:px-6 px-2 bg-white rounded-md text-c26`}
         >
             <div className="flex items-center gap-3">
                 <span
@@ -38,21 +38,21 @@ const RecordCardBody = ({record, isRemove, date}) => {
                         {userCategory?.iconName}{" "}
                     </i>
                 </span>
-                <div className="flex flex-col gap-1 text-dark">
+                <div className="flex flex-col gap-1 text-c26">
                     <h2 className="md:text-xl capitalize">
                         {" "}
                         {userCategory?.name}{" "}
                     </h2>
                     {description !== null || description?.trim().length > 0 ?
-                        <p className="md:text-base text-xs line-clamp-1  ">
+                        <p className="md:text-base text-xs break-all ">
                             {" "}
                             {description}{" "}
                         </p> : ""}
                 </div>
             </div>
-            <div className="flex items-center gap-3 record">
+            <div className="flex items-center md:gap-3 gap-1 min-w-max ">
                 <p
-                    className={` min-w-max md:text-lg text-sm font-rbs md:font-medium ${
+                    className={` min-w-max md:text-lg text-sm font-rbs font-medium ${
                         type === "EXPENSE" ? "text-danger" : "text-primaryGreen"
                     } `}
                 >
@@ -67,7 +67,7 @@ const RecordCardBody = ({record, isRemove, date}) => {
                         trigger={["click"]}
                         placement="bottomRight"
                     >
-                        <button className="text-xl text-dark">
+                        <button className="text-xl text-c8C">
                             {" "}
                             <BsThreeDotsVertical/>{" "}
                         </button>

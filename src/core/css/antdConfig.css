@@ -52,7 +52,7 @@
 
 .ant-segmented .ant-segmented-item-selected {
     background-color: var(--primaryGreen);
-    color: var(--whiteGray) !important;
+    color: var(--cFA) !important;
 }
 
 /* dropdown */

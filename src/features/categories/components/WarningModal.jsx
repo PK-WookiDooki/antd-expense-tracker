@@ -24,8 +24,8 @@ const WarningModal = ({actionType}) => {
             >
                 {" "}
                 <div className=" flex items-center gap-2 justify-center mb-6 text-[#FFA940]">
-                    <MdError className="text-2xl"/>
-                    <p className=" text-xl text-dark">
+                    <MdError className="text-2xl "/>
+                    <p className=" md:text-xl text-c26">
                         {" "}
                         Sorry! you can&apos;t {actionType} the system category.{" "}
                     </p>

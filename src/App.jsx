@@ -64,7 +64,7 @@ const App = () => {
                     },
                     Input: {
                         colorBorder: "#D9D9D9",
-                        fontSize: 16,
+                        fontSize: 14,
                         fontFamily: "Roboto",
                         borderRadius: 2
                     },
@@ -72,7 +72,7 @@ const App = () => {
                         colorBorder: "#D9D9D9",
                         handleVisible: "auto",
                         controlHeight: 40,
-                        fontSize: 16,
+                        fontSize: 14,
                         fontFamily: "Roboto",
                         borderRadius: 2
 

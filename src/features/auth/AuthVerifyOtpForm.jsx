@@ -85,6 +85,7 @@ const AuthVerifyOtpForm = () => {
         e.preventDefault();
         setIsResent(true);
         setTimer(59)
+        setOtp("")
         try {
             setOtp("");
             const {data, error: apiError} = await resendOtp({
@@ -107,18 +108,18 @@ const AuthVerifyOtpForm = () => {
     };
 
     return (
-        <section className=" h-full w-full flex flex-col items-center justify-center bg-whiteGray rounded-2xl p-4  ">
+        <section className=" h-full w-full flex flex-col items-center justify-center bg-cFA rounded-2xl p-4  ">
             <form
                 onSubmit={onOtpVerify}
-                className="w-full max-w-[480px] shadow-md md:p-10 p-4 "
+                className="w-full max-w-[480px] shadow-md md:p-10 p-4  "
             >
                 <div className="mb-9 text-center">
-                    <h2 className="lg:text-4xl text-2xl font-medium text-dark mb-6">
+                    <h2 className="lg:text-4xl text-2xl font-medium text-c26 mb-6">
                         Verify Email
                     </h2>
-                    <p className="md:text-base text-sm text-lightGray ">
+                    <p className="md:text-base text-sm text-c59 ">
                         Please enter the verification code sent to <span
-                        className={"text-dark font-semibold"}> {newEmail} </span>
+                        className={"text-c26 font-semibold"}> {newEmail} </span>
                     </p>
 
                 </div>

@@ -68,7 +68,7 @@ const RecordsList = ({recordsList, selectedOpt, setSelectedOpt}) => {
                 <div className="flex items-center md:gap-3 gap-1">
                     <button
                         onClick={() => setIsASC(!isASC)}
-                        className=" h-8 aspect-square bg-white border border-gray rounded-sm "
+                        className=" h-8 aspect-square bg-white border border-cD9 rounded-sm "
                     >
                         {" "}
                         <i className="material-symbols-outlined text-xl flex items-center justify-center ">

@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {CreateBtn, FixWButton} from "@/components";
+import {CreateBtn, FixWButton, SubmitBtn} from "@/components";
 import {Alert, Form, Input, Modal, Segmented} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {useAddNewCategoryMutation} from "./categoriesApi";
@@ -127,8 +127,9 @@ const AddNewCategoryForm = ({iconsList}) => {
                             },
                         ]}
                         className={"mb-8"}
+
                     >
-                        <Input/>
+                        <Input placeholder={"Enter category name"}/>
                     </Form.Item>
 
                     <Form.Item
@@ -189,13 +190,8 @@ const AddNewCategoryForm = ({iconsList}) => {
                             htmlType={"button"}
                             buttonType={"default"}
                         />
-                        <FixWButton
-                            label={"save"}
-                            htmlType={"submit"}
-                            buttonType={"primary"}
-                            isButton={true}
-                            isLoading={isSubmitting}
-                        />
+                        <SubmitBtn label={"save"} isLoading={isSubmitting} isFixedWidth={true}
+                                   extraStyle={" max-w-[180px] w-full "}/>
                     </div>
                 </Form>
             </Modal>

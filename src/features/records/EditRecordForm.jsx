@@ -11,7 +11,7 @@ import {
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import dayjs from "dayjs";
-import {FixWButton} from "@/components";
+import {FixWButton, SubmitBtn} from "@/components";
 import {useGetAllCategoriesQuery} from "../categories/categoriesApi";
 import {useUpdateRecordMutation} from "./recordsApi";
 import {setMessage} from "@/app/global/globalSlice";
@@ -187,7 +187,8 @@ const EditRecordForm = ({record, date}) => {
                                     },
                                 ]}
                             >
-                                <InputNumber className="flex flex-col justify-center !w-full"/>
+                                <InputNumber placeholder={"Enter amount"}
+                                             className="flex flex-col justify-center !w-full"/>
                             </Form.Item>
                             <Form.Item
                                 label="Date"
@@ -217,7 +218,7 @@ const EditRecordForm = ({record, date}) => {
                                     },
                                 ]}
                             >
-                                <Select options={catOptions}/>
+                                <Select placeholder={"Select category"} options={catOptions}/>
                             </Form.Item>
                         </div>
 
@@ -226,7 +227,7 @@ const EditRecordForm = ({record, date}) => {
                             name={"description"}
                             className="w-full note-input"
                         >
-                            <Input.TextArea className="!resize-none"/>
+                            <Input.TextArea placeholder={"Enter description here"} className="!resize-none"/>
                         </Form.Item>
                     </div>
 
@@ -238,13 +239,8 @@ const EditRecordForm = ({record, date}) => {
                             htmlType={"button"}
                             buttonType={"default"}
                         />
-                        <FixWButton
-                            label={"save"}
-                            htmlType={"submit"}
-                            buttonType={"primary"}
-                            isButton={true}
-                            isLoading={isSubmitting}
-                        />
+                        <SubmitBtn label={"save"} isLoading={isSubmitting} isFixedWidth={true}
+                                   extraStyle={" max-w-[180px] w-full "}/>
                     </div>
                 </Form>
             </Modal>

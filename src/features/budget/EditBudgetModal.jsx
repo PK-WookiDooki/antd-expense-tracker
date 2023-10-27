@@ -1,17 +1,17 @@
-import { Alert, Button, Form, InputNumber, Modal } from "antd";
-import { useEffect, useState } from "react";
-import { ModalHeader, SubmitBtn } from "@/components";
-import { useSetBudgetMutation } from "../auth/userApi";
-import { useDispatch, useSelector } from "react-redux";
-import { setMessage } from "@/app/global/globalSlice";
+import {Alert, Button, Form, InputNumber, Modal} from "antd";
+import {useEffect, useState} from "react";
+import {ModalHeader, SubmitBtn} from "@/components";
+import {useSetBudgetMutation} from "../auth/userApi";
+import {useDispatch, useSelector} from "react-redux";
+import {setMessage} from "@/app/global/globalSlice";
 
-const EditBudgetModal = ({ userBudget, extraStyle }) => {
+const EditBudgetModal = ({userBudget, extraStyle}) => {
     const [openModal, setOpenModal] = useState(false);
     const [error, setError] = useState(null);
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const [isSubmitting, setIsSubmitting] = useState(false)
-    const { token } = useSelector((state) => state.authSlice);
+    const {token} = useSelector((state) => state.authSlice);
     const [setBudget] = useSetBudgetMutation();
     useEffect(
         () => {
@@ -36,7 +36,7 @@ const EditBudgetModal = ({ userBudget, extraStyle }) => {
     const onFormSubmit = async (values) => {
         try {
             setIsSubmitting(true)
-            const { data, error: apiError } = await setBudget({
+            const {data, error: apiError} = await setBudget({
                 ...values,
                 token,
             });
@@ -64,7 +64,7 @@ const EditBudgetModal = ({ userBudget, extraStyle }) => {
                 onClick={() => setOpenModal(true)}
                 type="primary"
                 htmlType="button"
-                className=" !bg-whiteGray rounded-2xl !px-8 !text-dark md:!h-[50px] font-medium "
+                className=" !bg-cFA rounded-2xl !px-8 !text-c26 md:!h-[50px] font-medium "
             >
                 Edit Budget
             </Button>
@@ -75,7 +75,7 @@ const EditBudgetModal = ({ userBudget, extraStyle }) => {
                 footer={null}
                 closeIcon={false}
             >
-                <ModalHeader title={"Edit Budget"} event={closeModal} />
+                <ModalHeader title={"Edit Budget"} event={closeModal}/>
                 <Form
                     form={form}
                     layout="vertical"
@@ -107,9 +107,9 @@ const EditBudgetModal = ({ userBudget, extraStyle }) => {
                             },
                         ]}
                     >
-                        <InputNumber className="!w-full" />
+                        <InputNumber placeholder={"Enter budget amount"} className="!w-full"/>
                     </Form.Item>
-                    <div className="border-t border-gray py-3">
+                    <div className="border-t border-cD9 py-3">
                         <SubmitBtn
                             label={"save"}
                             isFixedWidth={true}

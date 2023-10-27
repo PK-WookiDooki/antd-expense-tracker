@@ -71,7 +71,7 @@ const SignUpForm = () => {
                 className="w-full max-w-[420px] my-auto md:my-0 lg:mt-auto md:bg-white md:p-10 lg:p-0 rounded-2xl"
             >
                 {" "}
-                <div className="mb-2 md:hidden font-medium text-dark">
+                <div className="mb-2 md:hidden font-medium text-c26">
                     <p>Welcome to</p>
                     <h3 className="text-3xl font-dms">Nextracker</h3>
                 </div>
@@ -99,7 +99,7 @@ const SignUpForm = () => {
                         }),
                     ]}
                 >
-                    <Input placeholder="Nexcoder"/>
+                    <Input placeholder="Enter your name"/>
                 </Form.Item>
                 <Form.Item
                     name="email"
@@ -115,7 +115,7 @@ const SignUpForm = () => {
                         },
                     ]}
                 >
-                    <Input placeholder="example@gmail.com" type="email"/>
+                    <Input placeholder="Enter your email address" type="email"/>
                 </Form.Item>
                 <Form.Item
                     name="password"
@@ -135,7 +135,7 @@ const SignUpForm = () => {
                         },
                     ]}
                 >
-                    <Input.Password/>
+                    <Input.Password placeholder={"Enter your password"}/>
                 </Form.Item>
                 <Form.Item
                     name="password_confirmation"
@@ -163,11 +163,11 @@ const SignUpForm = () => {
                         }),
                     ]}
                 >
-                    <Input.Password/>
+                    <Input.Password placeholder={"Confirm your password"}/>
                 </Form.Item>
                 <SubmitBtn label={"sign up"} isLoading={isSubmitting}/>
             </Form>
-            <p className="mt-auto md:text-white lg:text-dark text-base">
+            <p className="mt-auto md:text-white lg:text-c26 text-base">
                 {" "}
                 Already have an account?{" "}
                 <Link to={"/signIn"} className="text-[#20C]">
