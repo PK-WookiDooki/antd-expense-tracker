@@ -11,7 +11,7 @@ const DBPieCharts = ({recordsList}) => {
 
     return (
         <section className="lg:p-8 lg:py-10 md:p-3 md:py-5 p-2 py-4 rounded-2xl bg-cFA relative z-[1]">
-            <h2 className="md:text-2xl font-medium text-c8C mb-5 px-2 ">
+            <h2 className="md:text-2xl font-medium text-c8C md:mb-8 mb-5 px-2 ">
                 Pie Charts Categories
             </h2>
             <Carousel
@@ -39,12 +39,12 @@ const DBPieCharts = ({recordsList}) => {
                 ]}
             >
                 <PieChart
-                    chartTitle={"Expense Chart"}
+                    chartTitle={"Expense Structure"}
                     chartData={expenseData}
                     dataColor={expenseCatColors}
                 />
                 <PieChart
-                    chartTitle={"Income Chart"}
+                    chartTitle={"Income Structure"}
                     chartData={incomeData}
                     dataColor={incomeCatColors}
                     extraStyle={"income-chart"}

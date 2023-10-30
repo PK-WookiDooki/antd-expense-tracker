@@ -38,7 +38,7 @@ const ChangePasswordModal = () => {
                 token,
             });
 
-            console.log(data, apiError)
+            // console.log(data, apiError)
             if (data?.success) {
                 nav("/signIn", {
                     replace: true,

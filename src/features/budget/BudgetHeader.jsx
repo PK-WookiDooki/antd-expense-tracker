@@ -24,7 +24,7 @@ const BudgetHeader = ({
 
             <div className="flex items-center md:gap-16 justify-center md:w-full">
                 <div className="text-right">
-                    <p className="md:text-xl text-sm font-normal md:font-medium mb-2"> {userBudget - totalExpensePerMonth < 0 ? "Exceeded" : "Remaining"} </p>
+                    <p className="md:text-xl text-sm font-normal md:font-medium mb-2"> {userBudget === 0 ? "Remaining" : userBudget - totalExpensePerMonth >= 0 ? "Remaining" : "Exceeded"} </p>
                     <p className="md:text-3xl text-xl font-rbs
                     ">
                         {userBudget === 0 ? formatCurrency(userBudget) : formatCurrency(remainingBudget)}

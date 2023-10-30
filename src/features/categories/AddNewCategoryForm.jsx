@@ -7,7 +7,6 @@ import {setMessage} from "@/app/global/globalSlice";
 
 const AddNewCategoryForm = ({iconsList}) => {
     const {token} = useSelector((state) => state.authSlice);
-    //const { iconsList } = useSelector((state) => state.categoriesSlice);
     const [openModal, setOpenModal] = useState(false);
     const [error, setError] = useState(null);
     const [icon, setIcon] = useState(null);

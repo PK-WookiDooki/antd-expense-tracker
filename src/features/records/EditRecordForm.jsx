@@ -53,7 +53,7 @@ const EditRecordForm = ({record, date}) => {
             form.resetFields(["userCategoryId"])
         }
 
-        console.log(type)
+        // console.log(type)
 
     }, [type, record]);
 
@@ -102,7 +102,7 @@ const EditRecordForm = ({record, date}) => {
                 token,
             });
 
-            console.log(data);
+            // console.log(data);
 
             if (data?.success) {
                 closeModal();
@@ -185,7 +185,7 @@ const EditRecordForm = ({record, date}) => {
                             onChange={(value) => setType(value)}
                         />
                     </Form.Item>
-                    <div className="flex flex-col md:flex-row lg:gap-10 md:gap-6 gap-4  ">
+                    <div className="flex flex-col md:flex-row lg:gap-10 md:gap-6  ">
                         <div className="w-full">
                             <Form.Item
                                 label={"Amount"}

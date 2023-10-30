@@ -153,7 +153,7 @@ const AddNewRecordForm = () => {
                             onChange={(value) => setType(value)}
                         />
                     </Form.Item>
-                    <div className=" flex flex-col md:flex-row lg:gap-10 md:gap-6 gap-4 ">
+                    <div className=" flex flex-col md:flex-row lg:gap-10 md:gap-6">
                         <div className="w-full">
                             <Form.Item
                                 label="Amount"
