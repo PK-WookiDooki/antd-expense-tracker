@@ -22,6 +22,7 @@ const EmailVerificationForm = () => {
             if (data?.success) {
                 setIsSubmitting(false);
                 nav("/verify", {
+                    replace: true,
                     state: {email: values.email, previousRoute: currentRoute},
                 });
                 dispatch(

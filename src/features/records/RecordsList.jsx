@@ -36,7 +36,7 @@ const RecordsList = ({recordsList, selectedOpt, setSelectedOpt}) => {
         if (selectedOpt === "ALL") {
             if (isASC) {
                 setRecords(
-                    records
+                    formatData(recordsList)
                         .slice()
                         .sort((a, b) => dayjs(a.date) - dayjs(b.date))
                     // .sort((a, b) => new Date(a.date) - new Date(b.date))
