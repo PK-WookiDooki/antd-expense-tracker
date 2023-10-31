@@ -73,7 +73,7 @@ const EmailVerificationForm = () => {
                         },
                     ]}
                 >
-                    <Input placeholder="Enter your email address"/>
+                    <Input type="email" placeholder="Enter your email address"/>
                 </Form.Item>
 
                 <SubmitBtn label={"Confirm"} isLoading={isSubmitting}/>

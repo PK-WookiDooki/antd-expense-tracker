@@ -21,7 +21,7 @@ const Home = () => {
                  }}
             >
                 <span
-                    className="material-symbols-outlined text-[70px] w-28 h-28 rounded-full bg-c26 text-cFA flex items-center justify-center outline outline-4 outline-cFA absolute left-1/2 transform bottom-0 translate-y-1/2 -translate-x-1/2">
+                    className="material-symbols-outlined text-[70px] w-[120px] aspect-square rounded-full bg-c26 text-cFA flex items-center justify-center outline outline-4 outline-cFA absolute left-1/2 transform bottom-0 translate-y-1/2 -translate-x-1/2">
                     {" "}
                     person{" "}
                 </span>

@@ -1,4 +1,3 @@
-import {useSelector} from "react-redux";
 import {NoRecords, RecordCard} from "..";
 import {formatData} from "@/core/functions/formatData";
 import {DatePicker} from "antd";
@@ -23,13 +22,13 @@ const ExpenseRecords = ({
                 setExpenseRecords(
                     records
                         .slice()
-                        .sort((a, b) => new Date(a.date) - new Date(b.date))
+                        .sort((a, b) => dayjs(a.date) - dayjs(b.date))
                 );
             } else {
                 setExpenseRecords(
                     records
                         .slice()
-                        .sort((a, b) => new Date(b.date) - new Date(a.date))
+                        .sort((a, b) => dayjs(b.date) - dayjs(a.date))
                 );
             }
         }

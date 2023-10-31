@@ -39,7 +39,7 @@ const RecordCardBody = ({record, isRemove, date}) => {
                     </i>
                 </span>
                 <div className="flex flex-col gap-1 text-c26">
-                    <h2 className="md:text-xl capitalize">
+                    <h2 className="md:text-xl capitalize font-medium md:font-normal ">
                         {" "}
                         {userCategory?.name}{" "}
                     </h2>
@@ -52,14 +52,14 @@ const RecordCardBody = ({record, isRemove, date}) => {
             </div>
             <div className="flex items-center md:gap-3 gap-1 min-w-max ">
                 <p
-                    className={` min-w-max md:text-lg text-sm font-rbs font-medium ${
+                    className={` min-w-max md:text-xl text-sm font-rbs font-medium ${
                         type === "EXPENSE" ? "text-danger" : "text-primaryGreen"
                     } `}
                 >
                     {" "}
                     {type === "EXPENSE"
                         ? `- ${formattedAmount}`
-                        : formattedAmount}{" "}
+                        : `+ ${formattedAmount}`}{" "}
                 </p>
                 {!isRemove ? (
                     <Dropdown

@@ -15,6 +15,11 @@ import {FixWButton, SubmitBtn} from "@/components";
 import {useGetAllCategoriesQuery} from "../categories/categoriesApi";
 import {useUpdateRecordMutation} from "./recordsApi";
 import {setMessage} from "@/app/global/globalSlice";
+import customParseFormat from "dayjs/plugin/customParseFormat"
+import 'dayjs/locale/en';
+
+dayjs.locale('en'); // Set the locale
+dayjs.extend(customParseFormat)
 
 const EditRecordForm = ({record, date}) => {
     const [form] = Form.useForm();

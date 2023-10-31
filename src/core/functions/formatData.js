@@ -1,7 +1,9 @@
+import dayjs from "dayjs";
+
 export const formatData = (allData) => {
     const formattedData = [];
     allData.forEach((data) => {
-        const { id, createdDate, description, userCategory, type, amount } =
+        const {id, createdDate, description, userCategory, type, amount} =
             data;
 
         if (!formattedData[createdDate]) {
@@ -23,7 +25,7 @@ export const formatData = (allData) => {
             data: formattedData[createdDate],
         }))
         .slice()
-        .sort((a, b) => new Date(b.date) - new Date(a.date));
+        .sort((a, b) => dayjs(b.date) - dayjs(a.date));
 
     return result;
 };

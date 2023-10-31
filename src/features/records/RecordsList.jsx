@@ -2,6 +2,7 @@ import {Select} from "antd";
 import {formatData} from "@/core/functions/formatData";
 import {NoRecords, RecordCard} from "..";
 import {useEffect, useState} from "react";
+import dayjs from "dayjs";
 
 
 const options = [
@@ -37,7 +38,8 @@ const RecordsList = ({recordsList, selectedOpt, setSelectedOpt}) => {
                 setRecords(
                     records
                         .slice()
-                        .sort((a, b) => new Date(a.date) - new Date(b.date))
+                        .sort((a, b) => dayjs(a.date) - dayjs(b.date))
+                    // .sort((a, b) => new Date(a.date) - new Date(b.date))
                 );
             } else {
                 setRecords(formatData(recordsList));
@@ -50,7 +52,8 @@ const RecordsList = ({recordsList, selectedOpt, setSelectedOpt}) => {
                 setRecords(
                     formatData(filteredRecords)
                         .slice()
-                        .sort((a, b) => new Date(a.date) - new Date(b.date))
+                        .sort((a, b) => dayjs(a.date) - dayjs(b.date))
+                    // .sort((a, b) => new Date(a.date) - new Date(b.date))
                 );
             } else {
                 setRecords(formatData(filteredRecords));
