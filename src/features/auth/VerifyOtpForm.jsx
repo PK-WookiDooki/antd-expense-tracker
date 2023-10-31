@@ -46,7 +46,7 @@ const VerifyOtpForm = () => {
                     dispatch(
                         setMessage({
                             msgType: "success",
-                            msgContent: "Password changed successfully!",
+                            msgContent: data?.message,
                         })
                     );
                     nav("/signIn/createNewPassword", {
