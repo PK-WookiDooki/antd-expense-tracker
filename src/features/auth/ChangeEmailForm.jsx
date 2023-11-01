@@ -56,7 +56,7 @@ const ChangeEmailForm = () => {
             <Form
                 layout="vertical"
                 onFinish={onFormSubmit}
-                className="w-full max-w-[570px] md:p-10 p-4 shadow"
+                className="w-full max-w-[570px] md:p-10 p-4 shadow border border-cD9 "
             >
                 <div className="mb-9 text-left">
                     <h2 className="lg:text-4xl text-2xl font-medium text-c26 mb-6">

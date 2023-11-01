@@ -112,7 +112,7 @@ const AuthVerifyOtpForm = () => {
         <section className=" h-full w-full flex flex-col items-center justify-center bg-cFA rounded-2xl p-4  ">
             <form
                 onSubmit={onOtpVerify}
-                className="w-full max-w-[480px] shadow-md md:p-10 p-4"
+                className="w-full max-w-[480px] shadow-md md:p-10 p-4 border border-cD9 "
             >
                 <div className="mb-9 text-center">
                     <h2 className="lg:text-4xl text-2xl font-medium text-c26 mb-6">
@@ -145,8 +145,8 @@ const AuthVerifyOtpForm = () => {
                     shouldAutoFocus={true}
                 />
 
-                <div className="flex flex-col my-8 gap-3 items-center">
-                    <p>Do not receive an OTP?</p>
+                <div className="flex flex-col my-8 gap-1 items-center">
+                    <p className={"text-sm"}>Do not receive an OTP?</p>
                     <p className={`text-xl ${isResent ? "block" : "hidden"} `}>
                         {timer} s
                     </p>
@@ -154,10 +154,10 @@ const AuthVerifyOtpForm = () => {
                         onClick={onResendOtp}
                         type="button"
                         disabled={isResent}
-                        className={` ${
+                        className={` font-medium ${
                             isResent
-                                ? " text-primaryBlue/20 "
-                                : "text-primaryBlue hover:text-primaryBlue/80"
+                                ? " text-[#20C]/50 "
+                                : " text-[#20C] "
                         } duration-200 `}
                     >
                         {" "}

@@ -3,7 +3,6 @@ import {SubmitBtn} from "@/components";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useRegisterAccountMutation} from "./authApi";
 import {setMessage} from "@/app/global/globalSlice";
-
 import {useDispatch} from "react-redux";
 import {useState} from "react";
 

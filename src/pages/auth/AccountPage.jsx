@@ -26,7 +26,8 @@ const Home = () => {
                     person{" "}
                 </span>
             </div>
-            <div className="lg:max-w-[660px] md:max-w-[450px] w-full mx-auto mt-20 duration-300 md:p-0 px-5">
+            <div
+                className="lg:max-w-[660px] md:max-w-[450px] w-full mx-auto mt-16 md:mt-[105px] duration-300 md:p-0 px-5">
                 <EditNameModal username={userData?.username}/>
                 <div className="pb-6 border-b border-cD9 mt-4 text-c26 ">
                     <h2 className="text-xl">Email</h2>

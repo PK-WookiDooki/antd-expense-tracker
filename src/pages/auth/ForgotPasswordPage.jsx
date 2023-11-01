@@ -1,21 +1,8 @@
 import {EmailVerificationForm} from "@/features";
 import forgotPwsSVG from "@/assets/imgs/img_forgotPws.svg";
 import {AdvertText} from "@/components";
-import {Navigate, useLocation, useNavigate} from "react-router-dom";
-import {useEffect} from "react";
 
 const ForgotPasswordPage = () => {
-    const location = useLocation().pathname;
-    const nav = useNavigate();
-
-    // useEffect(() => {
-    //     if (location === "/signIn/forgotPassword") {
-    //         setTimeout(() => {
-    //             nav("/signIn", { replace: true });
-    //         }, 10000);
-    //     }
-    // }, [location]);
-
     return (
         <section
             className="w-full flex  min-h-screen relative  lg:bg-[url('@/assets/imgs/img_bg.svg')] bg-[url('@/assets/imgs/img_bgMobile.svg')] lg:bg-center bg-cover bg-no-repeat ">

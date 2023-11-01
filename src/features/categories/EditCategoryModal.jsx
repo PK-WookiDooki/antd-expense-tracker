@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {FixWButton, SubmitBtn} from "@/components";
-import {Alert, Form, Input, Modal, Segmented} from "antd";
+import {Alert, Form, Input, Modal} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {
     useGetAllIconsQuery,
@@ -42,6 +42,8 @@ const EditCategoryModal = ({category}) => {
 
             setIsSubmitting(true)
             const updatedData = {...values, type: category?.type}
+            // console.log(updatedData)
+            // return;
             const {data, error: apiError} = await updateCategory({
                 categoryId: category?.id,
                 category: updatedData,
@@ -66,6 +68,7 @@ const EditCategoryModal = ({category}) => {
 
     const closeModal = () => {
         setOpenModal(false);
+        setIsSubmitting(false)
         setIsSubmitting(false)
     };
 

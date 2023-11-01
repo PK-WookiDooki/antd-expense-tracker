@@ -1,6 +1,5 @@
 import {Alert, Form, Input, Modal} from "antd";
 import {useEffect, useState} from "react";
-import {RxCross1} from "react-icons/rx";
 import {useDispatch, useSelector} from "react-redux";
 import {setMessage} from "@/app/global/globalSlice";
 import {ModalHeader, SubmitBtn} from "@/components";

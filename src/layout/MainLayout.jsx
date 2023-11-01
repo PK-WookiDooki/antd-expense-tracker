@@ -10,7 +10,7 @@ const MainLayout = () => {
     const dispatch = useDispatch()
 
     return (
-        <section className="flex flex-row min-h-screen !font-sans">
+        <section className="flex flex-row min-h-screen !font-sans bg-cFA">
             <Sidebar/>
             <main className=" bg-lightGreen flex flex-1 flex-col min-h-screen overflow-clip  ">
                 <Header/>

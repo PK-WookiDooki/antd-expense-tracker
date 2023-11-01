@@ -132,12 +132,6 @@ const PieChart = ({chartData, dataColor, chartTitle, extraStyle}) => {
             {
                 type: "element-selected",
             },
-            // {
-            //     type: "element-active",
-            // },
-            // {
-            //     type: "pie-statistic-active",
-            // },
             {
                 type: 'tooltip',
                 cfg: {start: [{trigger: 'element:click', action: 'tooltip:show'}]}
