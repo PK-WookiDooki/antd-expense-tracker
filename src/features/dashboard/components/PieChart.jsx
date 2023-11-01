@@ -146,7 +146,7 @@ const PieChart = ({chartData, dataColor, chartTitle, extraStyle}) => {
                 {" "}
                 {chartTitle}{" "}
             </h2>
-            <Pie {...config} style={{width: "300px"}}/>
+            <Pie {...config} className={" md:max-w-[300px] w-full "}/>
         </div>
     );
 };

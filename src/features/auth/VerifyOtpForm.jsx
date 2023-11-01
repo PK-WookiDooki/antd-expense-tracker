@@ -154,8 +154,8 @@ const VerifyOtpForm = () => {
                     shouldAutoFocus={true}
                 />
 
-                <div className="flex flex-col my-8 gap-1 items-center text-c26 ">
-                    <p>Do not receive an OTP?</p>
+                <div className="flex flex-col my-8 gap-1 md:gap-3 items-center text-c26 ">
+                    <p className={"text-sm"}>Do not receive an OTP?</p>
                     <p className={`text-xl ${isResent ? "block" : "hidden"} `}>
                         {" "}
                         {timer} s{" "}
@@ -164,10 +164,10 @@ const VerifyOtpForm = () => {
                         onClick={onResendOtp}
                         type="button"
                         disabled={isResent}
-                        className={` ${
+                        className={` font-medium ${
                             isResent
-                                ? " text-primaryBlue/20 "
-                                : "text-primaryBlue"
+                                ? " text-[#20C]/50 "
+                                : "text-[#20C]"
                         } `}
                     >
                         {" "}

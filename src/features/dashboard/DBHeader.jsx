@@ -29,7 +29,7 @@ const DBHeader = ({startDate, endDate, setStartDate, setEndDate}) => {
                         tracking and managing expenses effortlessly. &rdquo;
                     </p>
                 </div>
-                <span className=" md:w-[1px] w-full h-[1px] md:h-auto bg-cFA block md:self-stretch"></span>
+                <span className=" md:w-[1px] w-full h-[1px] md:h-auto bg-cFA/30 block md:self-stretch"></span>
                 <div
                     className="flex items-center lg:gap-9 md:gap-2 gap-4 lg:p-6 md:p-4 p-3 rounded-md bg-black/30 w-full lg:w-auto">
                     <div className="datepicker-wrapper">

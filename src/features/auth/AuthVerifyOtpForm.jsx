@@ -145,7 +145,7 @@ const AuthVerifyOtpForm = () => {
                     shouldAutoFocus={true}
                 />
 
-                <div className="flex flex-col my-8 gap-1 items-center">
+                <div className="flex flex-col my-8 gap-1 md:gap-3 items-center">
                     <p className={"text-sm"}>Do not receive an OTP?</p>
                     <p className={`text-xl ${isResent ? "block" : "hidden"} `}>
                         {timer} s

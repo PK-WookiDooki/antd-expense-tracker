@@ -20,7 +20,7 @@ const Sidebar = () => {
 
     return (
         <section
-            className={`flex flex-col self-start w-full lg:w-[224px] h-full gap-5 lg:sticky top-0 fixed left-0 bg-white z-10 transform md:pt-[72px] pt-16 lg:pt-0 ${
+            className={`flex flex-col self-start w-full lg:w-[224px] h-full gap-5 lg:sticky top-0 fixed left-0 bg-cFA z-10 transform md:pt-[72px] pt-16 lg:pt-0 ${
                 isSidebarOpen
                     ? " translate-x-0 w-full md:w-[50vw] opacity-100 "
                     : " -translate-x-[100vw] lg:translate-x-0 opacity-0 lg:opacity-100 "

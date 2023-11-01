@@ -35,7 +35,7 @@ const ExpenseRecords = ({
     }, [isASC, expensesList]);
 
     return (
-        <section className="md:p-10 p-4 rounded-2xl bg-cFA flex flex-col md:gap-9 gap-3  h-full">
+        <section className="lg:p-10 md:p-5 p-4 rounded-2xl bg-cFA flex flex-col md:gap-9 gap-3  h-full">
             <div className="flex items-center justify-between">
                 <h2 className="transitions-tlt"> Transactions </h2>
                 <div className="flex items-center gap-2 ">

@@ -9,7 +9,7 @@ const BudgetHeader = ({
 
     return (
         <section
-            className="md:p-10 p-4 rounded-2xl bg-primaryGreen font-medium flex items-center text-cFA justify-between gap-4 drop-shadow-xl ">
+            className="lg:p-10 md:p-5 md:py-10 p-4 rounded-2xl bg-primaryGreen font-medium flex items-center text-cFA justify-between gap-4 drop-shadow-xl ">
             <div className="md:w-full">
                 <h2 className="md:text-3xl text-xl mb-2 text-cFA">
                     Budget
@@ -30,7 +30,7 @@ const BudgetHeader = ({
                         {userBudget === 0 ? formatCurrency(userBudget) : formatCurrency(remainingBudget)}
                     </p>
                 </div>
-                <span className=" md:block hidden self-stretch w-[1px] bg-cFA"></span>
+                <span className=" md:block hidden self-stretch w-[1px] bg-cFA/30"></span>
                 <EditBudgetModal
                     userBudget={userBudget}
                     extraStyle={" hidden md:block "}

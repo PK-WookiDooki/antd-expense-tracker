@@ -100,6 +100,10 @@ const EditNameModal = ({username}) => {
                                     required: true,
                                     message: "Name is required!",
                                 },
+                                {
+                                    pattern: /^\s*[A-Za-z][A-Za-z\s]*$/,
+                                    message: "Enter valid username!"
+                                }
                             ]}
                         >
                             <Input placeholder={"Enter your name"}/>

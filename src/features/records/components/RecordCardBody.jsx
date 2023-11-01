@@ -24,7 +24,7 @@ const RecordCardBody = ({record, isRemove, date}) => {
 
     return (
         <div
-            className={`flex items-center justify-between md:py-2 py-1 gap-2 ${isRemove ? "px-0" : " md:px-6 px-2"}  bg-white rounded-md text-c26`}
+            className={`flex items-center justify-between md:py-2 py-1 gap-2 ${isRemove ? "px-0 bg-cFA " : " lg:px-6 px-4 px-2 bg-white "} rounded-md text-c26`}
         >
             <div className="flex items-center gap-3">
                 <span

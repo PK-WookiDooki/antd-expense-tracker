@@ -55,7 +55,7 @@ const SignUpForm = () => {
     return (
         <section
             className=" min-h-screen w-full flex flex-col items-center justify-center py-5 md:bg-[url('src/assets/imgs/img_signupMobile.png')] bg-cover bg-center lg:bg-[url('')] lg:bg-white ">
-            <div className=" w-full md:max-w-[420px] text-white mb-14 px-5 hidden md:block lg:hidden mt-auto">
+            <div className=" w-full md:max-w-[420px] text-white mb-16 px-5 hidden md:block lg:hidden mt-auto">
                 <p className="text-3xl">Welcome to</p>
                 <h2 className="text-[60px] leading-[70px] font-dms ">
                     Nextracker
@@ -81,21 +81,10 @@ const SignUpForm = () => {
                 <Form.Item
                     name="username"
                     label="Name"
-                    rules={[{required: true, message: "Name is required!"},
-                        ({getFieldValue}) => ({
-                            validator(_, value) {
-                                if (
-                                    value.trim().length > 0
-                                ) {
-                                    return Promise.resolve();
-                                }
-                                return Promise.reject(
-                                    new Error(
-                                        "Enter valid username!"
-                                    )
-                                );
-                            },
-                        }),
+                    rules={[{required: true, message: "Name is required!"}, {
+                        pattern: /^\s*[A-Za-z][A-Za-z\s]*$/,
+                        message: "Enter valid username!"
+                    }
                     ]}
                 >
                     <Input placeholder="Enter your name"/>

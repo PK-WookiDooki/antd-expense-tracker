@@ -15,7 +15,8 @@ const Header = () => {
 
     return (
         <header
-            className="lg:pr-14 md:px-8 lg:pt-6 lg:pb-8 px-4 py-[10px] lg:shadow-none shadow flex items-center justify-between lg:justify-end w-full sticky top-0 z-10 lg:bg-lightGreen bg-white">
+            className="lg:pr-14 md:px-8 lg:pt-6 lg:pb-8 px-4 py-[10px] lg:shadow-none shadow flex items-center justify-between lg:justify-end w-full sticky top-0 z-10 lg:bg-lightGreen bg-cFA
+          ">
             <div className="flex items-center gap-2 lg:hidden">
                 <button onClick={handleSidebar} className="text-2xl">
                     {" "}

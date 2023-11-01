@@ -5,8 +5,8 @@ const CategoryCard = ({category, isRemove}) => {
     return (
         <div
             className={` ${
-                isRemove ? "p-0" : "md:px-6 md:py-1"
-            } rounded-md bg-white text-c26 flex items-center justify-between`}
+                isRemove ? "p-0 bg-cFA " : "md:px-6 md:py-1 bg-white"
+            } rounded-md text-c26 flex items-center justify-between`}
         >
             <div className=" capitalize flex items-center md:gap-3 gap-2 ">
                 <span

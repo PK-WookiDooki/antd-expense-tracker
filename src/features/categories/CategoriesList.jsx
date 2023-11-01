@@ -32,7 +32,7 @@ const CategoriesList = ({categoriesList}) => {
                 size="large"
                 block
             />
-            <div className="flex flex-col gap-2 mt-8">
+            <div className="flex flex-col gap-1 mt-8">
                 {filteredCategories?.map((category) => (
                     <CategoryCard
                         category={category}
