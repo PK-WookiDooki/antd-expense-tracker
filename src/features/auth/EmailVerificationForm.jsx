@@ -1,7 +1,7 @@
 import {Form, Input} from "antd";
 import {FormTitle, SubmitBtn} from "@/components";
 import {useLocation, useNavigate} from "react-router-dom";
-import {useResendOtpMutation} from "./authApi";
+import {useForgotPasswordMutation} from "./authApi";
 import {useDispatch} from "react-redux";
 import {setMessage} from "@/app/global/globalSlice";
 import {useState} from "react";
@@ -10,7 +10,7 @@ const EmailVerificationForm = () => {
     const nav = useNavigate();
     const currentRoute = useLocation().pathname;
 
-    const [resendOtp] = useResendOtpMutation();
+    const [forgotPassword] = useForgotPasswordMutation();
     const dispatch = useDispatch();
 
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -18,7 +18,7 @@ const EmailVerificationForm = () => {
     const onFormSubmit = async (values) => {
         try {
             setIsSubmitting(true);
-            const {data, error} = await resendOtp({email: values.email});
+            const {data, error} = await forgotPassword(values.email);
             if (data?.success) {
                 setIsSubmitting(false);
                 nav("/verify", {
@@ -70,6 +70,7 @@ const EmailVerificationForm = () => {
                         },
                         {
                             type: "email",
+                            pattern: /^([\w.]{4,10})+@([\w-]+\.)+[\w-]{2,4}$/,
                             message: "Enter valid email address!",
                         },
                     ]}

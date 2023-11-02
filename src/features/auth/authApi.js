@@ -1,4 +1,4 @@
-import { baseApi } from "@/app/global/baseApi";
+import {baseApi} from "@/app/global/baseApi";
 
 const endPoint = "/auth";
 
@@ -31,19 +31,19 @@ export const authApi = baseApi.injectEndpoints({
         }),
 
         resendOtp: builder.mutation({
-            query: ({ email, newEmail }) => ({
+            query: ({email, newEmail}) => ({
                 url: `${endPoint}/resend-otp`,
                 method: "POST",
-                body: { email, newEmail },
+                body: {email, newEmail},
             }),
             invalidatesTags: ["auth"],
         }),
 
         forgotPassword: builder.mutation({
             query: (email) => ({
-                url: `${endPoint}/forgot-password`,
+                url: `${endPoint}/forgot-password/send-otp`,
                 method: "POST",
-                body: { email },
+                body: {email},
             }),
             invalidatesTags: ["auth"],
         }),

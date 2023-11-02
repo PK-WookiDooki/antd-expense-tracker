@@ -57,9 +57,6 @@ const CreateNewPasswordForm = () => {
                     <FormTitle
                         isCenter={true}
                         title={"Create New Password"}
-                        desc={
-                            "Your password have to be different from previous one!"
-                        }
                     />
                 </div>
                 <Form.Item

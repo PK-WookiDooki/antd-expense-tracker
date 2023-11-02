@@ -85,16 +85,7 @@ const PieChart = ({chartData, dataColor, chartTitle, extraStyle}) => {
                 formatter: (v) => ` MMK ${v}`,
             },
         },
-        label: {
-            type: "inner",
-            offset: "-50%",
-            style: {
-                textAlign: "center",
-                fontSize: 14,
-            },
-            autoRotate: false,
-            content: chartData?.length > 1 ? "{percentage}" : "",
-        },
+        label: false,
         statistic: {
             title: {
                 offsetY: -4,
@@ -132,21 +123,27 @@ const PieChart = ({chartData, dataColor, chartTitle, extraStyle}) => {
             {
                 type: "element-selected",
             },
-            {
-                type: 'tooltip',
-                cfg: {start: [{trigger: 'element:click', action: 'tooltip:show'}]}
-            }
+            {type: 'element-active'},
+            // {
+            //     type: 'tooltip', // Define the 'pie-select' interaction
+            //     cfg: {
+            //         start: [{trigger: 'element:click', action: "tooltip:show"}]
+            //     }
+            // },
+            // {
+            //     type: 'pie-statistic-active',
+            // }
         ],
     };
     return (
         <div
-            className={`w-full md:max-w-[480px]  bg-pieBg p-5 rounded-xl shadow-xl ${extraStyle} flex flex-col items-center `}
+            className={`w-full md:max-w-[480px]  bg-pieBg py-6 md:py-8 px-4 rounded-xl shadow-xl ${extraStyle} flex flex-col items-center `}
         >
-            <h2 className="text-black md:text-2xl text-base font-medium mt-3 md:mt-0">
+            <h2 className="text-black md:text-2xl text-base font-medium my-6 md:mt-0">
                 {" "}
                 {chartTitle}{" "}
             </h2>
-            <Pie {...config} className={" md:max-w-[300px] w-full "}/>
+            <Pie {...config} className={" md:max-w-[300px] w-full"}/>
         </div>
     );
 };

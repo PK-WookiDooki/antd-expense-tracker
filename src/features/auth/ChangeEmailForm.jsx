@@ -77,6 +77,11 @@ const ChangeEmailForm = () => {
                             required: true,
                             message: "Email address is required!",
                         },
+                        {
+                            type: "email",
+                            pattern: /^([\w.]{4,10})+@([\w-]+\.)+[\w-]{2,4}$/,
+                            message: "Enter valid email address!",
+                        },
                     ]}
                 >
                     <Input placeholder="Enter your new email address" type="email"/>

@@ -21,6 +21,10 @@
     /* Add any other styles you want */
 }
 
+g2-html-annotation:nth-child(2) div {
+    word-break: break-all !important;
+}
+
 .g2-html-annotation:nth-child(3) div {
     font-family: "Roboto Slab", sans-serif !important;
 }
@@ -48,6 +52,11 @@
     z-index: 10;
     height: 10px !important;
     padding: 0 !important;
+}
+
+.ant-carousel .slick-dots-top {
+    top: 24px !important;
+    bottom: auto;
 }
 
 .slick-slider .slick-dots li {

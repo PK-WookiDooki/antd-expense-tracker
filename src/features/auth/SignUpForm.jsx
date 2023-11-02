@@ -12,10 +12,9 @@ const SignUpForm = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const [form] = Form.useForm()
-
-    const [registerAccount] = useRegisterAccountMutation();
     const dispatch = useDispatch();
 
+    const [registerAccount] = useRegisterAccountMutation();
     const onFormSubmit = async (values) => {
         try {
             setIsSubmitting(true);
@@ -84,6 +83,9 @@ const SignUpForm = () => {
                     rules={[{required: true, message: "Name is required!"}, {
                         pattern: /^\s*[A-Za-z][A-Za-z\s]*$/,
                         message: "Enter valid username!"
+                    }, {
+                        min: 3,
+                        message: "Username must have at least 3 characters!"
                     }
                     ]}
                 >
@@ -99,7 +101,7 @@ const SignUpForm = () => {
                         },
                         {
                             pattern: /^([\w.]{4,10})+@([\w-]+\.)+[\w-]{2,4}$/,
-                            message: "Invalid email address!",
+                            message: "Enter valid email address!",
                         },
                     ]}
                 >
@@ -114,8 +116,8 @@ const SignUpForm = () => {
                             pattern:
                                 /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                             message:
-                                "Password must have minimum eight characters with at least one uppercase letter, one number and one special character. Password can not include space keyword.",
-                        },
+                                "Password must have minimum eight characters with at least one uppercase letter, one number and one special character. Password cannot include space keyword!",
+                        }
                     ]}
                 >
                     <Input.Password placeholder={"Enter your password"}/>
