@@ -252,7 +252,7 @@ const EditRecordForm = ({record, date}) => {
                             name={"description"}
                             className="w-full note-input"
                         >
-                            <Input.TextArea placeholder={"Enter description here"} className="!resize-none"/>
+                            <Input.TextArea placeholder={"Enter your note"} className="!resize-none"/>
                         </Form.Item>
                     </div>
 
