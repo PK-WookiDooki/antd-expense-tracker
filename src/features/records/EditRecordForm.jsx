@@ -172,7 +172,7 @@ const EditRecordForm = ({record, date}) => {
                     ) : (
                         ""
                     )}
-                    <Form.Item name={"type"}>
+                    <Form.Item name={"type"} className={"!mb-4 md:!mb-8 "}>
                         <Segmented
                             options={[
                                 {
@@ -205,6 +205,8 @@ const EditRecordForm = ({record, date}) => {
                                         message: "Enter valid value!",
                                     },
                                 ]}
+                                className={" md:!mb-6 !mb-2"}
+
                             >
                                 <InputNumber placeholder={"Enter amount"}
                                              className="flex flex-col justify-center !w-full"/>
@@ -218,6 +220,8 @@ const EditRecordForm = ({record, date}) => {
                                         message: "Date is required!",
                                     },
                                 ]}
+                                className={" md:!mb-6 !mb-2"}
+
                             >
                                 <DatePicker
                                     className="default-input shadow-none "
@@ -236,6 +240,8 @@ const EditRecordForm = ({record, date}) => {
                                         message: "Category is required!",
                                     },
                                 ]}
+                                className={" md:!mb-6 !mb-2"}
+
                             >
                                 <Select placeholder={"Select category"} options={catOptions}/>
                             </Form.Item>

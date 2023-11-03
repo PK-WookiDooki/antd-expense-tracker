@@ -72,6 +72,13 @@ const EditCategoryModal = ({category}) => {
         setIsSubmitting(false)
     };
 
+    const customValidator = async (rule, value) => {
+        if (value?.toString().charAt(0) === " ") {
+            throw new Error("Enter valid category name!")
+        }
+    }
+
+
     return category?.type === null ? (
         <WarningModal actionType={"edit"}/>
     ) : (
@@ -113,9 +120,11 @@ const EditCategoryModal = ({category}) => {
                             {
                                 required: true,
                                 message: "Category name is required!",
-                            },
+                            }, {
+                                validator: customValidator
+                            }
                         ]}
-                        className={"mb-8"}
+                        className={"md:!mb-8 !mb-4"}
                     >
                         <Input placeholder={"Enter category name"}/>
                     </Form.Item>

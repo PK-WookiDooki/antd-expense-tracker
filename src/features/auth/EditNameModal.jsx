@@ -52,6 +52,12 @@ const EditNameModal = ({username}) => {
         setIsSubmitting(false)
     };
 
+    const nameValidator = async (rule, value) => {
+        if (value?.toString().charAt(0) === " ") {
+            throw new Error("Enter valid username!")
+        }
+    }
+
     return (
         <section className="pb-6 border-b border-cD9 text-c26 ">
             <h2 className="text-xl">Name</h2>
@@ -101,8 +107,10 @@ const EditNameModal = ({username}) => {
                                     message: "Name is required!",
                                 },
                                 {
-                                    pattern: /^\s*[A-Za-z][A-Za-z\s]*$/,
-                                    message: "Enter valid username!"
+                                    validator: nameValidator
+                                }, {
+                                    min: 3,
+                                    message: "Username must have at least 3 characters!"
                                 }
                             ]}
                         >

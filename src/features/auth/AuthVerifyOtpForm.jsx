@@ -17,7 +17,8 @@ const AuthVerifyOtpForm = () => {
     const [otp, setOtp] = useState("");
     const [isResent, setIsResent] = useState(false);
     const [timer, setTimer] = useState(59);
-    const [error, setError] = useState(null);
+    const [apiMsg, setApiMsg] = useState(null);
+    const [msgType, setMsgType] = useState(true)
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const nav = useNavigate();
@@ -29,7 +30,8 @@ const AuthVerifyOtpForm = () => {
         try {
             setIsSubmitting(true);
             if (otp?.trim().length === 0) {
-                setError("Please enter OTP code!");
+                setApiMsg("Please enter OTP code!");
+                setMsgType(false)
                 setIsSubmitting(false)
                 return;
             }
@@ -42,25 +44,26 @@ const AuthVerifyOtpForm = () => {
                 dispatch(
                     setMessage({
                         msgType: "success",
-                        msgContent: data?.message,
+                        msgContent: "Email address changed successfully!",
                     })
                 );
                 dispatch(logoutAccount());
             } else {
                 setIsSubmitting(false);
-                setError(apiError?.data?.message || apiError?.error);
+                setApiMsg(apiError?.data?.message || apiError?.error);
+                setMsgType(false)
             }
         } catch (error) {
             throw new Error(error);
         }
     };
     useEffect(() => {
-        if (error !== null) {
+        if (apiMsg !== null) {
             setTimeout(() => {
-                setError(null);
+                setApiMsg(null);
             }, 5000);
         }
-    }, [error]);
+    }, [apiMsg]);
 
     useEffect(() => {
         let counter;
@@ -94,14 +97,11 @@ const AuthVerifyOtpForm = () => {
                 email: userData?.email,
             });
             if (data?.success) {
-                dispatch(
-                    setMessage({
-                        msgType: "success",
-                        msgContent: "Email changed successfully!",
-                    })
-                );
+                setApiMsg(data?.message)
+                setMsgType(true)
             } else {
-                setError(apiError?.data?.message || apiError?.error);
+                setApiMsg(apiError?.data?.message || apiError?.error);
+                setMsgType(false)
             }
         } catch (error) {
             throw new Error(error);
@@ -125,12 +125,13 @@ const AuthVerifyOtpForm = () => {
 
                 </div>
 
-                {error?.trim().length > 0 ? (
+                {apiMsg !== null ? (
                     <Alert
-                        message={error}
-                        type="error"
+                        message={apiMsg}
+                        type={msgType ? "success" : "error" +
+                            ""}
                         showIcon
-                        className="mb-3"
+                        className="mb-4"
                     />
                 ) : (
                     ""

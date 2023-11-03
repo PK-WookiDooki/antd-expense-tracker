@@ -51,6 +51,13 @@ const SignUpForm = () => {
             throw new Error(error);
         }
     };
+
+    const nameValidator = async (rule, value) => {
+        if (value?.toString().charAt(0) === " ") {
+            throw new Error("Enter valid username!")
+        }
+    }
+
     return (
         <section
             className=" min-h-screen w-full flex flex-col items-center justify-center py-5 md:bg-[url('src/assets/imgs/img_signupMobile.png')] bg-cover bg-center lg:bg-[url('')] lg:bg-white ">
@@ -81,8 +88,7 @@ const SignUpForm = () => {
                     name="username"
                     label="Name"
                     rules={[{required: true, message: "Name is required!"}, {
-                        pattern: /^\s*[A-Za-z][A-Za-z\s]*$/,
-                        message: "Enter valid username!"
+                        validator: nameValidator
                     }, {
                         min: 3,
                         message: "Username must have at least 3 characters!"

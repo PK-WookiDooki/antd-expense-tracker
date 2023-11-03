@@ -67,7 +67,7 @@ const ChangePasswordModal = () => {
     };
 
     return (
-        <section className="mt-4">
+        <section className="mt-5">
             <div className="flex items-center justify-between text-c26">
                 <h2 className="text-xl">Password</h2>
                 <button

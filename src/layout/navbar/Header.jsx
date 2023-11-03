@@ -17,15 +17,15 @@ const Header = () => {
         <header
             className="lg:pr-14 md:px-8 lg:pt-6 lg:pb-8 px-4 py-[10px] lg:shadow-none shadow flex items-center justify-between lg:justify-end w-full sticky top-0 z-10 lg:bg-lightGreen bg-cFA
           ">
-            <div className="flex items-center gap-2 lg:hidden">
+            <div className="flex items-center md:gap-4 gap-2 lg:hidden">
                 <button onClick={handleSidebar} className="text-2xl">
                     {" "}
                     {isSidebarOpen ? <RxCross1/> : <RxHamburgerMenu/>}{" "}
                 </button>
-                <h1 className="text-2xl font-medium">
+                <h2>
                     <Link onClick={() => dispatch(toggleSidebar(false))} to={"/"}
-                          className={"font-dms"}> Nextracker </Link>
-                </h1>
+                          className={"font-dms text-c26 text-[22px] "}> Nextracker </Link>
+                </h2>
             </div>
             <div className="flex items-center gap-3 lg:gap-6">
                 <AddNewRecordModal/>

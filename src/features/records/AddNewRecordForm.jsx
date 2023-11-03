@@ -135,7 +135,7 @@ const AddNewRecordForm = () => {
                         ""
                     )}
 
-                    <Form.Item name={"type"} initialValue={"EXPENSE"}>
+                    <Form.Item name={"type"} initialValue={"EXPENSE"} className={"!mb-4 md:!mb-8"}>
                         <Segmented
                             options={[
                                 {
@@ -169,6 +169,7 @@ const AddNewRecordForm = () => {
                                         message: "Amount must have at least 1.",
                                     },
                                 ]}
+                                className={" md:!mb-6 !mb-2"}
                             >
                                 <InputNumber placeholder={"Enter amount"}
                                              className="flex flex-col justify-center !w-full "/>
@@ -183,6 +184,8 @@ const AddNewRecordForm = () => {
                                     },
                                 ]}
                                 initialValue={dayjs()}
+                                className={" md:!mb-6 !mb-2"}
+
                             >
                                 <DatePicker
                                     format={"DD-MM-YYYY"}
@@ -200,7 +203,7 @@ const AddNewRecordForm = () => {
                                             "Record's category is required!",
                                     },
                                 ]}
-                                //className="md:!mb-0"
+                                className={"md:!mb-6 !mb-2 "}
                             >
                                 <Select placeholder={"Select category"} options={catOptions}/>
                             </Form.Item>

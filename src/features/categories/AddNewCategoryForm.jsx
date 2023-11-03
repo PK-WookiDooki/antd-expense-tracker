@@ -72,6 +72,12 @@ const AddNewCategoryForm = ({iconsList}) => {
         setOpenModal(false);
     };
 
+    const customValidator = async (rule, value) => {
+        if (value?.toString().charAt(0) === " ") {
+            throw new Error("Enter valid category name!")
+        }
+    }
+
     return (
         <section>
             <CreateBtn
@@ -97,7 +103,7 @@ const AddNewCategoryForm = ({iconsList}) => {
                         ""
                     )}
 
-                    <Form.Item name={"type"} initialValue={"EXPENSE"} className={"mb-8"}>
+                    <Form.Item name={"type"} initialValue={"EXPENSE"} className={"!mb-4 md:!mb-8"}>
                         <Segmented
                             options={[
                                 {
@@ -123,9 +129,11 @@ const AddNewCategoryForm = ({iconsList}) => {
                             {
                                 required: true,
                                 message: "Category name is required!",
-                            },
+                            }, {
+                                validator: customValidator
+                            }
                         ]}
-                        className={"mb-8"}
+                        className={"!mb-4 md:!mb-8"}
 
                     >
                         <Input placeholder={"Enter category name"}/>

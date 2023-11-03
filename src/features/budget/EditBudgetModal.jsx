@@ -80,40 +80,44 @@ const EditBudgetModal = ({userBudget, extraStyle}) => {
                     form={form}
                     layout="vertical"
                     onFinish={onFormSubmit}
-                    className="p-6 pb-0"
+
                 >
-                    {error !== null ? (
-                        <Alert
-                            message={error}
-                            type="error"
-                            showIcon
-                            className="mb-3"
-                        />
-                    ) : (
-                        ""
-                    )}
-                    <Form.Item
-                        label={"Budget Amount"}
-                        name={"budget"}
-                        rules={[
-                            {
-                                required: true,
-                                message: "Budget amount is required!",
-                            },
-                            {
-                                type: "number",
-                                min: 0,
-                                message: "Enter valid amount!",
-                            },
-                        ]}
-                    >
-                        <InputNumber placeholder={"Enter budget amount"} className="!w-full"/>
-                    </Form.Item>
-                    <div className="border-t border-cD9 py-3">
+                    <div className="p-6 pb-0">
+
+
+                        {error !== null ? (
+                            <Alert
+                                message={error}
+                                type="error"
+                                showIcon
+                                className="mb-3"
+                            />
+                        ) : (
+                            ""
+                        )}
+                        <Form.Item
+                            label={"Budget Amount"}
+                            name={"budget"}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Budget amount is required!",
+                                },
+                                {
+                                    type: "number",
+                                    min: 0,
+                                    message: "Enter valid amount!",
+                                },
+                            ]}
+                        >
+                            <InputNumber placeholder={"Enter budget amount"} className="!w-full"/>
+                        </Form.Item>
+                    </div>
+                    <div className="py-3 border-t px-6 border-cD9/60">
                         <SubmitBtn
                             label={"save"}
                             isFixedWidth={true}
-                            extraStyle={" block ml-auto"}
+                            extraStyle={"block ml-auto"}
                             isLoading={isSubmitting}
                         />
                     </div>
