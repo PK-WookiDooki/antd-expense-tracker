@@ -97,7 +97,7 @@ const AuthVerifyOtpForm = () => {
                 dispatch(
                     setMessage({
                         msgType: "success",
-                        msgContent: data?.message,
+                        msgContent: "Email changed successfully!",
                     })
                 );
             } else {
