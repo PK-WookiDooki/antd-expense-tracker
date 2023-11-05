@@ -71,7 +71,7 @@ const DeleteConfirmationBox = ({title, component, event, isDropdown}) => {
                 width={isDropdown ? 580 : 480}
                 className={" confirmation-modal "}
             >
-                <h2 className="md:mb-8 mb-4 md:text-3xl text-xl text-center capitalize ">
+                <h2 className="md:mb-8 mb-4 md:text-3xl text-xl text-center capitalize font-medium ">
                     Remove {title}
                 </h2>
                 <p className="mb-6 md:text-base text-sm">

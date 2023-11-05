@@ -155,7 +155,7 @@ const EditRecordForm = ({record, date}) => {
                     form={form}
                     layout="vertical"
                     onFinish={onFormSubmit}
-                    className="!font-sans p-4"
+                    className="!font-sans create-form"
                 >
                     <h2 className="modal-form-tlt ">
                         {" "}

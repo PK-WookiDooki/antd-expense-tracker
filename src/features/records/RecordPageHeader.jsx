@@ -3,7 +3,7 @@ import {DatePicker} from "antd";
 const RecordPageHeader = ({dates, setDates}) => {
 
     return (
-        <div className=" flex items-center gap-8 md:max-w-[400px] w-full text-black">
+        <div className=" flex items-center lg:gap-8 md:gap-6 gap-4 md:max-w-[400px] w-full text-black">
             <div className="datepicker-wrapper">
                 <label htmlFor="startDate" className="datepicker-label">Start Date</label>
                 <DatePicker

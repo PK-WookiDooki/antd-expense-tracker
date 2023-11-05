@@ -11,9 +11,10 @@ const VerifyOtpForm = () => {
     const {email, previousRoute} = useLocation().state;
     const [otp, setOtp] = useState("");
     const [isResent, setIsResent] = useState(false);
-    // const [timer, setTimer] = useState(59);
     const [timer, setTimer] = useState(59);
-    const [error, setError] = useState(null);
+    const [apiMessage, setApiMessage] = useState({
+        type: null, content: null
+    });
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const nav = useNavigate();
@@ -27,7 +28,7 @@ const VerifyOtpForm = () => {
         try {
             setIsSubmitting(true);
             if (otp?.trim().length === 0) {
-                setError("Please enter OTP code!");
+                setApiMessage({type: "error", content: "Please enter OTP code!"});
                 setIsSubmitting(false)
                 return;
             }
@@ -55,25 +56,21 @@ const VerifyOtpForm = () => {
                     });
                 }
             } else {
+                setOtp("")
                 setIsSubmitting(false);
-                dispatch(
-                    setMessage({
-                        msgType: "error",
-                        msgContent: error?.data?.message || error?.error,
-                    })
-                );
+                setApiMessage({type: "error", content: error?.data?.message || error?.error})
             }
         } catch (error) {
             throw new Error(error);
         }
     };
     useEffect(() => {
-        if (error !== null) {
+        if (apiMessage?.content !== null) {
             setTimeout(() => {
-                setError(null);
+                setApiMessage({type: null, content: null});
             }, 5000);
         }
-    }, [error]);
+    }, [apiMessage]);
 
     useEffect(() => {
         let counter;
@@ -100,14 +97,14 @@ const VerifyOtpForm = () => {
         try {
             const {data, error: apiError} = await resendOtp({email});
             if (data?.success) {
-                dispatch(
-                    setMessage({
-                        msgType: "success",
-                        msgContent: data?.message,
-                    })
-                );
+                setApiMessage({
+                    type: "success", content: data?.message
+                });
             } else {
-                setError(apiError?.data?.message || apiError?.error);
+                setOtp("")
+                setApiMessage({
+                    type: "error", content: apiError?.data?.message || apiError?.error
+                });
             }
         } catch (error) {
             throw new Error(error);
@@ -134,12 +131,12 @@ const VerifyOtpForm = () => {
                     />
                 </div>
 
-                {error?.trim().length > 0 ? (
+                {apiMessage?.content !== null && apiMessage?.type !== null ? (
                     <Alert
-                        message={error}
-                        type="error"
+                        message={apiMessage?.content}
+                        type={apiMessage?.type}
                         showIcon
-                        className="mb-3"
+                        className="mb-5"
                     />
                 ) : (
                     ""

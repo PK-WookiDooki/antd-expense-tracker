@@ -63,7 +63,7 @@ const RecordsList = ({recordsList, selectedOpt, setSelectedOpt}) => {
 
     return (
         <section className="h-full flex flex-col ">
-            <div className="flex items-center justify-between md:mb-9 mb-4 text-black">
+            <div className="flex items-center justify-between md:mb-9 mb-5 text-black">
                 <h2 className="transitions-tlt ">
                     Transactions
                 </h2>

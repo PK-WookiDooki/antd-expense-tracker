@@ -30,7 +30,7 @@
     }
 
     .modal-form-tlt {
-        @apply md:text-3xl text-xl md:mb-8 mb-5 text-center
+        @apply md:text-3xl text-xl md:mb-8 mb-5 text-center md:font-normal font-medium
     }
 
     .record-form-footer {
