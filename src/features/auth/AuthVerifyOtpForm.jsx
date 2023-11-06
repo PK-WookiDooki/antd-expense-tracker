@@ -12,7 +12,7 @@ import {logoutAccount} from "./authSlice";
 const AuthVerifyOtpForm = () => {
     const {token} = useSelector((state) => state.authSlice);
     const {data: userData} = useGetUserDataQuery(token);
-    const newEmail = useLocation().state?.email || "example@gmail.com";
+    const newEmail = useLocation().state?.email;
 
     const [otp, setOtp] = useState("");
     const [isResent, setIsResent] = useState(false);

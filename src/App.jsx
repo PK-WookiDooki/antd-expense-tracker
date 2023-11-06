@@ -100,7 +100,9 @@ const App = () => {
                             />
                             <Route
                                 path="verify"
-                                element={<AuthVerifyOtpPage/>}
+                                element={<OTPGuard>
+                                    <AuthVerifyOtpPage/>
+                                </OTPGuard>}
                             />
                         </Route>
                         <Route path="transactions" element={<Records/>}/>
