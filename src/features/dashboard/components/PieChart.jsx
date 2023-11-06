@@ -137,7 +137,7 @@ const PieChart = ({chartData, dataColor, chartTitle, extraStyle}) => {
     };
     return (
         <div
-            className={`w-full md:max-w-[480px]  bg-pieBg py-6 md:py-8 px-4 rounded-xl shadow-xl ${extraStyle} flex flex-col items-center `}
+            className={`w-full md:max-w-[480px]  bg-pieBg py-6 md:py-8 px-4 rounded-2xl ${extraStyle} flex flex-col items-center `}
         >
             <h2 className="text-black md:text-2xl text-base font-medium my-6 md:mt-0">
                 {" "}
