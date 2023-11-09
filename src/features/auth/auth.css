@@ -9,7 +9,7 @@
     }
 
     .otp-form input {
-        @apply !w-12  h-12 rounded text-black text-center outline-none border border-[#14224A]
+        @apply !w-12  h-12 rounded text-black text-center outline-none border border-[#14224A] caret-black
         ;
     }
 
