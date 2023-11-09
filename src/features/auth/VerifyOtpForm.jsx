@@ -146,6 +146,7 @@ const VerifyOtpForm = () => {
                     value={otp}
                     onChange={(code) => setOtp(code)}
                     numInputs={6}
+                    inputType={'number'}
                     containerStyle={"otp-form"}
                     renderInput={(props) => <input {...props} />}
                     shouldAutoFocus={true}
