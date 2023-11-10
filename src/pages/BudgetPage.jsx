@@ -9,6 +9,7 @@ import {useGetUserDataQuery} from "../features/auth/userApi";
 const BudgetPage = () => {
     const {token} = useSelector((state) => state.authSlice);
     const [selectedMonth, setSelectedMonth] = useState(dayjs());
+    const [isASC, setIsASC] = useState(false)
     const {data: expensesList, isLoading: isELLoading, isFetching: isDataFetching} =
         useGetAllExpensesQuery({
             token,
@@ -41,6 +42,8 @@ const BudgetPage = () => {
                 expensesList={expensesList}
                 selectedMonth={selectedMonth}
                 setSelectedMonth={setSelectedMonth}
+                isASC={isASC}
+                setIsASC={setIsASC}
             />
             <FloatingBtn/>
         </section>

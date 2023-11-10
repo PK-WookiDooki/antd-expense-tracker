@@ -24,7 +24,7 @@ const DashboardPage = () => {
         });
 
 
-    console.log(recordsList, error)
+    // console.log(recordsList, error)
 
     if (isRecordsLoading || isRecordsFetching) {
         return <Loader/>;

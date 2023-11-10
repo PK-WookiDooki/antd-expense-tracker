@@ -142,13 +142,6 @@ const VerifyOtpForm = () => {
                     ""
                 )}
 
-                <Alert
-                    message={"ehh"}
-                    type={"success"}
-                    showIcon
-                    className="mb-5 !rounded-sm "
-                />
-
                 <OTPInput
                     value={otp}
                     onChange={(code) => setOtp(code)}

@@ -20,11 +20,10 @@ const options = [
     },
 ];
 
-const RecordsList = ({recordsList, selectedOpt, setSelectedOpt}) => {
+const RecordsList = ({recordsList, selectedOpt, setSelectedOpt, isASC, setIsASC}) => {
     //const { recordsList } = useSelector((state) => state.recordsSlice);
     const [records, setRecords] = useState([]);
-    const [isASC, setIsASC] = useState(false);
-
+    // const [isASC, setIsASC] = useState(false);
 
     useEffect(() => {
         if (recordsList?.length > 0) {

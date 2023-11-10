@@ -7,10 +7,11 @@ import {useEffect, useState} from "react";
 const ExpenseRecords = ({
                             selectedMonth,
                             setSelectedMonth,
+                            isASC, setIsASC,
                             expensesList,
                             userBudget,
                         }) => {
-    const [isASC, setIsASC] = useState(false);
+    // const [isASC, setIsASC] = useState(false);
     const [expenseRecords, setExpenseRecords] = useState([]);
 
     useEffect(() => {

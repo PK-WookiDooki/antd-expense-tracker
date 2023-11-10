@@ -30,10 +30,13 @@ const RecordsPage = () => {
             startDate: dates.startDate.format("YYYY-MM-DD"),
             endDate: dates.endDate.format("YYYY-MM-DD"),
         });
+    const [isASC, setIsASC] = useState(false);
 
     if (isRecordsLoading || isRecordsFetching) {
         return <Loader/>;
     }
+
+    // just for testing!!
 
     return (
         <section className=" lg:p-10 md:p-5 p-4 rounded-2xl flex flex-col gap-6 h-full bg-cFA">
@@ -41,7 +44,8 @@ const RecordsPage = () => {
                 dates={dates}
                 setDates={setDates}
             />
-            <RecordsList recordsList={records} selectedOpt={selectedOpt} setSelectedOpt={setSelectedOpt}/>
+            <RecordsList recordsList={records} selectedOpt={selectedOpt} setSelectedOpt={setSelectedOpt} isASC={isASC}
+                         setIsASC={setIsASC}/>
             <FloatingBtn/>
         </section>
     );
