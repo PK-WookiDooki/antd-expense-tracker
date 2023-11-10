@@ -70,6 +70,7 @@ const ChangeEmailForm = () => {
 
                 </div>
                 <Form.Item
+                    validateTrigger={"onSubmit"}
                     name="newEmail"
                     label="Email"
                     rules={[
@@ -87,6 +88,7 @@ const ChangeEmailForm = () => {
                     <Input placeholder="Enter your new email address" type="email"/>
                 </Form.Item>
                 <Form.Item
+                    validateTrigger={"onSubmit"}
                     name="password"
                     label="Password"
                     rules={[

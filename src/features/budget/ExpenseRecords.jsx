@@ -60,7 +60,7 @@ const ExpenseRecords = ({
             </div>
 
             {expenseRecords?.length > 0 && userBudget > 0 ? (
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-1">
                     {expenseRecords?.map((record) => (
                         <RecordCard key={record?.id} record={record}/>
                     ))}

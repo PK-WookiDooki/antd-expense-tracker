@@ -58,6 +58,7 @@ const SignInForm = () => {
                         Up</Link></p>
                 </div>
                 <Form.Item
+                    validateTrigger={"onSubmit"}
                     name="email"
                     label="Email"
                     rules={[
@@ -74,6 +75,7 @@ const SignInForm = () => {
                     <Input placeholder="Enter your email address" type="email"/>
                 </Form.Item>
                 <Form.Item
+                    validateTrigger={"onSubmit"}
                     name="password"
                     label="Password"
                     rules={[

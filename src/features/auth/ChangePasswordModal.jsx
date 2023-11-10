@@ -97,6 +97,7 @@ const ChangePasswordModal = () => {
                             <Alert message={error} type={"error"} showIcon={true} className={"mb-3"}/> : ""}
 
                         <Form.Item
+                            validateTrigger={"onSubmit"}
                             name="oldPassword"
                             label="Current Password"
                             rules={[
@@ -109,6 +110,7 @@ const ChangePasswordModal = () => {
                             <Input.Password placeholder={"Enter your current password"}/>
                         </Form.Item>
                         <Form.Item
+                            validateTrigger={"onSubmit"}
                             name="newPassword"
                             label="Password"
                             rules={[
@@ -127,6 +129,7 @@ const ChangePasswordModal = () => {
                             <Input.Password placeholder={"Enter your new password"}/>
                         </Form.Item>
                         <Form.Item
+                            validateTrigger={"onSubmit"}
                             name="password_confirmation"
                             label="Confirm Password"
                             dependencies={["newPassword"]}

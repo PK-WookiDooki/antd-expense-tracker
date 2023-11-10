@@ -19,13 +19,13 @@ const DBPieCharts = ({recordsList}) => {
                 slidesToShow={2}
                 slidesToScroll={1}
                 draggable={true}
-                dots={true}
+                dots={false}
                 responsive={[
                     {
                         breakpoint: 1024,
                         settings: {
                             slidesToShow: 2,
-                            dots: true,
+                            dots: false,
                         },
                     },
                     {

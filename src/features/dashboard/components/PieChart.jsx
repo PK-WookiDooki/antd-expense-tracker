@@ -68,13 +68,13 @@ const PieChart = ({chartData, dataColor, chartTitle, extraStyle}) => {
                                 inactiveOpacity: 0.5,
                                 fill: '#1C1B1F',
                                 opacity: 0.8,
-                                size: 18,
+                                size: 22,
                             },
                         },
                         text: {
                             style: {
                                 fill: '#000',
-                                fontSize: 14,
+                                fontSize: 16,
                             },
                         },
                     }
@@ -137,9 +137,9 @@ const PieChart = ({chartData, dataColor, chartTitle, extraStyle}) => {
     };
     return (
         <div
-            className={`w-full md:max-w-[480px]  bg-pieBg py-6 md:py-8 px-4 rounded-2xl ${extraStyle} flex flex-col items-center `}
+            className={`w-full md:max-w-[480px]  bg-pieBg  py-8 px-4 rounded-2xl ${extraStyle} flex flex-col items-center `}
         >
-            <h2 className="text-black md:text-2xl text-base font-medium my-6 md:mt-0">
+            <h2 className="text-black md:text-2xl text-lg font-medium my-6 md:mt-0">
                 {" "}
                 {chartTitle}{" "}
             </h2>

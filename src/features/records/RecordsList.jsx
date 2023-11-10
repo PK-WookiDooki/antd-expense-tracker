@@ -87,7 +87,7 @@ const RecordsList = ({recordsList, selectedOpt, setSelectedOpt}) => {
                 </div>
             </div>
             {records?.length > 0 ? (
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-1">
                     {records?.map((record) => (
                         <RecordCard record={record} key={record.id}/>
                     ))}

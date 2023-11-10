@@ -60,6 +60,7 @@ const CreateNewPasswordForm = () => {
                     />
                 </div>
                 <Form.Item
+                    validateTrigger={"onSubmit"}
                     name="password"
                     label="Password"
                     rules={[
@@ -75,6 +76,7 @@ const CreateNewPasswordForm = () => {
                     <Input.Password placeholder={"Enter new password"}/>
                 </Form.Item>
                 <Form.Item
+                    validateTrigger={"onSubmit"}
                     name="password_confirmation"
                     label="Confirm Password"
                     rules={[

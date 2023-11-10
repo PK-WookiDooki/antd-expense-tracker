@@ -136,11 +136,18 @@ const VerifyOtpForm = () => {
                         message={apiMessage?.content}
                         type={apiMessage?.type}
                         showIcon
-                        className="mb-5"
+                        className="mb-5 !rounded-sm "
                     />
                 ) : (
                     ""
                 )}
+
+                <Alert
+                    message={"ehh"}
+                    type={"success"}
+                    showIcon
+                    className="mb-5 !rounded-sm "
+                />
 
                 <OTPInput
                     value={otp}
@@ -166,10 +173,10 @@ const VerifyOtpForm = () => {
                             isResent
                                 ? " text-[#20C]/50 "
                                 : "text-[#20C]"
-                        } `}
+                        } duration-200 `}
                     >
                         {" "}
-                        Resend OTP{" "}
+                        Resend OTP!{" "}
                     </button>
                 </div>
 

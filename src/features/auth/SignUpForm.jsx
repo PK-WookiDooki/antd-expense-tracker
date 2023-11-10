@@ -85,6 +85,7 @@ const SignUpForm = () => {
                     Create Account{" "}
                 </h2>
                 <Form.Item
+                    validateTrigger={"onSubmit"}
                     name="username"
                     label="Name"
                     rules={[{required: true, message: "Name is required!"}, {
@@ -98,6 +99,7 @@ const SignUpForm = () => {
                     <Input placeholder="Enter your name"/>
                 </Form.Item>
                 <Form.Item
+                    validateTrigger={"onSubmit"}
                     name="email"
                     label="Email"
                     rules={[
@@ -114,6 +116,7 @@ const SignUpForm = () => {
                     <Input placeholder="Enter your email address" type="email"/>
                 </Form.Item>
                 <Form.Item
+                    validateTrigger={"onSubmit"}
                     name="password"
                     label="Password"
                     rules={[
@@ -129,6 +132,7 @@ const SignUpForm = () => {
                     <Input.Password placeholder={"Enter your password"}/>
                 </Form.Item>
                 <Form.Item
+                    validateTrigger={"onSubmit"}
                     name="password_confirmation"
                     label="Confirm Password"
                     dependencies={["password"]}

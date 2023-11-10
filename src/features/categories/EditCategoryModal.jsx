@@ -125,6 +125,7 @@ const EditCategoryModal = ({category}) => {
                             }
                         ]}
                         className={"md:!mb-8 !mb-4"}
+                        validateTrigger={"onSubmit"}
                     >
                         <Input placeholder={"Enter category name"}/>
                     </Form.Item>
@@ -138,6 +139,7 @@ const EditCategoryModal = ({category}) => {
                                 message: "Category Icon is required!",
                             },
                         ]}
+                        validateTrigger={"onSubmit"}
                     >
                         <div className="icon-box">
                             {iconOptions?.map((item, index) => {

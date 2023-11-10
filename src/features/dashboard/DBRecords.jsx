@@ -18,7 +18,7 @@ const DBRecords = ({recordsList, dateString}) => {
                 Transactions
             </h2>
             {records?.length > 0 ? (
-                <div className=" flex flex-col gap-2 ">
+                <div className=" flex flex-col gap-1 ">
                     {records?.map((record) => (
                         <RecordCard key={record?.id} record={record}/>
                     ))}
@@ -34,10 +34,12 @@ const DBRecords = ({recordsList, dateString}) => {
                             pathname: "/transactions",
                             search: `?${dateString}`,
                         }}
-                        className="text-[#20C] hover:text-[#20C]/80 duration-200 text-sm md:text-base "
+                        className="text-[#20C] hover:text-[#20C]/80 duration-200 text-sm md:text-base flex items-center gap-2 font-medium"
                     >
                         {" "}
-                        See more . . .
+                        See more <span className="material-symbols-outlined text-base">
+arrow_forward_ios
+</span>
                     </Link>
                 </div>
             ) : (

@@ -109,8 +109,9 @@ const EditBudgetModal = ({userBudget, extraStyle}) => {
                                     message: "Enter valid amount!",
                                 },
                             ]}
+                            validateTrigger={"onSubmit"}
                         >
-                            <InputNumber placeholder={"Enter budget amount"} className="!w-full"/>
+                            <InputNumber inputMode={"numeric"} placeholder={"Enter budget amount"} className="!w-full"/>
                         </Form.Item>
                     </div>
                     <div className="py-3 border-t px-6 border-cD9/60">

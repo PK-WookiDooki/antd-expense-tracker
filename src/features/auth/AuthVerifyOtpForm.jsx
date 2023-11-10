@@ -131,11 +131,12 @@ const AuthVerifyOtpForm = () => {
                         type={msgType ? "success" : "error" +
                             ""}
                         showIcon
-                        className="mb-4"
+                        className="mb-4 !rounded-sm"
                     />
                 ) : (
                     ""
                 )}
+
 
                 <OTPInput
                     value={otp}
@@ -163,7 +164,7 @@ const AuthVerifyOtpForm = () => {
                         } duration-200 `}
                     >
                         {" "}
-                        Resend OTP{" "}
+                        Resend OTP!{" "}
                     </button>
                 </div>
 

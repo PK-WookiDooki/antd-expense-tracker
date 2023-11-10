@@ -21,13 +21,14 @@
     /* Add any other styles you want */
 }
 
-g2-html-annotation:nth-child(2) div {
-    word-break: break-all !important;
-}
+/*g2-html-annotation:nth-child(2) div {*/
+/*    word-break: break-all !important;*/
+/*}*/
 
-.g2-html-annotation:nth-child(3) div {
+.g2-html-annotation:where(:nth-child(3), :nth-child(4)) div {
     font-family: "Roboto Slab", sans-serif !important;
 }
+
 
 /* carousel */
 

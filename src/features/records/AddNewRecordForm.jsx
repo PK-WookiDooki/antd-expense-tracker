@@ -156,6 +156,7 @@ const AddNewRecordForm = () => {
                     <div className=" flex flex-col md:flex-row lg:gap-10 md:gap-6">
                         <div className="w-full">
                             <Form.Item
+                                validateTrigger={"onSubmit"}
                                 label="Amount"
                                 name={"amount"}
                                 rules={[
@@ -172,9 +173,11 @@ const AddNewRecordForm = () => {
                                 className={" md:!mb-6 !mb-2"}
                             >
                                 <InputNumber placeholder={"Enter amount"}
+                                             inputMode={"numeric"}
                                              className="flex flex-col justify-center !w-full "/>
                             </Form.Item>
                             <Form.Item
+                                validateTrigger={"onSubmit"}
                                 label="Date"
                                 name={"createdDate"}
                                 rules={[
@@ -194,6 +197,7 @@ const AddNewRecordForm = () => {
                                 />
                             </Form.Item>
                             <Form.Item
+                                validateTrigger={"onSubmit"}
                                 label="Category"
                                 name={"userCategoryId"}
                                 rules={[
@@ -210,6 +214,7 @@ const AddNewRecordForm = () => {
                         </div>
 
                         <Form.Item
+                            validateTrigger={"onSubmit"}
                             label="Note"
                             name={"description"}
                             className="w-full note-input"

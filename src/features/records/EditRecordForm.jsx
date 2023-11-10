@@ -206,10 +206,11 @@ const EditRecordForm = ({record, date}) => {
                                     },
                                 ]}
                                 className={" md:!mb-6 !mb-2"}
+                                validateTrigger={"onSubmit"}
 
                             >
                                 <InputNumber placeholder={"Enter amount"}
-                                             className="flex flex-col justify-center !w-full"/>
+                                             inputMode={"numeric"} className="flex flex-col justify-center !w-full"/>
                             </Form.Item>
                             <Form.Item
                                 label="Date"
@@ -221,7 +222,7 @@ const EditRecordForm = ({record, date}) => {
                                     },
                                 ]}
                                 className={" md:!mb-6 !mb-2"}
-
+                                validateTrigger={"onSubmit"}
                             >
                                 <DatePicker
                                     className="default-input shadow-none "
@@ -241,7 +242,7 @@ const EditRecordForm = ({record, date}) => {
                                     },
                                 ]}
                                 className={" md:!mb-6 !mb-2"}
-
+                                validateTrigger={"onSubmit"}
                             >
                                 <Select placeholder={"Select category"} options={catOptions}/>
                             </Form.Item>
@@ -251,6 +252,7 @@ const EditRecordForm = ({record, date}) => {
                             label="Note"
                             name={"description"}
                             className="w-full note-input"
+                            validateTrigger={"onSubmit"}
                         >
                             <Input.TextArea placeholder={"Enter your note"} className="!resize-none"/>
                         </Form.Item>

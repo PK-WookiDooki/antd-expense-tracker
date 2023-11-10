@@ -84,7 +84,6 @@ const EditNameModal = ({username}) => {
                     layout="vertical"
                     onFinish={onFormSubmit}
                 >
-
                     <div className={" p-6 pb-0"}>
 
                         {error !== null ? (
@@ -113,6 +112,7 @@ const EditNameModal = ({username}) => {
                                     message: "Username must have at least 3 characters!"
                                 }
                             ]}
+                            validateTrigger={"onSubmit"}
                         >
                             <Input placeholder={"Enter your name"}/>
                         </Form.Item>

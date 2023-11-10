@@ -61,6 +61,7 @@ const EmailVerificationForm = () => {
                     />
                 </div>
                 <Form.Item
+                    validateTrigger={"onSubmit"}
                     name="email"
                     label="Email"
                     rules={[

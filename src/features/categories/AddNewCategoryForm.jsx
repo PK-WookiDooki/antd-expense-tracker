@@ -134,7 +134,7 @@ const AddNewCategoryForm = ({iconsList}) => {
                             }
                         ]}
                         className={"!mb-4 md:!mb-8"}
-
+                        validateTrigger={"onSubmit"}
                     >
                         <Input placeholder={"Enter category name"}/>
                     </Form.Item>
@@ -148,6 +148,7 @@ const AddNewCategoryForm = ({iconsList}) => {
                                 message: "Category Icon is required!",
                             },
                         ]}
+                        validateTrigger={"onSubmit"}
                     >
                         <div className="icon-box ">
                             {iconOptions?.map((item, index) => {
