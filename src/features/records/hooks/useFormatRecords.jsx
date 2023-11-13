@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
+import dayjs from "dayjs";
 
-function useFormatRecords(recordsList) {
+function useFormatRecords(recordsList, isASC = false) {
     const [result, setResult] = useState([]);
 
     useEffect(() => {
-        const formatData = () => {
-            const formattedData = recordsList.reduce((filteredArray, data) => {
+        if (recordsList?.length > 0) {
+            const formattedData = recordsList?.reduce((filteredArray, data) => {
                 const {
                     id,
                     createdDate,
@@ -36,13 +37,17 @@ function useFormatRecords(recordsList) {
                     date: createdDate,
                     data: formattedData[createdDate],
                 }))
-                .sort((a, b) => new Date(b.date) - new Date(a.date));
+                .sort((a, b) => dayjs(b.date) - dayjs(a.date));
 
-            setResult(sortedResult);
-        };
+            if (isASC) {
+                const formattedResult = sortedResult?.slice().sort((a, b) => dayjs(a.date) - dayjs(b.date));
+                setResult(formattedResult)
+            } else {
+                setResult(sortedResult);
+            }
+        }
+    }, [recordsList, isASC]);
 
-        formatData();
-    }, [recordsList]);
 
     return result;
 }

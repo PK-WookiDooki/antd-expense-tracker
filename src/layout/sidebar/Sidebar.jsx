@@ -5,6 +5,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {Button} from "antd";
 import {logoutAccount} from "@/features/auth/authSlice";
 import {toggleSidebar} from "@/app/global/globalSlice";
+import {
+    MdOutlineCompareArrows,
+    MdOutlineCategory,
+    MdOutlineDashboard,
+    MdOutlineProductionQuantityLimits
+} from "react-icons/md"
 
 const Sidebar = () => {
     const {isSidebarOpen} = useSelector((state) => state.globalSlice);
@@ -58,7 +64,7 @@ const Sidebar = () => {
                     className="flex text-lg items-center gap-2 lg:hidden !bg-danger hover:!bg-danger/80 w-full justify-center font-medium !rounded-sm "
                 >
                     {" "}
-                    <i className="material-symbols-outlined text-2xl">
+                    <i className="material-symbols-rounded text-2xl">
                         logout
                     </i> Logout{" "}
                 </Button>

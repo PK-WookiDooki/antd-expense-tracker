@@ -36,7 +36,7 @@ const Header = () => {
                         className=" lg:pointer-events-none lg:hidden "
                     >
                         <span
-                            className="material-symbols-outlined text-2xl md:h-9 h-8 aspect-square rounded-full flex items-center justify-center bg-c26 text-cFA ">
+                            className="material-symbols-rounded text-2xl md:h-9 h-8 aspect-square rounded-full flex items-center justify-center bg-c26 text-cFA ">
                             person
                         </span>
                     </Link>

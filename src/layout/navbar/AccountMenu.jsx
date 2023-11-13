@@ -23,7 +23,7 @@ const AccountMenu = () => {
             label: (
                 <Link to={"/account"} className="menu-item">
                     {" "}
-                    <i className="material-symbols-outlined">person</i>
+                    <i className="material-symbols-rounded">person</i>
                     Account
                 </Link>
             ),
@@ -37,7 +37,7 @@ const AccountMenu = () => {
                     className="menu-item "
                 >
                     {" "}
-                    <i className="material-symbols-outlined">
+                    <i className="material-symbols-rounded">
                         logout
                     </i> Logout{" "}
                 </button>
@@ -53,12 +53,12 @@ const AccountMenu = () => {
             >
                 {" "}
                 <span
-                    className="material-symbols-outlined text-2xl h-9 aspect-square rounded-full flex items-center justify-center bg-c26 text-cFA mr-2">
+                    className="material-symbols-rounded text-2xl h-9 aspect-square rounded-full flex items-center justify-center bg-c26 text-cFA mr-2">
                     person
                 </span>
                 {userData?.username || "Nexcoder"}
 
-                <i className="material-symbols-outlined">expand_more</i>
+                <i className="material-symbols-rounded">expand_more</i>
 
             </button>
         </Dropdown>

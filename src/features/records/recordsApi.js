@@ -5,8 +5,8 @@ const endPoint = "/transactions";
 export const recordsApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllRecords: builder.query({
-            query: ({startDate, endDate, token}) => ({
-                url: `${endPoint}?startDate=${startDate}&endDate=${endDate}&filter=ALL`,
+            query: ({startDate, endDate, token, keyword}) => ({
+                url: `${endPoint}?startDate=${startDate}&endDate=${endDate}&filter=${keyword}`,
                 method: "GET",
                 headers: {authorization: `Bearer ${token}`},
             }),

@@ -1,8 +1,8 @@
-import { NavLink } from "react-router-dom";
-import { toggleSidebar } from "@/app/global/globalSlice";
-import { useDispatch } from "react-redux";
+import {NavLink} from "react-router-dom";
+import {toggleSidebar} from "@/app/global/globalSlice";
+import {useDispatch} from "react-redux";
 
-const CNavLink = ({ icon, title, path }) => {
+const CNavLink = ({icon, title, path}) => {
     const dispatch = useDispatch();
 
     const closeSidebar = () => {
@@ -16,8 +16,8 @@ const CNavLink = ({ icon, title, path }) => {
             className="nav-link"
             to={path}
         >
-            <i className="material-symbols-outlined"> {icon} </i>
-            <span className={"text-lg font-medium"} >{title}</span>
+            <i className="material-symbols-rounded"> {icon} </i>
+            <span className={"text-lg font-medium"}>{title}</span>
         </NavLink>
     );
 };

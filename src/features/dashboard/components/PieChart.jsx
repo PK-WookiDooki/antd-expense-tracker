@@ -109,6 +109,7 @@ const PieChart = ({chartData, dataColor, chartTitle, extraStyle}) => {
                     fontWeight: 500,
                     fontSize: 20,
                     color: "#262626",
+                    fontFamily: "Roboto Slab"
                 },
                 customHtml: (container, view, item, data) => {
                     const {width} = container.getBoundingClientRect();
@@ -119,31 +120,18 @@ const PieChart = ({chartData, dataColor, chartTitle, extraStyle}) => {
                 },
             },
         },
-        interactions: [
-            {
-                type: "element-selected",
-            },
-            {type: 'element-active'},
-            // {
-            //     type: 'tooltip', // Define the 'pie-select' interaction
-            //     cfg: {
-            //         start: [{trigger: 'element:click', action: "tooltip:show"}]
-            //     }
-            // },
-            // {
-            //     type: 'pie-statistic-active',
-            // }
-        ],
+        interactions: [{type: 'element-selected'}, {type: 'element-active'}],
+
     };
     return (
         <div
-            className={`w-full md:max-w-[480px]  bg-pieBg  py-8 px-4 rounded-2xl ${extraStyle} flex flex-col items-center `}
+            className={` pie w-full md:max-w-[480px]  bg-pieBg  py-8 px-4 rounded-2xl ${extraStyle} flex flex-col items-center `}
         >
             <h2 className="text-black md:text-2xl text-lg font-medium my-6 md:mt-0">
                 {" "}
                 {chartTitle}{" "}
             </h2>
-            <Pie {...config} className={" md:max-w-[300px] w-full"}/>
+            <Pie {...config} className={"w-full"}/>
         </div>
     );
 };

@@ -1,28 +1,18 @@
 import Modal from "antd/es/modal/Modal";
 import {useEffect, useState} from "react";
 import {FixWButton} from "@/components";
-import {Alert} from "antd";
 import {useDispatch} from "react-redux";
 import {setMessage} from "@/app/global/globalSlice";
 
 const DeleteConfirmationBox = ({title, component, event, isDropdown}) => {
     const [openModal, setOpenModal] = useState(false);
-    const [error, setError] = useState(null);
     const dispatch = useDispatch();
 
     const [isSubmitting, setIsSubmitting] = useState(false)
 
-    useEffect(() => {
-        if (error !== null) {
-            setTimeout(() => {
-                setError(null);
-            }, 5000);
-        }
-    }, [error]);
 
     const closeModal = () => {
         setOpenModal(false);
-        setError(null);
         setIsSubmitting(false)
     };
 
@@ -40,7 +30,12 @@ const DeleteConfirmationBox = ({title, component, event, isDropdown}) => {
                 );
             } else {
                 setIsSubmitting(false)
-                setError(apiError?.data?.message || apiError?.error);
+                dispatch(
+                    setMessage({
+                        msgType: "success",
+                        msgContent: apiError?.data?.message || apiError?.error,
+                    })
+                );
             }
         } catch (error) {
             throw new Error(error);
@@ -60,7 +55,7 @@ const DeleteConfirmationBox = ({title, component, event, isDropdown}) => {
                 <button
                     onClick={() => setOpenModal(true)}
                     className={"bg-danger hover:bg-danger/80 text-white md:h-10 h-8 aspect-square flex items-center justify-center rounded duration-200 "}>
-                    <i className={"material-symbols-outlined text-base md:text-2xl "}> delete </i>
+                    <i className={"material-symbols-rounded text-base md:text-2xl "}> delete </i>
                 </button>
             )}
             <Modal
@@ -77,18 +72,6 @@ const DeleteConfirmationBox = ({title, component, event, isDropdown}) => {
                 <p className="mb-6 md:text-base text-sm">
                     Are you sure you want to delete this {title}?
                 </p>
-
-                {error !== null ? (
-                    <Alert
-                        message={error}
-                        type="error"
-                        showIcon
-                        className="mb-3"
-                    />
-                ) : (
-                    ""
-                )}
-
                 {component}
 
                 <div className="md:mt-10 mt-8 flex md:gap-10 gap-4 items-center justify-center">

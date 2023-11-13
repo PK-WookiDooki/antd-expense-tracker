@@ -10,6 +10,7 @@ const RecordsPage = () => {
     const {token} = useSelector((state) => state.authSlice);
 
     const [selectedOpt, setSelectedOpt] = useState("ALL");
+    const [isASC, setIsASC] = useState(false);
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -29,14 +30,12 @@ const RecordsPage = () => {
             token,
             startDate: dates.startDate.format("YYYY-MM-DD"),
             endDate: dates.endDate.format("YYYY-MM-DD"),
+            keyword: selectedOpt,
         });
-    const [isASC, setIsASC] = useState(false);
 
     if (isRecordsLoading || isRecordsFetching) {
         return <Loader/>;
     }
-
-    // just for testing!!
 
     return (
         <section className=" lg:p-10 md:p-5 p-4 rounded-2xl flex flex-col gap-6 h-full bg-cFA">

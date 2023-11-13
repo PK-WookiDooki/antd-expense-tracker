@@ -1,4 +1,4 @@
-import { baseApi } from "@/app/global/baseApi";
+import {baseApi} from "@/app/global/baseApi";
 
 const endPoint = "/user";
 
@@ -8,50 +8,60 @@ export const authApi = baseApi.injectEndpoints({
             query: (token) => ({
                 url: `${endPoint}`,
                 method: "GET",
-                headers: { authorization: `Bearer ${token}` },
+                headers: {authorization: `Bearer ${token}`},
             }),
             providesTags: ["user", "records", "categories"],
         }),
 
         changeUsername: builder.mutation({
-            query: ({ username, token }) => ({
+            query: ({username, token}) => ({
                 url: `${endPoint}/change-username`,
                 method: "PUT",
-                headers: { authorization: `Bearer ${token}` },
-                body: { username },
+                headers: {authorization: `Bearer ${token}`},
+                body: {username},
             }),
             invalidatesTags: ["user"],
         }),
 
         changeEmail: builder.mutation({
-            query: ({ userData, token }) => ({
+            query: ({userData, token}) => ({
                 url: `${endPoint}/change-email`,
                 method: "PUT",
-                headers: { authorization: `Bearer ${token}` },
+                headers: {authorization: `Bearer ${token}`},
                 body: userData,
             }),
             invalidatesTags: ["user"],
         }),
 
         changePassword: builder.mutation({
-            query: ({ passwords, token }) => ({
+            query: ({passwords, token}) => ({
                 url: `${endPoint}/change-password`,
                 method: "PUT",
-                headers: { authorization: `Bearer ${token}` },
+                headers: {authorization: `Bearer ${token}`},
                 body: passwords,
             }),
             invalidatesTags: ["user"],
         }),
 
         setBudget: builder.mutation({
-            query: ({ budget, token }) => ({
+            query: ({budget, token}) => ({
                 url: `${endPoint}/budget`,
                 method: "PUT",
-                headers: { authorization: `Bearer ${token}` },
-                body: { budget },
+                headers: {authorization: `Bearer ${token}`},
+                body: {budget},
             }),
             invalidatesTags: ["user", "records"],
         }),
+
+        deleteAccount: builder.mutation({
+            query: ({token, password}) => ({
+                url: `${endPoint}`,
+                method: "DELETE",
+                headers: {authorization: `Bearer ${token}`},
+                body: {password}
+            }),
+            invalidatesTags: ["user", "records"]
+        })
     }),
 });
 
@@ -61,4 +71,5 @@ export const {
     useChangeEmailMutation,
     useChangePasswordMutation,
     useSetBudgetMutation,
+    useDeleteAccountMutation
 } = authApi;

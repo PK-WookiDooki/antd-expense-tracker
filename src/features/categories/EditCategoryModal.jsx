@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {FixWButton, SubmitBtn} from "@/components";
-import {Alert, Form, Input, Modal} from "antd";
+import {Form, Input, Modal} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {
     useGetAllIconsQuery,
@@ -12,7 +12,6 @@ import WarningModal from "./components/WarningModal";
 const EditCategoryModal = ({category}) => {
     const {token} = useSelector((state) => state.authSlice);
     const [openModal, setOpenModal] = useState(false);
-    const [error, setError] = useState(null);
     const [icon, setIcon] = useState(category?.iconName);
     const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -24,17 +23,11 @@ const EditCategoryModal = ({category}) => {
 
     const [form] = Form.useForm();
     useEffect(() => {
-        if (error !== null) {
-            setTimeout(() => {
-                setError(null);
-            }, 5000);
-        }
-
         if (category) {
             form.setFieldValue("userCategoryName", category?.name);
             form.setFieldValue("iconName", category?.iconName);
         }
-    }, [error, openModal]);
+    }, [openModal]);
 
     const [updateCategory] = useUpdateCategoryMutation();
     const onFormSubmit = async (values) => {
@@ -59,7 +52,12 @@ const EditCategoryModal = ({category}) => {
                 );
             } else {
                 setIsSubmitting(false)
-                setError(apiError?.data?.message || apiError?.error);
+                dispatch(
+                    setMessage({
+                        msgType: "error",
+                        msgContent: apiError?.data?.message || apiError?.error,
+                    })
+                );
             }
         } catch (error) {
             throw new Error(error);
@@ -86,7 +84,7 @@ const EditCategoryModal = ({category}) => {
             <button
                 onClick={() => setOpenModal(true)}
                 className={"bg-primaryBlue hover:bg-primaryBlue/80 text-white md:h-10 h-8 aspect-square flex items-center justify-center rounded duration-200 "}>
-                <i className={"material-symbols-outlined text-base md:text-2xl "}> edit </i>
+                <i className={"material-symbols-rounded text-base md:text-2xl "}> edit </i>
             </button>
 
             <Modal
@@ -101,17 +99,6 @@ const EditCategoryModal = ({category}) => {
                         {" "}
                         Edit Category{" "}
                     </h2>
-
-                    {error !== null ? (
-                        <Alert
-                            message={error}
-                            type="error"
-                            showIcon
-                            className="mb-3"
-                        />
-                    ) : (
-                        ""
-                    )}
 
                     <Form.Item
                         label="Category Name"
@@ -161,7 +148,7 @@ const EditCategoryModal = ({category}) => {
                                                 borderColor: item.iconBgColor,
                                             }}
                                         >
-                                            <i className="material-symbols-outlined text-lg md:text-2xl">
+                                            <i className="material-symbols-rounded text-lg md:text-2xl">
                                                 {item.name}
                                             </i>
                                         </label>

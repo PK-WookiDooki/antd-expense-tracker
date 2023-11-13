@@ -16,13 +16,13 @@ const DashboardPage = () => {
         endDate: endDate.format("YYYY-MM-DD"),
     }).toString();
 
-    const {data: recordsList, isLoading: isRecordsLoading, isFetching: isRecordsFetching, error} =
+    const {data: recordsList, isLoading: isRecordsLoading, isFetching: isRecordsFetching} =
         useGetAllRecordsQuery({
             token,
             startDate: startDate.format("YYYY-MM-DD"),
             endDate: endDate.format("YYYY-MM-DD"),
+            keyword: "ALL"
         });
-
 
     // console.log(recordsList, error)
 
@@ -31,7 +31,7 @@ const DashboardPage = () => {
     }
 
     return (
-        <section className="flex flex-col gap-6">
+        <section className="flex flex-col md:gap-6 gap-4">
 
             <DBHeader
                 startDate={startDate}

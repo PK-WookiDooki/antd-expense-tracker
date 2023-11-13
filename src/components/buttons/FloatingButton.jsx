@@ -1,6 +1,7 @@
-import { Button, FloatButton } from "antd";
-import { useDispatch } from "react-redux";
-import { setIsAddRecordModalOpen } from "@/features/records/recordsSlice";
+import {Button, FloatButton} from "antd";
+import {useDispatch} from "react-redux";
+import {setIsAddRecordModalOpen} from "@/features/records/recordsSlice";
+
 const FloatingButton = () => {
     const dispatch = useDispatch();
 
@@ -17,7 +18,7 @@ const FloatingButton = () => {
             shape="circle"
             className=" !w-14 !h-14 flex items-center justify-center !bg-primaryGreen hover:!bg-primaryGreen/80 fixed left-1/2 transform -translate-x-1/2 bottom-10 md:hidden z-[5]  "
         >
-            <i className="material-symbols-outlined">add</i>
+            <i className="material-symbols-rounded">add</i>
         </Button>
     );
 };

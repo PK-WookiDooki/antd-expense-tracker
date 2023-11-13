@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import OTPInput from "react-otp-input";
 import {FormTitle, SubmitBtn} from "@/components";
 import {useLocation, useNavigate} from "react-router-dom";
-import {Alert} from "antd";
 import {useResendOtpMutation, useVerifyOtpMutation} from "./authApi";
 import {useDispatch} from "react-redux";
 import {setMessage} from "@/app/global/globalSlice";
@@ -12,9 +11,6 @@ const VerifyOtpForm = () => {
     const [otp, setOtp] = useState("");
     const [isResent, setIsResent] = useState(false);
     const [timer, setTimer] = useState(59);
-    const [apiMessage, setApiMessage] = useState({
-        type: null, content: null
-    });
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const nav = useNavigate();
@@ -28,11 +24,16 @@ const VerifyOtpForm = () => {
         try {
             setIsSubmitting(true);
             if (otp?.trim().length === 0) {
-                setApiMessage({type: "error", content: "Please enter OTP code!"});
+                dispatch(
+                    setMessage({
+                        msgType: "error",
+                        msgContent: "Please enter otp code!",
+                    })
+                );
                 setIsSubmitting(false)
                 return;
             }
-            const {data, error} = await verifyOtp({email, otp});
+            const {data, error: apiError} = await verifyOtp({email, otp});
             if (data?.success) {
                 setIsSubmitting(false);
                 if (previousRoute === "/signUp") {
@@ -56,21 +57,18 @@ const VerifyOtpForm = () => {
                     });
                 }
             } else {
-                setOtp("")
                 setIsSubmitting(false);
-                setApiMessage({type: "error", content: error?.data?.message || error?.error})
+                dispatch(
+                    setMessage({
+                        msgType: "error",
+                        msgContent: apiError?.data?.message || apiError?.error,
+                    })
+                );
             }
         } catch (error) {
             throw new Error(error);
         }
     };
-    useEffect(() => {
-        if (apiMessage?.content !== null) {
-            setTimeout(() => {
-                setApiMessage({type: null, content: null});
-            }, 5000);
-        }
-    }, [apiMessage]);
 
     useEffect(() => {
         let counter;
@@ -97,14 +95,20 @@ const VerifyOtpForm = () => {
         try {
             const {data, error: apiError} = await resendOtp({email});
             if (data?.success) {
-                setApiMessage({
-                    type: "success", content: data?.message
-                });
+                dispatch(
+                    setMessage({
+                        msgType: "success",
+                        msgContent: data?.message,
+                    })
+                );
             } else {
                 setOtp("")
-                setApiMessage({
-                    type: "error", content: apiError?.data?.message || apiError?.error
-                });
+                dispatch(
+                    setMessage({
+                        msgType: "error",
+                        msgContent: apiError?.data?.message || apiError?.error,
+                    })
+                );
             }
         } catch (error) {
             throw new Error(error);
@@ -130,17 +134,6 @@ const VerifyOtpForm = () => {
                         }
                     />
                 </div>
-
-                {apiMessage?.content !== null && apiMessage?.type !== null ? (
-                    <Alert
-                        message={apiMessage?.content}
-                        type={apiMessage?.type}
-                        showIcon
-                        className="mb-5 !rounded-sm "
-                    />
-                ) : (
-                    ""
-                )}
 
                 <OTPInput
                     value={otp}

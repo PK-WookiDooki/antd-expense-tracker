@@ -33,7 +33,7 @@ const RecordCardBody = ({record, isRemove, date}) => {
                         backgroundColor: userCategory?.iconBgColor,
                     }}
                 >
-                    <i className="material-symbols-outlined">
+                    <i className="material-symbols-rounded">
                         {" "}
                         {userCategory?.iconName}{" "}
                     </i>

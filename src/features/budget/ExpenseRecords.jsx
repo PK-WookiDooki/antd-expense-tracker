@@ -1,8 +1,6 @@
 import {NoRecords, RecordCard} from "..";
-import {formatData} from "@/core/functions/formatData";
 import {DatePicker} from "antd";
-import dayjs from "dayjs";
-import {useEffect, useState} from "react";
+import useFormatRecords from "@/features/records/hooks/useFormatRecords.jsx";
 
 const ExpenseRecords = ({
                             selectedMonth,
@@ -11,29 +9,10 @@ const ExpenseRecords = ({
                             expensesList,
                             userBudget,
                         }) => {
-    // const [isASC, setIsASC] = useState(false);
-    const [expenseRecords, setExpenseRecords] = useState([]);
 
-    useEffect(() => {
-        if (expensesList) {
-            const records = formatData(expensesList);
-            setExpenseRecords(records);
+    const expenseRecords = useFormatRecords(expensesList, isASC);
 
-            if (isASC) {
-                setExpenseRecords(
-                    records
-                        .slice()
-                        .sort((a, b) => dayjs(a.date) - dayjs(b.date))
-                );
-            } else {
-                setExpenseRecords(
-                    records
-                        .slice()
-                        .sort((a, b) => dayjs(b.date) - dayjs(a.date))
-                );
-            }
-        }
-    }, [isASC, expensesList]);
+    // console.log(expenseRecords)
 
     return (
         <section className="lg:p-10 md:p-5 p-4 rounded-2xl bg-cFA flex flex-col md:gap-9 gap-3  h-full">
@@ -45,7 +24,7 @@ const ExpenseRecords = ({
                         className=" !h-8 aspect-square border border-cD9 rounded-sm bg-white flex items-center justify-center"
                     >
                         {" "}
-                        <i className="material-symbols-outlined text-xl ">
+                        <i className="material-symbols-rounded text-xl ">
                             swap_vert
                         </i>{" "}
                     </button>

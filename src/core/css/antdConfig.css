@@ -81,6 +81,11 @@
     padding: 40px !important;
 }
 
+/* alert */
+.ant-alert {
+    border-radius: 2px !important;
+}
+
 /* form */
 .create-form {
     padding: 16px !important;

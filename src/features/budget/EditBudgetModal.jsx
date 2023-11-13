@@ -1,4 +1,4 @@
-import {Alert, Button, Form, InputNumber, Modal} from "antd";
+import {Button, Form, InputNumber, Modal} from "antd";
 import {useEffect, useState} from "react";
 import {ModalHeader, SubmitBtn} from "@/components";
 import {useSetBudgetMutation} from "../auth/userApi";
@@ -7,7 +7,6 @@ import {setMessage} from "@/app/global/globalSlice";
 
 const EditBudgetModal = ({userBudget, extraStyle}) => {
     const [openModal, setOpenModal] = useState(false);
-    const [error, setError] = useState(null);
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -18,18 +17,8 @@ const EditBudgetModal = ({userBudget, extraStyle}) => {
             form.setFieldValue("budget", userBudget)
         }, [openModal]
     )
-
-    useEffect(() => {
-        if (error !== null) {
-            setTimeout(() => {
-                setError(null);
-            }, 5000);
-        }
-    }, [error]);
-
     const closeModal = () => {
         setOpenModal(false);
-        setError(null);
         setIsSubmitting(false)
     };
 
@@ -51,7 +40,12 @@ const EditBudgetModal = ({userBudget, extraStyle}) => {
                 );
             } else {
                 setIsSubmitting(false)
-                setError(apiError?.data?.message || apiError?.error);
+                dispatch(
+                    setMessage({
+                        msgType: "error",
+                        msgContent: apiError?.data?.message || apiError?.error,
+                    })
+                );
             }
         } catch (error) {
             throw new Error(error);
@@ -74,6 +68,7 @@ const EditBudgetModal = ({userBudget, extraStyle}) => {
                 open={openModal}
                 footer={null}
                 closeIcon={false}
+                width={420}
             >
                 <ModalHeader title={"Edit Budget"} event={closeModal}/>
                 <Form
@@ -83,18 +78,6 @@ const EditBudgetModal = ({userBudget, extraStyle}) => {
 
                 >
                     <div className="p-6 pb-0">
-
-
-                        {error !== null ? (
-                            <Alert
-                                message={error}
-                                type="error"
-                                showIcon
-                                className="mb-3"
-                            />
-                        ) : (
-                            ""
-                        )}
                         <Form.Item
                             label={"Budget Amount"}
                             name={"budget"}

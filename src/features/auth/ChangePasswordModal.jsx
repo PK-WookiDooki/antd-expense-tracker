@@ -1,6 +1,6 @@
-import {Alert, Form, Input, Modal} from "antd";
+import {Form, Input, Modal} from "antd";
 import {useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setMessage} from "@/app/global/globalSlice";
 import ModalHeader from "@/components/modals/ModalHeader";
@@ -11,7 +11,6 @@ import {logoutAccount} from "@/features/auth/authSlice.js";
 const ChangePasswordModal = () => {
     const {token} = useSelector((state) => state.authSlice);
     const [openModal, setOpenModal] = useState(false);
-    const [error, setError] = useState(null);
 
     const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -20,14 +19,6 @@ const ChangePasswordModal = () => {
 
     const dispatch = useDispatch();
     const [changePassword] = useChangePasswordMutation();
-
-    useEffect(() => {
-        if (error !== null) {
-            setTimeout(() => {
-                setError(null);
-            }, 5000);
-        }
-    }, [error]);
 
     const onFormSubmit = async (values) => {
         try {
@@ -53,7 +44,12 @@ const ChangePasswordModal = () => {
                 closeModal();
             } else {
                 setIsSubmitting(false)
-                setError(apiError?.data?.message || apiError?.error);
+                dispatch(
+                    setMessage({
+                        msgType: "error",
+                        msgContent: apiError?.data?.message || apiError?.error,
+                    })
+                );
             }
         } catch (error) {
             throw new Error(error);
@@ -84,6 +80,7 @@ const ChangePasswordModal = () => {
                 className="account-modal"
                 closeIcon={false}
                 footer={null}
+                width={420}
             >
                 <ModalHeader event={closeModal} title={"change password"}/>
                 <Form
@@ -92,10 +89,6 @@ const ChangePasswordModal = () => {
                     onFinish={onFormSubmit}
                 >
                     <div className={"p-6 pb-0"}>
-
-                        {error !== null ?
-                            <Alert message={error} type={"error"} showIcon={true} className={"mb-3"}/> : ""}
-
                         <Form.Item
                             validateTrigger={"onSubmit"}
                             name="oldPassword"
@@ -162,7 +155,7 @@ const ChangePasswordModal = () => {
                         <SubmitBtn
                             label={"save"}
                             isFixedWidth={true}
-                            extraStyle={" block ml-auto "}
+                            extraStyle={" !h-8 ml-auto "}
                             isLoading={isSubmitting}
                         />
                     </div>

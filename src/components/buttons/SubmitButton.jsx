@@ -1,12 +1,13 @@
-import { Button } from "antd";
+import {Button} from "antd";
 
 const SubmitButton = ({
-    label,
-    event,
-    isFixedWidth,
-    extraStyle,
-    isLoading
-}) => {
+                          label,
+                          event,
+                          isFixedWidth,
+                          extraStyle,
+                          isLoading,
+                          isDanger
+                      }) => {
     return (
         <Button
             onClick={event}
@@ -14,8 +15,8 @@ const SubmitButton = ({
             htmlType="submit"
             loading={isLoading}
             shape="round"
-            className={`!bg-primaryGreen hover:!bg-primaryGreen/80 ${
-                !isFixedWidth ? "w-full" : extraStyle
+            className={` flex items-center justify-center ${isDanger ? " !bg-danger hover:!bg-danger/80 " : " !bg-primaryGreen hover:!bg-primaryGreen/80 "} ${
+                isFixedWidth ? extraStyle : " w-full "
             } capitalize `}
         >
             {" "}

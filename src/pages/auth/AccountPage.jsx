@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {ChangePasswordModal, EditNameModal} from "@/features";
+import {AccountDeletionModal, ChangePasswordModal, EditNameModal} from "@/features";
 import {useGetUserDataQuery} from "@/features/auth/userApi";
 import {useSelector} from "react-redux";
 import dbImg from "@/assets/imgs/img_dbHeader.svg"
@@ -14,14 +14,14 @@ const Home = () => {
     }
 
     return (
-        <section className="bg-cFA w-full rounded-2xl h-full pb-5 overflow-hidden">
+        <section className="bg-cFA w-full rounded-[20px] h-full md:pb-10 pb-5 overflow-hidden">
             <div className="relative bg-cover bg-no-repeat bg-right md:h-[250px] h-[170px] drop-shadow-xl "
                  style={{
                      backgroundImage: `url(${dbImg})`
                  }}
             >
                 <span
-                    className="material-symbols-outlined text-[70px] w-[120px] aspect-square rounded-full bg-c26 text-cFA flex items-center justify-center outline outline-4 outline-cFA absolute left-1/2 transform bottom-0 translate-y-1/2 -translate-x-1/2">
+                    className="material-symbols-rounded text-[70px] w-[120px] aspect-square rounded-full bg-c26 text-cFA flex items-center justify-center outline outline-4 outline-cFA absolute left-1/2 transform bottom-0 translate-y-1/2 -translate-x-1/2">
                     {" "}
                     person{" "}
                 </span>
@@ -32,7 +32,7 @@ const Home = () => {
                 <div className="pb-6 border-b border-cD9 mt-5 text-c26 ">
                     <h2 className="text-xl">Email</h2>
                     <div className="flex items-center justify-between mt-2">
-                        <p> {userData?.email || "example@gmail.com"} </p>
+                        <p className={` text-[#434343] `}> {userData?.email || "example@gmail.com"} </p>
                         <Link
                             to={"changeEmail"}
                             className="edit-btn">
@@ -42,6 +42,7 @@ const Home = () => {
                     </div>
                 </div>
                 <ChangePasswordModal/>
+                <AccountDeletionModal/>
             </div>
         </section>
     );

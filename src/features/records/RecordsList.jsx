@@ -1,8 +1,6 @@
 import {Select} from "antd";
-import {formatData} from "@/core/functions/formatData";
 import {NoRecords, RecordCard} from "..";
-import {useEffect, useState} from "react";
-import dayjs from "dayjs";
+import useFormatRecords from "@/features/records/hooks/useFormatRecords.jsx";
 
 
 const options = [
@@ -21,44 +19,7 @@ const options = [
 ];
 
 const RecordsList = ({recordsList, selectedOpt, setSelectedOpt, isASC, setIsASC}) => {
-    //const { recordsList } = useSelector((state) => state.recordsSlice);
-    const [records, setRecords] = useState([]);
-    // const [isASC, setIsASC] = useState(false);
-
-    useEffect(() => {
-        if (recordsList?.length > 0) {
-            setRecords(formatData(recordsList));
-        }
-    }, [recordsList]);
-
-    useEffect(() => {
-        if (selectedOpt === "ALL") {
-            if (isASC) {
-                setRecords(
-                    formatData(recordsList)
-                        .slice()
-                        .sort((a, b) => dayjs(a.date) - dayjs(b.date))
-                    // .sort((a, b) => new Date(a.date) - new Date(b.date))
-                );
-            } else {
-                setRecords(formatData(recordsList));
-            }
-        } else {
-            const filteredRecords = recordsList?.filter(
-                (record) => record.type === selectedOpt
-            );
-            if (isASC) {
-                setRecords(
-                    formatData(filteredRecords)
-                        .slice()
-                        .sort((a, b) => dayjs(a.date) - dayjs(b.date))
-                    // .sort((a, b) => new Date(a.date) - new Date(b.date))
-                );
-            } else {
-                setRecords(formatData(filteredRecords));
-            }
-        }
-    }, [selectedOpt, isASC, recordsList]);
+    const records = useFormatRecords(recordsList, isASC)
 
     return (
         <section className="h-full flex flex-col ">
@@ -73,7 +34,7 @@ const RecordsList = ({recordsList, selectedOpt, setSelectedOpt, isASC, setIsASC}
                         className=" h-8 aspect-square bg-white border border-cD9 rounded-sm "
                     >
                         {" "}
-                        <i className="material-symbols-outlined text-xl flex items-center justify-center ">
+                        <i className="material-symbols-rounded text-xl flex items-center justify-center ">
                             swap_vert
                         </i>
                     </button>

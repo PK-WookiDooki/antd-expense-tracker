@@ -11,7 +11,7 @@ const WarningModal = ({actionType}) => {
                 onClick={() => setOpenModal(true)}
                 className={` ${actionType === "edit" ? " bg-primaryBlue hover:bg-primaryBlue/80 " :
                     " bg-danger hover:bg-danger/80 "}  text-white md:h-10 h-8 aspect-square flex items-center justify-center rounded duration-200 `}>
-                <i className={"material-symbols-outlined text-base md:text-2xl "}> {actionType} </i>
+                <i className={"material-symbols-rounded text-base md:text-2xl "}> {actionType} </i>
             </button>
 
             <Modal

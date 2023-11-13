@@ -1,14 +1,13 @@
 import {DatePicker} from "antd";
-import {formatCurrency} from "@/core/functions/formatData";
 import {useGetUserDataQuery} from "../auth/userApi";
 import {useSelector} from "react-redux";
 import dbImg from "@/assets/imgs/img_dbHeader.svg"
+import {useFormatCurrency} from "@/features/budget/hooks/useFormatCurrency.jsx";
 
 const DBHeader = ({startDate, endDate, setStartDate, setEndDate}) => {
     const {token} = useSelector((state) => state.authSlice);
     const {data: userData} = useGetUserDataQuery(token);
-    const balance = parseInt(userData?.balance);
-    const formattedAmount = formatCurrency(balance);
+    const balance = useFormatCurrency(parseInt(userData?.balance || 0));
 
     return (
         <section className="relative rounded-2xl bg-cover bg-no-repeat bg-right drop-shadow-xl "
@@ -20,7 +19,7 @@ const DBHeader = ({startDate, endDate, setStartDate, setEndDate}) => {
                     <p className=" text-sm md:text-base lg:text-xl mb-2">Account Balance</p>
                     <h2 className="lg:text-4xl md:text-3xl text-2xl font-medium lg:mb-8 md:mb-6 mb-4 font-rbs ">
                         {" "}
-                        {formattedAmount}
+                        {balance}
                     </h2>
                     <p className="text-[10px] md:text-sm lg:text-base font-light ">
                         {" "}

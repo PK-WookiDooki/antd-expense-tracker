@@ -5,7 +5,6 @@ import {
     Modal,
     Segmented,
     Select,
-    Alert,
     Input,
 } from "antd";
 import {useDispatch, useSelector} from "react-redux";
@@ -28,9 +27,7 @@ const AddNewRecordForm = () => {
 
     const [form] = Form.useForm();
     const dispatch = useDispatch();
-    const [error, setError] = useState(null);
 
-    // const [catOptions, setCatOptions] = useState([]);
 
     const catOptions = userCategories
         ?.filter(
@@ -42,7 +39,7 @@ const AddNewRecordForm = () => {
                 label: (
                     <p className="flex items-center gap-1 capitalize">
                         <i
-                            className="material-symbols-outlined w-8 h-8 rounded-md text-white flex items-center justify-center"
+                            className="material-symbols-rounded w-8 h-8 rounded-md text-white flex items-center justify-center"
                             style={{
                                 backgroundColor: category?.iconBgColor,
                             }}
@@ -85,7 +82,12 @@ const AddNewRecordForm = () => {
                 closeModal();
             } else {
                 setIsSubmitting(false)
-                setError(apiError?.data?.message || apiError?.error);
+                dispatch(
+                    setMessage({
+                        msgType: "success",
+                        msgContent: apiError?.data?.message || apiError?.error,
+                    })
+                );
             }
         } catch (error) {
             throw new Error(error);
@@ -94,7 +96,6 @@ const AddNewRecordForm = () => {
 
     const closeModal = () => {
         form.resetFields();
-        setError(null);
         setIsSubmitting(false)
         setType("EXPENSE")
         dispatch(setIsAddRecordModalOpen(false));
@@ -123,17 +124,6 @@ const AddNewRecordForm = () => {
                         {" "}
                         Add New Record{" "}
                     </h2>
-
-                    {error !== null ? (
-                        <Alert
-                            message={error}
-                            type="error"
-                            showIcon
-                            className="mb-3"
-                        />
-                    ) : (
-                        ""
-                    )}
 
                     <Form.Item name={"type"} initialValue={"EXPENSE"} className={"!mb-4 md:!mb-8"}>
                         <Segmented

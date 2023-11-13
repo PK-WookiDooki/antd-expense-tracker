@@ -14,7 +14,7 @@ const CreateButton = ({label, event}) => {
             } !h-9 flex items-center !pl-3 !pr-5 gap-[2px] text-base capitalize  text-cFA`}
         >
             {" "}
-            <i className="material-symbols-outlined"> add </i> {label}{" "}
+            <i className="material-symbols-rounded"> add </i> {label}{" "}
         </Button>
     );
 };

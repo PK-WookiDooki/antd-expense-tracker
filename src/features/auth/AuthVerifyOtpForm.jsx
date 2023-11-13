@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import OTPInput from "react-otp-input";
 import {FixWButton, SubmitBtn} from "@/components";
 import {useLocation, useNavigate} from "react-router-dom";
-import {Alert} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {useResendOtpMutation, useVerifyOtpMutation} from "./authApi";
 import {setMessage} from "@/app/global/globalSlice";
@@ -17,8 +16,6 @@ const AuthVerifyOtpForm = () => {
     const [otp, setOtp] = useState("");
     const [isResent, setIsResent] = useState(false);
     const [timer, setTimer] = useState(59);
-    const [apiMsg, setApiMsg] = useState(null);
-    const [msgType, setMsgType] = useState(true)
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const nav = useNavigate();
@@ -30,9 +27,12 @@ const AuthVerifyOtpForm = () => {
         try {
             setIsSubmitting(true);
             if (otp?.trim().length === 0) {
-                setApiMsg("Please enter OTP code!");
-                setMsgType(false)
-                setIsSubmitting(false)
+                dispatch(
+                    setMessage({
+                        msgType: "success",
+                        msgContent: "Please enter otp code!",
+                    })
+                );
                 return;
             }
 
@@ -50,20 +50,17 @@ const AuthVerifyOtpForm = () => {
                 dispatch(logoutAccount());
             } else {
                 setIsSubmitting(false);
-                setApiMsg(apiError?.data?.message || apiError?.error);
-                setMsgType(false)
+                dispatch(
+                    setMessage({
+                        msgType: "error",
+                        msgContent: apiError?.data?.message || apiError?.error,
+                    })
+                );
             }
         } catch (error) {
             throw new Error(error);
         }
     };
-    useEffect(() => {
-        if (apiMsg !== null) {
-            setTimeout(() => {
-                setApiMsg(null);
-            }, 5000);
-        }
-    }, [apiMsg]);
 
     useEffect(() => {
         let counter;
@@ -97,11 +94,19 @@ const AuthVerifyOtpForm = () => {
                 email: userData?.email,
             });
             if (data?.success) {
-                setApiMsg(data?.message)
-                setMsgType(true)
+                dispatch(
+                    setMessage({
+                        msgType: "success",
+                        msgContent: data?.message,
+                    })
+                );
             } else {
-                setApiMsg(apiError?.data?.message || apiError?.error);
-                setMsgType(false)
+                dispatch(
+                    setMessage({
+                        msgType: "error",
+                        msgContent: apiError?.data?.message || apiError?.error,
+                    })
+                );
             }
         } catch (error) {
             throw new Error(error);
@@ -112,10 +117,10 @@ const AuthVerifyOtpForm = () => {
         <section className=" h-full w-full flex flex-col items-center justify-center bg-cFA rounded-2xl p-4  ">
             <form
                 onSubmit={onOtpVerify}
-                className="w-full max-w-[480px] shadow-md md:p-10 p-4 border border-cD9 "
+                className="w-full max-w-[480px] shadow-md md:p-10 py-8 p-4 border border-cD9 "
             >
                 <div className="mb-9 text-center">
-                    <h2 className="lg:text-4xl text-2xl font-medium text-c26 mb-6">
+                    <h2 className="lg:text-4xl text-2xl font-medium text-c26 md:mb-6 mb-4">
                         Verify Email
                     </h2>
                     <p className="md:text-base text-sm text-c59 ">
@@ -124,19 +129,6 @@ const AuthVerifyOtpForm = () => {
                     </p>
 
                 </div>
-
-                {apiMsg !== null ? (
-                    <Alert
-                        message={apiMsg}
-                        type={msgType ? "success" : "error" +
-                            ""}
-                        showIcon
-                        className="mb-4 !rounded-sm"
-                    />
-                ) : (
-                    ""
-                )}
-
 
                 <OTPInput
                     value={otp}

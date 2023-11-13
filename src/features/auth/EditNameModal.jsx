@@ -1,4 +1,4 @@
-import {Alert, Form, Input, Modal} from "antd";
+import {Form, Input, Modal} from "antd";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setMessage} from "@/app/global/globalSlice";
@@ -10,9 +10,6 @@ const EditNameModal = ({username}) => {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const [isSubmitting, setIsSubmitting] = useState(false)
-
-    const [error, setError] = useState(null);
-
     useEffect(() => {
         if (username) {
             form.setFieldsValue({username});
@@ -39,10 +36,20 @@ const EditNameModal = ({username}) => {
                 closeModal();
             } else {
                 setIsSubmitting(false)
-                setError(apiError?.data?.message || apiError?.error);
+                dispatch(
+                    setMessage({
+                        msgType: "error",
+                        msgContent: apiError?.data.message || apiError?.error,
+                    })
+                );
             }
         } catch (error) {
-            throw new Error(error);
+            dispatch(
+                setMessage({
+                    msgType: "error",
+                    msgContent: error?.message,
+                })
+            );
         }
     };
 
@@ -62,7 +69,7 @@ const EditNameModal = ({username}) => {
         <section className="pb-6 border-b border-cD9 text-c26 ">
             <h2 className="text-xl">Name</h2>
             <div className="flex items-center justify-between mt-2">
-                <p> {username || "Nexcoder"} </p>
+                <p className={` text-[#434343] `}> {username || "Nexcoder"} </p>
                 <button
                     onClick={() => setOpenModal(true)}
                     className="edit-btn">
@@ -77,6 +84,8 @@ const EditNameModal = ({username}) => {
                 className="account-modal"
                 closeIcon={false}
                 footer={null}
+                width={420}
+
             >
                 <ModalHeader title={"change name"} event={closeModal}/>
                 <Form
@@ -85,18 +94,6 @@ const EditNameModal = ({username}) => {
                     onFinish={onFormSubmit}
                 >
                     <div className={" p-6 pb-0"}>
-
-                        {error !== null ? (
-                            <Alert
-                                message={error}
-                                type="error"
-                                showIcon
-                                className="mb-3"
-                            />
-                        ) : (
-                            ""
-                        )}
-
                         <Form.Item
                             label={"Name"}
                             name="username"
@@ -121,7 +118,7 @@ const EditNameModal = ({username}) => {
                         <SubmitBtn
                             label={"save"}
                             isFixedWidth={true}
-                            extraStyle={"block ml-auto"}
+                            extraStyle={" !h-8 ml-auto"}
                             isLoading={isSubmitting}
                         />
                     </div>

@@ -13,7 +13,7 @@ const CategoryCard = ({category, isRemove}) => {
                     className={`md:h-12 aspect-square h-10  rounded-md text-white flex items-center justify-center`}
                     style={{backgroundColor: category.iconBgColor}}
                 >
-                    <i className="material-symbols-outlined">
+                    <i className="material-symbols-rounded">
                         {" "}
                         {category.iconName}{" "}
                     </i>

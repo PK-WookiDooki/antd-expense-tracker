@@ -46,6 +46,6 @@
 
     /*  account page btns*/
     .edit-btn {
-        @apply py-1 px-4 rounded-full text-cFA bg-primaryGreen hover:bg-primaryGreen/80 outline-none duration-200;
+        @apply !h-8 px-4 rounded-full text-cFA bg-primaryGreen hover:bg-primaryGreen/80 outline-none duration-200 flex items-center justify-center;
     }
 }

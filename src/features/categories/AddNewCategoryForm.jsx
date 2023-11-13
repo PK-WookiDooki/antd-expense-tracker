@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {CreateBtn, FixWButton, SubmitBtn} from "@/components";
-import {Alert, Form, Input, Modal, Segmented} from "antd";
+import {Form, Input, Modal, Segmented} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {useAddNewCategoryMutation} from "./categoriesApi";
 import {setMessage} from "@/app/global/globalSlice";
@@ -8,7 +8,6 @@ import {setMessage} from "@/app/global/globalSlice";
 const AddNewCategoryForm = ({iconsList}) => {
     const {token} = useSelector((state) => state.authSlice);
     const [openModal, setOpenModal] = useState(false);
-    const [error, setError] = useState(null);
     const [icon, setIcon] = useState(null);
     const [type, setType] = useState("EXPENSE");
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -24,12 +23,6 @@ const AddNewCategoryForm = ({iconsList}) => {
     const [form] = Form.useForm();
 
     useEffect(() => {
-        if (error !== null) {
-            setTimeout(() => {
-                setError(null);
-            }, 3000);
-        }
-
         if (type) {
             setIconOptions(
                 iconsList?.filter(
@@ -37,7 +30,7 @@ const AddNewCategoryForm = ({iconsList}) => {
                 )
             );
         }
-    }, [error, type]);
+    }, [type]);
 
     const onFormSubmit = async (values) => {
         try {
@@ -58,7 +51,12 @@ const AddNewCategoryForm = ({iconsList}) => {
                 );
             } else {
                 setIsSubmitting(false)
-                setError(apiError?.data?.message || apiError?.error);
+                dispatch(
+                    setMessage({
+                        msgType: "error",
+                        msgContent: apiError?.data?.message || apiError?.error,
+                    })
+                );
             }
         } catch (error) {
             throw new Error(error);
@@ -91,18 +89,6 @@ const AddNewCategoryForm = ({iconsList}) => {
                         {" "}
                         Add New Category{" "}
                     </h2>
-
-                    {error !== null ? (
-                        <Alert
-                            message={error}
-                            type="error"
-                            showIcon
-                            className="mb-3"
-                        />
-                    ) : (
-                        ""
-                    )}
-
                     <Form.Item name={"type"} initialValue={"EXPENSE"} className={"!mb-4 md:!mb-8"}>
                         <Segmented
                             options={[
@@ -169,7 +155,7 @@ const AddNewCategoryForm = ({iconsList}) => {
                                                 borderColor: item.iconBgColor,
                                             }}
                                         >
-                                            <i className="material-symbols-outlined text-lg md:text-2xl">
+                                            <i className="material-symbols-rounded text-lg md:text-2xl">
                                                 {item.name}
                                             </i>
                                         </label>

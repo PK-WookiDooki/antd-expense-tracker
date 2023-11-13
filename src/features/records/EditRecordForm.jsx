@@ -1,5 +1,4 @@
 import {
-    Alert,
     DatePicker,
     Form,
     Input,
@@ -28,19 +27,8 @@ const EditRecordForm = ({record, date}) => {
     const {data: userCategories} = useGetAllCategoriesQuery(token);
 
     const [openModal, setOpenModal] = useState(false);
-    const [error, setError] = useState(null);
     const [type, setType] = useState(record?.type);
     const [isSubmitting, setIsSubmitting] = useState(false)
-
-    useEffect(() => {
-        if (error?.trim().length > 0) {
-            setTimeout(() => {
-                setError(null);
-            }, 3000);
-        }
-
-
-    }, [error]);
 
     useEffect(() => {
         if (record) {
@@ -72,7 +60,7 @@ const EditRecordForm = ({record, date}) => {
                 label: (
                     <p className="flex items-center gap-1 capitalize">
                         <i
-                            className="material-symbols-outlined w-8 h-8 rounded-md text-white flex items-center justify-center"
+                            className="material-symbols-rounded w-8 h-8 rounded-md text-white flex items-center justify-center"
                             style={{backgroundColor: category?.iconBgColor}}
                         >
                             {category.iconName}
@@ -119,7 +107,12 @@ const EditRecordForm = ({record, date}) => {
                 );
             } else {
                 setIsSubmitting(false)
-                setError(apiError?.data?.message || apiError?.error);
+                dispatch(
+                    setMessage({
+                        msgType: "error",
+                        mgsContent: apiError?.data?.message || apiError?.error,
+                    })
+                );
             }
         } catch (error) {
             throw new Error(error);
@@ -127,7 +120,6 @@ const EditRecordForm = ({record, date}) => {
     };
 
     const closeModal = () => {
-        setError(null);
         setIsSubmitting(false)
         setOpenModal(false);
     };
@@ -161,17 +153,6 @@ const EditRecordForm = ({record, date}) => {
                         {" "}
                         Edit Record{" "}
                     </h2>
-
-                    {error !== null ? (
-                        <Alert
-                            message={error}
-                            type="error"
-                            showIcon
-                            className="mb-3"
-                        />
-                    ) : (
-                        ""
-                    )}
                     <Form.Item name={"type"} className={"!mb-4 md:!mb-8 "}>
                         <Segmented
                             options={[
